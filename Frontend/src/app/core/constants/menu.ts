@@ -7,13 +7,13 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+          icon: 'assets/icons/heroicons/outline/dashboard-svgrepo-com.svg',
           label: 'Dashboard',
           route: '/dashboard',
-          children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
+          // children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
         },
         {
-          icon: 'assets/icons/heroicons/outline/lock-closed.svg',
+          icon: 'assets/icons/heroicons/outline/lock-closed-outline-svgrepo-com.svg',
           label: 'Auth',
           route: '/auth',
           children: [
@@ -25,66 +25,85 @@ export class Menu {
           ],
         },
         {
-          icon: 'assets/icons/heroicons/outline/exclamation-triangle.svg',
-          label: 'Errors',
-          route: '/errors',
-          children: [
-            { label: '404', route: '/errors/404' },
-            { label: '500', route: '/errors/500' },
-          ],
+          icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg',
+          label: 'User Management',
+          route: '/user-management',
+          
         },
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Components',
-          route: '/components',
-          children: [{ label: 'Table', route: '/components/table' }],
+          icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
+          label: 'Field Management',
+          route: '/Field Management',
+          
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',
+          label: 'Planning',
+          route: '/Planning',
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/activity-log-svgrepo-com.svg',
+          label: 'Activity Log',
+          route: '/Activity Log',
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/harvest-svgrepo-com.svg',
+          label: 'Harvest',
+          route: '/Harvest',
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/fertilizer-fragrance-perfume-spray-svgrepo-com.svg',
+          label: 'Fertilizer',
+          route: '/Fertilizer',
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/dollar-circle-list-svgrepo-com.svg',
+          label: 'Financials',
+          route: '/Financials',
+        
+        },
+         {
+          icon: 'assets/icons/heroicons/outline/business-financial-graph-svgrepo-com.svg',
+          label: 'Sales',
+          route: '/Sales',
+        
         },
       ],
     },
     {
-      group: 'Collaboration',
+      group: 'Integrations',
       separator: true,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/download.svg',
-          label: 'Download',
-          route: '/download',
+          icon: 'assets/icons/heroicons/outline/monitoring-health-svgrepo-com.svg',
+          label: 'Monitoring',
+          route: '/Monitoring',
         },
         {
-          icon: 'assets/icons/heroicons/outline/gift.svg',
-          label: 'Gift Card',
-          route: '/gift',
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/users.svg',
-          label: 'Users',
-          route: '/users',
+          icon: 'assets/icons/heroicons/outline/book-svgrepo-com.svg',
+          label: 'Knowledge Center',
+          route: '/Knowledge Center',
         },
       ],
     },
     {
-      group: 'Config',
+      group: 'Reports',
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/cog.svg',
-          label: 'Settings',
-          route: '/settings',
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/bell.svg',
-          label: 'Notifications',
-          route: '/gift',
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/folder.svg',
-          label: 'Folders',
-          route: '/folders',
-          children: [
-            { label: 'Current Files', route: '/folders/current-files' },
-            { label: 'Downloads', route: '/folders/download' },
-            { label: 'Trash', route: '/folders/trash' },
-          ],
+          icon: 'assets/icons/heroicons/outline/reports-svgrepo-com.svg',
+          label: 'Reports',
+          route: '/Reports',
+          // children: [
+          //   { label: 'Current Files', route: '/folders/current-files' },
+          //   { label: 'Downloads', route: '/folders/download' },
+          //   { label: 'Trash', route: '/folders/trash' },
+          // ],
         },
       ],
     },

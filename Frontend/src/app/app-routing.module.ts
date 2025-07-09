@@ -13,8 +13,8 @@ const routes: Routes = [
   // {
   //   path: 'errors',
   //   loadChildren: () => import('./modules/error/error.module').then((m) => m.ErrorModule),
-  // },
-  { path: '**', redirectTo: 'errors/404' },
+  // // },
+  // { path: '**', redirectTo: 'errors/404' },
 ];
 
 @NgModule({
