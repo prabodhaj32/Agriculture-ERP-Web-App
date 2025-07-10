@@ -9,9 +9,9 @@ const routes: Routes = [
     loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   // {
-  //   path: 'components',
+  //   path: 'user-management',
   //   component: LayoutComponent,
-  //   loadChildren: () => import('../uikit/uikit.module').then((m) => m.UikitModule),
+  //   loadChildren: () => import('../user-management/user-management.module').then((m) => m.UserManagementModule), // Assume this module exists
   // },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },

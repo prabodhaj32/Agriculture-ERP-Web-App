@@ -1,5 +1,6 @@
 import { MenuItem } from '../models/menu.model';
 
+
 export class Menu {
   public static pages: MenuItem[] = [
     {
@@ -10,7 +11,7 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/dashboard-svgrepo-com.svg',
           label: 'Dashboard',
           route: '/dashboard',
-          // children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
+          
         },
         {
           icon: 'assets/icons/heroicons/outline/lock-closed-outline-svgrepo-com.svg',
@@ -28,50 +29,41 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg',
           label: 'User Management',
           route: '/user-management',
-          
         },
         {
           icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
           label: 'Field Management',
-          route: '/Field Management',
-          
-        
+          route: '/field-management',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',
           label: 'Planning',
-          route: '/Planning',
-        
+          route: '/planning',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/activity-log-svgrepo-com.svg',
           label: 'Activity Log',
-          route: '/Activity Log',
-        
+          route: '/activity-log',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/harvest-svgrepo-com.svg',
           label: 'Harvest',
-          route: '/Harvest',
-        
+          route: '/harvest',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/fertilizer-fragrance-perfume-spray-svgrepo-com.svg',
           label: 'Fertilizer',
-          route: '/Fertilizer',
-        
+          route: '/fertilizer',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/dollar-circle-list-svgrepo-com.svg',
           label: 'Financials',
-          route: '/Financials',
-        
+          route: '/financials',
         },
-         {
+        {
           icon: 'assets/icons/heroicons/outline/business-financial-graph-svgrepo-com.svg',
           label: 'Sales',
-          route: '/Sales',
-        
+          route: '/sales',
         },
       ],
     },
@@ -82,12 +74,12 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/monitoring-health-svgrepo-com.svg',
           label: 'Monitoring',
-          route: '/Monitoring',
+          route: '/monitoring',
         },
         {
           icon: 'assets/icons/heroicons/outline/book-svgrepo-com.svg',
           label: 'Knowledge Center',
-          route: '/Knowledge Center',
+          route: '/knowledge-center',
         },
       ],
     },
@@ -98,12 +90,7 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/reports-svgrepo-com.svg',
           label: 'Reports',
-          route: '/Reports',
-          // children: [
-          //   { label: 'Current Files', route: '/folders/current-files' },
-          //   { label: 'Downloads', route: '/folders/download' },
-          //   { label: 'Trash', route: '/folders/trash' },
-          // ],
+          route: '/reports',
         },
       ],
     },
