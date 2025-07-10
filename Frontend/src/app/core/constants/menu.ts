@@ -1,6 +1,5 @@
 import { MenuItem } from '../models/menu.model';
 
-
 export class Menu {
   public static pages: MenuItem[] = [
     {
@@ -11,7 +10,6 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/dashboard-svgrepo-com.svg',
           label: 'Dashboard',
           route: '/dashboard',
-          
         },
         {
           icon: 'assets/icons/heroicons/outline/lock-closed-outline-svgrepo-com.svg',
@@ -26,9 +24,10 @@ export class Menu {
           ],
         },
         {
-          icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg',
+          icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg', 
           label: 'User Management',
           route: '/user-management',
+          
         },
         {
           icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
