@@ -16,7 +16,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     HttpClientModule,
     UserListComponent,
     UserFormComponent,
-     UserManagementRoutingModule
+    UserManagementRoutingModule
   ],
 
   exports: [UserListComponent] 

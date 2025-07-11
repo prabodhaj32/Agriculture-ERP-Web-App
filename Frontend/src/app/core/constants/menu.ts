@@ -27,6 +27,12 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg', 
           label: 'User Management',
           route: '/user-management',
+           children: [
+           { label: 'User Form', route: '/user-management/user-form' }, // will open form
+           { label: 'User List', route: '/user-management/user-list' }, // opens table
+            
+    
+  ],
           
         },
         {

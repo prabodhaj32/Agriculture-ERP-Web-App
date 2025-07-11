@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -16,30 +16,37 @@ export class UserService {
         role: 'Admin',
         isActive: true,
         assignedFields: ['Field A'],
+        password: 'secret', 
       },
     ]);
   }
 
-  getUsers() {
+  getUsers(): Observable<User[]> {
     return this.users$.asObservable();
   }
 
-  addUser(user: User) {
+  addUser(user: User): Observable<void> {
     const current = this.users$.getValue();
-    this.users$.next([...current, { ...user, id: Date.now().toString(), isActive: true }]);
+    this.users$.next([
+      ...current,
+      { ...user, id: Date.now().toString(), isActive: true },
+    ]);
+    return of(void 0); // ✅ Return Observable<void>
   }
 
-  updateUser(updatedUser: User) {
-    const updatedList = this.users$.getValue().map(u =>
+  updateUser(updatedUser: User): Observable<void> {
+    const updatedList = this.users$.getValue().map((u) =>
       u.id === updatedUser.id ? { ...u, ...updatedUser } : u
     );
     this.users$.next(updatedList);
+    return of(void 0); // ✅ Return Observable<void>
   }
 
-  toggleUserStatus(id: string) {
-    const updatedList = this.users$.getValue().map(user =>
+  toggleUserStatus(id: string): Observable<void> {
+    const updatedList = this.users$.getValue().map((user) =>
       user.id === id ? { ...user, isActive: !user.isActive } : user
     );
     this.users$.next(updatedList);
+    return of(void 0); // ✅ Return Observable<void>
   }
 }

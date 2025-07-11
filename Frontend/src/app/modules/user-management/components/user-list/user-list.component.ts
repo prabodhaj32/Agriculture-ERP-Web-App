@@ -14,6 +14,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  
 
   selectedUser: User = {
     fullName: '',
