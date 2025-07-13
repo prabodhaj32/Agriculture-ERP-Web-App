@@ -1,38 +1,68 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
-import { FieldService } from '../../services/field.service';
-import { Field } from '../../models/field.model';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-field-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatButtonModule,
+  MatIconModule],
   templateUrl: './field-map.component.html',
 })
 export class FieldMapComponent implements AfterViewInit {
-  @ViewChild('map') mapElementRef!: ElementRef;
-  fields: Field[] = [];
+  @ViewChild('map') mapElement!: ElementRef;
 
-  constructor(private fieldService: FieldService) {}
+  private map!: L.Map;
+  lat = 7.8731;
+  lng = 80.7718;
+  name = 'Field';
+
+  constructor(private location: Location, private route: ActivatedRoute) {
+  this.route.queryParams.subscribe(params => {
+    this.lat = +params['lat'] || this.lat;
+    this.lng = +params['lng'] || this.lng;
+    this.name = params['name'] || this.name;
+  });
+}
 
   ngAfterViewInit(): void {
-    this.fields = this.fieldService.getFields();
-
-    const map = L.map(this.mapElementRef.nativeElement).setView([7.8731, 80.7718], 7);
+    this.map = L.map(this.mapElement.nativeElement, {
+      center: [this.lat, this.lng],
+      zoom: 14,
+      scrollWheelZoom: true,
+      zoomControl: true,
+      inertia: true,
+      zoomAnimation: true,
+      fadeAnimation: true,
+    });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+      detectRetina: true,
+      keepBuffer: 5,
+      updateWhenZooming: false,
+      updateWhenIdle: true,
+    }).addTo(this.map);
 
-    this.fields.forEach((field) => {
-      if (field.coordinates) {
-        L.marker([field.coordinates.lat, field.coordinates.lng])
-          .addTo(map)
-          .bindPopup(`
-            <b>${field.name}</b><br>Status: ${field.status}<br>Crop: ${field.cropType}
-          `);
-      }
+    L.marker([this.lat, this.lng])
+      .addTo(this.map)
+      .bindPopup(`<b>${this.name}</b>`)
+      .openPopup();
+
+    // Smooth camera animation
+    this.map.flyTo([this.lat, this.lng], 14, {
+      animate: true,
+      duration: 1.5,
     });
+
+    
   }
+  goBack() {
+  this.location.back();
+}
+  
 }

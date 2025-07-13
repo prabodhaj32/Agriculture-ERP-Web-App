@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Field } from '../../models/field.model';
 import { FieldService } from '../../services/field.service';
 import { FieldFormComponent } from '../field-form/field-form.component';
 
-// Import Angular Material modules
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-field-list',
   standalone: true,
   imports: [
+     RouterModule,
     CommonModule,
     FieldFormComponent,
     MatTableModule,
@@ -25,7 +27,6 @@ export class FieldListComponent {
   fields: Field[] = [];
   selectedField: Field | null = null;
 
-  
   displayedColumns: string[] = [
     'name',
     'size',
@@ -34,9 +35,13 @@ export class FieldListComponent {
     'cropType',
     'status',
     'actions',
+    'view',
   ];
 
-  constructor(private fieldService: FieldService) {
+  constructor(
+    private fieldService: FieldService,
+    private router: Router
+  ) {
     this.fields = this.fieldService.getFields();
   }
 
@@ -49,6 +54,7 @@ export class FieldListComponent {
       soilType: '',
       cropType: '',
       status: 'Active',
+      coordinates: { lat: 7.8731, lng: 80.7718 },
     };
   }
 
@@ -73,5 +79,17 @@ export class FieldListComponent {
   deleteField(id: number) {
     this.fieldService.deleteField(id);
     this.fields = this.fieldService.getFields();
+  }
+
+  focusOnField(field: Field) {
+    if (field.coordinates) {
+      this.router.navigate(['/fields/map'], {
+        queryParams: {
+          lat: field.coordinates.lat,
+          lng: field.coordinates.lng,
+          name: field.name,
+        },
+      });
+    }
   }
 }

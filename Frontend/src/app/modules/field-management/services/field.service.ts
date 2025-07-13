@@ -1,4 +1,3 @@
-// field.service.ts
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
 
@@ -9,11 +8,22 @@ export class FieldService {
       id: 1,
       name: 'Field A',
       size: 10,
-      location: 'Hill Side',
+      location: 'kandy',
       soilType: 'Loamy',
       cropType: 'Tea',
       status: 'Planted',
+      coordinates: { lat: 7.2906, lng: 80.6337 } // Kandy
     },
+    {
+      id: 2,
+      name: 'Field B',
+      size: 5,
+      location: 'colombo',
+      soilType: 'Clay',
+      cropType: 'Coconut',
+      status: 'Active',
+      coordinates: { lat: 6.9271, lng: 79.8612 } // Colombo
+    }
   ];
 
   getFields(): Field[] {

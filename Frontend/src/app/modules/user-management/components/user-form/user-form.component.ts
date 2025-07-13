@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { Location } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+   imports: [CommonModule, FormsModule, MatButtonModule, MatIconModule],
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
@@ -26,7 +29,7 @@ export class UserFormComponent implements OnInit {
   // ✅ Add this property
   assignedField: string = 'Tea';
 
-  constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private location: Location) {}
   
 ngOnInit() {
   if (this.user?.assignedFields?.length) {
@@ -57,5 +60,8 @@ ngOnInit() {
       assignedFields: []
     };
     this.assignedField = 'Tea';
+  }
+   goBack(): void {
+    this.location.back();
   }
 }

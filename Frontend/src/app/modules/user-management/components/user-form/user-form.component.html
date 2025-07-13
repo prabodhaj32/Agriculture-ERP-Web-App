@@ -1,4 +1,19 @@
 <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+ <div class="mb-4">
+  <button
+    mat-button
+    color="primary"
+    class="flex items-center"
+    type="button"
+    (click)="goBack()"
+  >
+    <mat-icon class="mr-1">arrow_back</mat-icon>
+    Back
+  </button>
+</div>
+
+
+
   <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-6" novalidate>
 
     <div>

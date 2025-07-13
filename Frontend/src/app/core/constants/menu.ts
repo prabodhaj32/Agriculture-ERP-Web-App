@@ -40,8 +40,8 @@ export class Menu {
           label: 'Field Management',
           route: '/field-management',
            children: [
-          //  { label: 'field Form', route: '/field-management/field-form' }, 
-           { label: 'field List', route: '/field-management/field-list' }, 
+    
+           { label: 'Field List', route: '/field-management/field-list' }, 
             
     
   ],

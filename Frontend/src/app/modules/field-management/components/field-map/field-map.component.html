@@ -1,4 +1,13 @@
 <div class="p-4">
-  <h2 class="text-xl font-bold mb-4">Field Map View</h2>
-  <div #map class="h-[500px] w-full border rounded shadow"></div>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-bold">Field Location - {{ name }}</h2>
+    <button mat-stroked-button color="primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
+  <div class="border rounded shadow overflow-hidden" style="height: 500px;">
+    <div #map id="map" class="h-full w-full"></div>
+  </div>
 </div>
