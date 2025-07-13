@@ -1,33 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 import { UserFormComponent } from '../user-form/user-form.component';
+
+// Material modules
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, UserFormComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    UserFormComponent,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatTooltipModule
+  ],
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
   users: User[] = [];
-  
+  selectedUser: User | null = null;
 
-  selectedUser: User = {
-    fullName: '',
-    email: '',
-    phone: '',
-    role: 'FieldOfficer',
-    password: '',
-    assignedFields: []
-  };
+  displayedColumns: string[] = [
+  'fullName',
+  'email',
+  'phone',
+  'role',
+  'password',
+  'assignedFields',
+  'status',
+  'actions'
+];
 
-  constructor(private userService: UserService) {}
 
-  ngOnInit() {
+  constructor(private userService: UserService) {
+    this.loadUsers();
+  }
+
+  loadUsers() {
     this.userService.getUsers().subscribe((data) => (this.users = data));
   }
 
@@ -36,8 +57,12 @@ export class UserListComponent implements OnInit {
   }
 
   toggleStatus(user: User) {
-    if (user.id) {
-      this.userService.toggleUserStatus(user.id);
-    }
+    const updated = { ...user, isActive: !user.isActive };
+    this.userService.updateUser(updated).subscribe(() => this.loadUsers());
+  }
+
+  onUserUpdated() {
+    this.selectedUser = null;
+    this.loadUsers();
   }
 }

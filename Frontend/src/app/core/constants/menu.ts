@@ -28,8 +28,8 @@ export class Menu {
           label: 'User Management',
           route: '/user-management',
            children: [
-           { label: 'User Form', route: '/user-management/user-form' }, // will open form
-           { label: 'User List', route: '/user-management/user-list' }, // opens table
+           { label: 'User Form', route: '/user-management/user-form' }, 
+           { label: 'User List', route: '/user-management/user-list' }, 
             
     
   ],
@@ -39,6 +39,13 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
           label: 'Field Management',
           route: '/field-management',
+           children: [
+          //  { label: 'field Form', route: '/field-management/field-form' }, 
+           { label: 'field List', route: '/field-management/field-list' }, 
+            
+    
+  ],
+
         },
         {
           icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',

@@ -15,7 +15,7 @@ export class UserService {
         phone: '1234567890',
         role: 'Admin',
         isActive: true,
-        assignedFields: ['Field A'],
+        assignedFields: [''],
         password: 'secret', 
       },
     ]);

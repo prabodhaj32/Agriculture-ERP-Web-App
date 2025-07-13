@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/user-management/user-management.module').then((m) => m.UserManagementModule)
   },
+  {
+  path: 'fields',
+  loadChildren: () =>
+    import('./modules/field-management/field-management.module').then(m => m.FieldManagementModule),
+},
+
 ];
 
 @NgModule({

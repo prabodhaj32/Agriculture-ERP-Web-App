@@ -6,7 +6,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 const routes: Routes = [
   { path: 'user-list', component: UserListComponent },
   { path: 'user-form', component: UserFormComponent },
-  { path: '', redirectTo: 'user-list', pathMatch: 'full' }, // default route
+  { path: '', redirectTo: 'user-list', pathMatch: 'full' },  
 ];
 
 @NgModule({

@@ -1,0 +1,71 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-4">Field Management</h2>
+
+  <button *ngIf="!selectedField" mat-raised-button color="primary" class="mb-4" (click)="addField()">Add Field</button>
+
+  <app-field-form *ngIf="selectedField" [field]="selectedField" (save)="saveField($event)" (cancel)="cancelEdit()"></app-field-form>
+
+  <table *ngIf="!selectedField" mat-table [dataSource]="fields" class="mat-elevation-z8" style="width: 100%;">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let field">{{ field.name }}</td>
+    </ng-container>
+
+    <!-- Size Column -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>Size (acre)</th>
+      <td mat-cell *matCellDef="let field">{{ field.size }}</td>
+    </ng-container>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let field">{{ field.location }}</td>
+    </ng-container>
+
+    <!-- Soil Column -->
+    <ng-container matColumnDef="soilType">
+      <th mat-header-cell *matHeaderCellDef>Soil</th>
+      <td mat-cell *matCellDef="let field">{{ field.soilType }}</td>
+    </ng-container>
+
+    <!-- Crop Column -->
+    <ng-container matColumnDef="cropType">
+      <th mat-header-cell *matHeaderCellDef>Crop</th>
+      <td mat-cell *matCellDef="let field">{{ field.cropType }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let field">
+        <span [ngClass]="{
+          'text-green-600': field.status === 'Active',
+          'text-red-600': field.status === 'Inactive',
+          'text-yellow-600': field.status === 'Planted',
+          'text-blue-600': field.status === 'Harvested'
+        }">{{ field.status }}</span>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let field">
+        <button mat-icon-button color="primary" (click)="editField(field)" aria-label="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteField(field.id)" aria-label="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

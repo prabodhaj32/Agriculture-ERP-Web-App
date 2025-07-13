@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.model';
@@ -11,7 +11,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
   @Input() user: User = {
     fullName: '',
     email: '',
@@ -21,20 +21,33 @@ export class UserFormComponent {
     assignedFields: []
   };
 
-  fieldInput: string = '';
+  @Output() formSubmit = new EventEmitter<void>();
+
+  // ✅ Add this property
+  assignedField: string = 'Tea';
 
   constructor(private userService: UserService) {}
-
+  
+ngOnInit() {
+  if (this.user?.assignedFields?.length) {
+    this.assignedField = this.user.assignedFields[0];
+  }
+}
   onSubmit() {
-    this.user.assignedFields = this.fieldInput.split(',').map((f) => f.trim());
+    // ✅ Convert single field to array before saving
+    this.user.assignedFields = [this.assignedField];
 
     if (this.user.id) {
-      this.userService.updateUser(this.user);
+      this.userService.updateUser(this.user).subscribe(() => this.formSubmit.emit());
     } else {
-      this.userService.addUser(this.user);
+      this.userService.addUser(this.user).subscribe(() => {
+        this.formSubmit.emit();
+        this.resetForm();
+      });
     }
+  }
 
-    // Clear form after submit (optional)
+  resetForm() {
     this.user = {
       fullName: '',
       email: '',
@@ -43,6 +56,6 @@ export class UserFormComponent {
       password: '',
       assignedFields: []
     };
-    this.fieldInput = '';
+    this.assignedField = 'Tea';
   }
 }

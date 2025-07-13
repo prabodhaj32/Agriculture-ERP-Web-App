@@ -16,6 +16,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('../user-management/user-management.module').then((m) => m.UserManagementModule)
       },
+      {
+        path: 'user-management',
+        loadChildren: () =>
+          import('../user-management/user-management.module').then((m) => m.UserManagementModule)
+      },
+      
+        {
+        path: 'field-management',
+        loadChildren: () =>
+          import('../field-management/field-management.module').then((m) => m.FieldManagementModule),
+      },
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
