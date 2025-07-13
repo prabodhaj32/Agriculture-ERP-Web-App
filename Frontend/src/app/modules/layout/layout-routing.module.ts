@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../field-management/field-management.module').then((m) => m.FieldManagementModule),
       },
+       {
+        path: 'planning',
+        loadChildren: () =>
+          import('../planning/planning.module').then((m) => m.PlanningModule),
+      },
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }

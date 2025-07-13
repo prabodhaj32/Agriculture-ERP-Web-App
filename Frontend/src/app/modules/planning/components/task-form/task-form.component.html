@@ -1,0 +1,9 @@
+<form (submit)="save(fieldInput.value, taskTypeInput.value, assignedToInput.value, startDateInput.value, endDateInput.value, notesInput.value)" class="p-4 space-y-4">
+  <input #fieldInput placeholder="Field" required />
+  <input #taskTypeInput placeholder="Task Type" required />
+  <input #assignedToInput placeholder="Assigned To" required />
+  <input type="date" #startDateInput required />
+  <input type="date" #endDateInput required />
+  <textarea #notesInput placeholder="Notes"></textarea>
+  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save Task</button>
+</form>

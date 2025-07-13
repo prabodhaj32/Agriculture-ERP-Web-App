@@ -48,10 +48,17 @@ export class Menu {
 
         },
         {
-          icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',
-          label: 'Planning',
-          route: '/planning',
-        },
+  icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',
+  label: 'Planning',
+  route: '/planning',
+  children: [
+    { label: 'Task Form', route: '/planning/form' },   // ✅ match route
+    { label: 'Task List', route: '/planning/list' },   // ✅ match route
+    { label: 'Task Calendar', route: '/planning/calendar' },
+    // Optional calendar view:
+    // { label: 'Task Calendar', route: '/planning/calendar' }
+  ],
+},
         {
           icon: 'assets/icons/heroicons/outline/activity-log-svgrepo-com.svg',
           label: 'Activity Log',

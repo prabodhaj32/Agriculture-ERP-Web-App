@@ -43,7 +43,7 @@ ngOnInit() {
     if (this.user.id) {
       this.userService.updateUser(this.user).subscribe(() => this.formSubmit.emit());
     } else {
-      this.userService.addUser(this.user).subscribe(() => {
+   this.userService.addUser(this.user).subscribe(() => {
         this.formSubmit.emit();
         this.resetForm();
       });

@@ -1,52 +1,66 @@
+// src/app/modules/user-management/services/user.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
+  // Store users in a BehaviorSubject to allow reactive updates
   private users$ = new BehaviorSubject<User[]>([]);
 
   constructor() {
+    // Optional: initialize with some dummy users or load from storage
     this.users$.next([
       {
         id: '1',
         fullName: 'John Doe',
         email: 'john@example.com',
-        phone: '1234567890',
-        role: 'Admin',
-        isActive: true,
-        assignedFields: [''],
-        password: 'secret', 
-      },
+        phone: '123456789',
+        role: 'FieldOfficer',
+        password: '',
+        assignedFields: ['Tea']
+      }
     ]);
   }
 
+  // Observable to get current users
   getUsers(): Observable<User[]> {
     return this.users$.asObservable();
   }
 
+  // Add a new user
   addUser(user: User): Observable<void> {
-    const current = this.users$.getValue();
-    this.users$.next([
-      ...current,
-      { ...user, id: Date.now().toString(), isActive: true },
-    ]);
-    return of(void 0); // ✅ Return Observable<void>
+    const currentUsers = this.users$.getValue();
+
+    // If user doesn't have an id, generate one
+    if (!user.id) {
+      user.id = this.generateId();
+    }
+
+    this.users$.next([...currentUsers, user]);
+    return of(void 0); // Return Observable<void>
   }
 
+  // Update existing user by id
   updateUser(updatedUser: User): Observable<void> {
-    const updatedList = this.users$.getValue().map((u) =>
-      u.id === updatedUser.id ? { ...u, ...updatedUser } : u
+    const updatedList = this.users$.getValue().map(user =>
+      user.id === updatedUser.id ? { ...user, ...updatedUser } : user
     );
     this.users$.next(updatedList);
-    return of(void 0); // ✅ Return Observable<void>
+    return of(void 0); // Return Observable<void>
   }
 
-  toggleUserStatus(id: string): Observable<void> {
-    const updatedList = this.users$.getValue().map((user) =>
-      user.id === id ? { ...user, isActive: !user.isActive } : user
-    );
-    this.users$.next(updatedList);
-    return of(void 0); // ✅ Return Observable<void>
+  // Delete a user by id (optional)
+  deleteUser(id: string): Observable<void> {
+    const filteredUsers = this.users$.getValue().filter(user => user.id !== id);
+    this.users$.next(filteredUsers);
+    return of(void 0);
+  }
+
+  // Utility to generate a random id
+  private generateId(): string {
+    return Math.random().toString(36).substring(2, 9);
   }
 }
