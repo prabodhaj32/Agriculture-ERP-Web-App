@@ -1,0 +1,70 @@
+<div class="p-6 bg-white shadow rounded max-w-2xl mx-auto mt-6">
+  <h2 class="text-xl font-bold mb-4">Daily Task Log</h2>
+
+  <form (submit)="submitTask()" class="space-y-4">
+    <input
+      type="text"
+      placeholder="Field"
+      [(ngModel)]="task.field"
+      name="field"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Task Type"
+      [(ngModel)]="task.taskType"
+      name="taskType"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Worker Name"
+      [(ngModel)]="task.workerName"
+      name="workerName"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Task Duration (in hours)"
+      [(ngModel)]="task.duration"
+      name="duration"
+      class="input"
+      required
+    />
+
+    <!-- ✅ Add Date Picker Here -->
+    <input
+      type="date"
+      class="input"
+      [(ngModel)]="task.date"
+      name="date"
+      required
+    />
+
+    <textarea
+      placeholder="Remarks"
+      [(ngModel)]="task.remarks"
+      name="remarks"
+      class="input"
+    ></textarea>
+
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      multiple
+      class="input"
+    />
+
+<button mat-raised-button color="primary" type="submit">
+  Submit Task
+</button>
+
+
+  </form>
+</div>

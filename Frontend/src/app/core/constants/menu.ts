@@ -60,10 +60,15 @@ export class Menu {
   ],
 },
         {
-          icon: 'assets/icons/heroicons/outline/activity-log-svgrepo-com.svg',
-          label: 'Activity Log',
-          route: '/activity-log',
-        },
+  icon: 'assets/icons/heroicons/outline/activity-log-svgrepo-com.svg',
+  label: 'Activity Log',
+  route: '/activity-log',
+  children: [
+    { label: 'Daily Task', route: '/activity-log/daily-task' },
+    { label: 'Attendance Form', route: '/activity-log/attendance' },
+    { label: 'Task Summary', route: '/activity-log/summary' },
+  ]
+},
         {
           icon: 'assets/icons/heroicons/outline/harvest-svgrepo-com.svg',
           label: 'Harvest',

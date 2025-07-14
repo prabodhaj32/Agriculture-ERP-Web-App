@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('../planning/planning.module').then((m) => m.PlanningModule),
       },
+       {
+        path: 'activity-log',
+        loadChildren: () => import('../activity-log/activity-log.module').then(m => m.ActivityLogModule),
+      },
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
