@@ -1,0 +1,36 @@
+<div class="p-6 bg-white shadow rounded-md max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Field-wise Cost Comparison</h2>
+
+  <!-- Action Buttons -->
+  <div class="flex flex-wrap gap-4 mb-6">
+    <button (click)="loadComparisonData()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+       Refresh Data
+    </button>
+    <button (click)="exportComparisonToExcel()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+      ⬇ Export to Excel
+    </button>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-left text-sm border border-gray-300 shadow-sm">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border px-4 py-2 font-semibold text-gray-700"> Field</th>
+          <th class="border px-4 py-2 font-semibold text-gray-700"> Total Expense (Rs.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of comparisonData | keyvalue" class="hover:bg-gray-50 transition">
+          <td class="border px-4 py-2">{{ item.key }}</td>
+          <td class="border px-4 py-2">Rs. {{ item.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Data Message -->
+  <div *ngIf="!comparisonData || (comparisonData | keyvalue).length === 0" class="mt-4 text-red-600">
+    No comparison data available. Please refresh.
+  </div>
+</div>

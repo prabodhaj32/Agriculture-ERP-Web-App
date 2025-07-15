@@ -88,11 +88,17 @@ export class Menu {
     { label: 'Application Form', route: '/fertilizer/application' },
   ],
 },
-        {
-          icon: 'assets/icons/heroicons/outline/dollar-circle-list-svgrepo-com.svg',
-          label: 'Financials',
-          route: '/financials',
-        },
+       {
+  icon: 'assets/icons/heroicons/outline/dollar-circle-list-svgrepo-com.svg',
+  label: 'Financials',
+  route: '/financials',
+  children: [
+    { label: 'Expense Entry', route: '/financials/expenses' },
+    { label: 'Revenue Entry', route: '/financials/revenues' },
+    { label: 'Cost Comparison', route: '/financials/cost-comparison' },
+    { label: 'Income vs Expense Chart', route: '/financials/income-expense-chart' },
+  ],
+},
         {
           icon: 'assets/icons/heroicons/outline/business-financial-graph-svgrepo-com.svg',
           label: 'Sales',

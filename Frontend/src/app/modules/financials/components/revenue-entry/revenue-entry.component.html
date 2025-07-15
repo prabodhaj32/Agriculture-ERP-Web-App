@@ -1,0 +1,73 @@
+<form (ngSubmit)="submitRevenue()" class="bg-white p-6 rounded shadow max-w-xl mx-auto space-y-4">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4"> Revenue Entry Form</h2>
+
+  <input
+    [(ngModel)]="revenue.type"
+    name="type"
+    placeholder="Revenue Type"
+    required
+    class="input w-full"
+  />
+
+  <input
+    [(ngModel)]="revenue.date"
+    name="date"
+    type="date"
+    required
+    class="input w-full"
+  />
+
+  <input
+    [(ngModel)]="revenue.field"
+    name="field"
+    placeholder="Field"
+    required
+    class="input w-full"
+  />
+
+  <div class="grid grid-cols-2 gap-4">
+    <input
+      [(ngModel)]="quantity"
+      name="quantity"
+      type="number"
+      (input)="updateTotal()"
+      placeholder="Quantity"
+      required
+      class="input w-full"
+    />
+    <input
+      [(ngModel)]="price"
+      name="price"
+      type="number"
+      (input)="updateTotal()"
+      placeholder="Price per Unit"
+      required
+      class="input w-full"
+    />
+  </div>
+
+  <input
+    [(ngModel)]="revenue.total"
+    name="total"
+    placeholder="Total Revenue"
+    readonly
+    class="input w-full bg-gray-100 text-gray-700"
+  />
+
+  <textarea
+    [(ngModel)]="revenue.description"
+    name="description"
+    placeholder="Description"
+    rows="3"
+    class="input w-full"
+  ></textarea>
+  <div>
+    <button
+      type="submit"
+      class="w-full bg-green-600 text-white py-2 rounded hover:bg-blue-700 transition"
+    >
+      Submit Revenue
+    </button>
+
+  </div>
+</form>

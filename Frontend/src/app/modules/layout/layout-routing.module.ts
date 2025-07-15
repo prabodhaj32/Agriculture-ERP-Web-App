@@ -44,6 +44,10 @@ const routes: Routes = [
         path: 'fertilizer',
         loadChildren: () => import('../fertilizer/fertilizer.module').then(m => m.FertilizerModule),
       },
+       {
+        path: 'financials',
+        loadChildren: () => import('../financials/financials.module').then(m => m.FinancialsModule),
+      },
       
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
