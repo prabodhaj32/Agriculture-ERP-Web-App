@@ -1,0 +1,25 @@
+<div class="p-6 max-w-3xl mx-auto bg-white shadow rounded">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-bold text-green-700">Daily Harvest Summary by Field</h2>
+    <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700" (click)="exportLog()">Export CSV</button>
+  </div>
+  
+  <table class="table-auto w-full border border-gray-200">
+    <thead class="bg-green-100">
+      <tr>
+        <th class="text-left px-4 py-2 border">Field</th>
+        <th class="text-left px-4 py-2 border">Total Quantity (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let field of summary | keyvalue" class="border-t">
+        <td class="px-4 py-2 border">{{ field.key }}</td>
+        <td class="px-4 py-2 border">{{ field.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="isEmptySummary" class="text-gray-500 mt-4">
+  No harvest data available.
+</div>
+</div>

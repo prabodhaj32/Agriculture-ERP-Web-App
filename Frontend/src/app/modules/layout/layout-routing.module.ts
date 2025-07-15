@@ -36,6 +36,15 @@ const routes: Routes = [
         path: 'activity-log',
         loadChildren: () => import('../activity-log/activity-log.module').then(m => m.ActivityLogModule),
       },
+       {
+        path: 'harvest',
+        loadChildren: () => import('../harvest/harvest.module').then(m => m.HarvestModule),
+      },
+       {
+        path: 'fertilizer',
+        loadChildren: () => import('../fertilizer/fertilizer.module').then(m => m.FertilizerModule),
+      },
+      
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }

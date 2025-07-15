@@ -1,0 +1,91 @@
+<div class="p-6 bg-white rounded shadow-md max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Fertilizer / Pesticide Application Form</h2>
+
+  <!-- FORM SECTION -->
+  <form (ngSubmit)="addEntry()" class="grid gap-4 md:grid-cols-2">
+    <input
+      class="input border rounded px-4 py-2"
+      placeholder=" Field"
+      [(ngModel)]="entry.field"
+      name="field"
+      required
+    />
+    <input
+      type="date"
+      class="input border rounded px-4 py-2"
+      [(ngModel)]="entry.date"
+      name="date"
+      required
+    />
+    <input
+      class="input border rounded px-4 py-2"
+      placeholder=" Item (e.g., Urea)"
+      [(ngModel)]="entry.item"
+      name="item"
+      required
+    />
+    <input
+      type="number"
+      class="input border rounded px-4 py-2"
+      placeholder="Quantity (kg)"
+      [(ngModel)]="entry.quantityApplied"
+      name="quantityApplied"
+      required
+    />
+    <input
+      class="input border rounded px-4 py-2 md:col-span-2"
+      placeholder=" Applied By"
+      [(ngModel)]="entry.appliedBy"
+      name="appliedBy"
+      required
+    />
+
+    <button class="btn btn-primary md:col-span-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Submit Application
+    </button>
+  </form>
+
+  <!-- HISTORY SECTION -->
+  <div class="mt-8">
+    <h3 class="text-lg font-semibold text-gray-700 mb-2">Field Application History</h3>
+
+    <select
+      class="input border rounded px-4 py-2 w-full mb-4"
+      [(ngModel)]="fieldFilter"
+      name="fieldFilter"
+      (ngModelChange)="refresh()"
+    >
+      <option value="">Select Field to Filter</option>
+      <option *ngFor="let field of getFieldList()" [value]="field">{{ field }}</option>
+    </select>
+
+    <div *ngIf="fieldFilter">
+      <ul *ngIf="getHistoryByField().length > 0; else noHistory" class="list-disc ml-6 text-sm text-gray-800">
+        <li *ngFor="let record of getHistoryByField()">
+          📅 {{ record.date }} - {{ record.item }} ({{ record.quantityApplied }} kg) by {{ record.appliedBy }}
+        </li>
+      </ul>
+
+      <ng-template #noHistory>
+        <p class="text-sm text-gray-500">No entries found for this field.</p>
+      </ng-template>
+
+      <div class="mt-4">
+        <div class="text-green-600">
+          ✅ <strong>Last Application Date:</strong> {{ getNextApplicationDate() || 'N/A' }}
+        </div>
+
+        <div class="text-blue-600 mt-1">
+          📆 <strong>Next Scheduled Date (+14 days):</strong> {{ getNextScheduledDate() || 'N/A' }}
+        </div>
+
+        <div
+          *ngIf="isApplicationOverdue()"
+          class="mt-2 text-red-700 font-bold border-l-4 border-red-500 pl-2"
+        >
+          ⚠️ Application is overdue for <strong>{{ fieldFilter }}</strong>!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

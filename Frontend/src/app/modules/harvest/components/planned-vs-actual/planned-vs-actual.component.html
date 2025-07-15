@@ -1,0 +1,28 @@
+<div class="p-6 max-w-4xl mx-auto bg-white shadow rounded">
+  <h2 class="text-xl font-bold mb-4 text-green-700">Planned vs. Actual Yield</h2>
+
+  <table *ngIf="records.length > 0" class="table-auto w-full border border-gray-300">
+    <thead class="bg-green-100">
+      <tr>
+        <th class="text-left px-4 py-2 border">Field</th>
+        <th class="text-left px-4 py-2 border">Planned Yield (kg)</th>
+        <th class="text-left px-4 py-2 border">Actual Quantity (kg)</th>
+        <th class="text-left px-4 py-2 border">Variance (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of records" class="border-t">
+        <td class="px-4 py-2 border">{{ r.field }}</td>
+        <td class="px-4 py-2 border">{{ r.plannedYield || 'N/A' }}</td>
+        <td class="px-4 py-2 border">{{ r.quantity }}</td>
+        <td class="px-4 py-2 border">
+          {{ r.plannedYield ? (r.quantity - r.plannedYield) : 'N/A' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="records.length === 0" class="text-gray-500 mt-4">
+    No harvest records found.
+  </div>
+</div>

@@ -69,16 +69,25 @@ export class Menu {
     { label: 'Task Summary', route: '/activity-log/summary' },
   ]
 },
+      {
+  icon: 'assets/icons/heroicons/outline/harvest-svgrepo-com.svg',
+  label: 'Harvest',
+  route: '/harvest',
+  children: [
+    { label: 'Harvest Form', route: '/harvest/harvest-entry' },
+    { label: 'Harvest Summary', route: '/harvest/harvest-summary' },
+    { label: 'Planned vs. Actual Yield', route: '/harvest/planned-vs-actual' },
+  ]
+},
         {
-          icon: 'assets/icons/heroicons/outline/harvest-svgrepo-com.svg',
-          label: 'Harvest',
-          route: '/harvest',
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/fertilizer-fragrance-perfume-spray-svgrepo-com.svg',
-          label: 'Fertilizer',
-          route: '/fertilizer',
-        },
+  icon: 'assets/icons/heroicons/outline/fertilizer-fragrance-perfume-spray-svgrepo-com.svg',
+  label: 'Fertilizer',
+  route: '/fertilizer',
+  children: [
+    { label: 'Inventory Form', route: '/fertilizer/inventory' },
+    { label: 'Application Form', route: '/fertilizer/application' },
+  ],
+},
         {
           icon: 'assets/icons/heroicons/outline/dollar-circle-list-svgrepo-com.svg',
           label: 'Financials',

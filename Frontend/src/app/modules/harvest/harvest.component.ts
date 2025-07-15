@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-harvest',
-  imports: [],
+   standalone: true,
+  imports: [RouterModule], // ✅ for router-outlet
   templateUrl: './harvest.component.html',
   styleUrl: './harvest.component.css'
 })
