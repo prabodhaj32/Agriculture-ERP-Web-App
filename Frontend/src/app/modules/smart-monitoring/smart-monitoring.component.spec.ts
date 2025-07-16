@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MonitoringComponent } from './monitoring.component';
+import { SmartMonitoringComponent } from './smart-monitoring.component';
 
-describe('MonitoringComponent', () => {
-  let component: MonitoringComponent;
-  let fixture: ComponentFixture<MonitoringComponent>;
+describe('SmartMonitoringComponent', () => {
+  let component: SmartMonitoringComponent;
+  let fixture: ComponentFixture<SmartMonitoringComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MonitoringComponent]
+      imports: [SmartMonitoringComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MonitoringComponent);
+    fixture = TestBed.createComponent(SmartMonitoringComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

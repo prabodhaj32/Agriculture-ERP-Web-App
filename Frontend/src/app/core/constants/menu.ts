@@ -117,11 +117,11 @@ export class Menu {
       group: 'Integrations',
       separator: true,
       items: [
-        {
-          icon: 'assets/icons/heroicons/outline/monitoring-health-svgrepo-com.svg',
-          label: 'Monitoring',
-          route: '/monitoring',
-        },
+       {
+  icon: 'assets/icons/heroicons/outline/monitoring-health-svgrepo-com.svg',
+  label: 'Monitoring',
+  route: '/monitoring',
+},
         {
           icon: 'assets/icons/heroicons/outline/book-svgrepo-com.svg',
           label: 'Knowledge Center',

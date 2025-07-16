@@ -52,7 +52,11 @@ const routes: Routes = [
         path: 'sales',
         loadChildren: () => import('../sales/sales.module').then(m => m.SalesModule),
       },
-      
+    {
+        path: 'monitoring',
+        loadChildren: () =>
+          import('../smart-monitoring/smart-monitoring.module').then(m => m.SmartMonitoringModule)
+      },
       
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
