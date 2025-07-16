@@ -1,0 +1,45 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow rounded mt-6">
+  <h2 class="text-xl font-bold mb-4">Sales & Dues Tracker</h2>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-green-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Total Sales</h3>
+      <p class="text-2xl font-bold text-green-800">Rs. {{ getTotalSales() }}</p>
+    </div>
+    <div class="bg-blue-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Amount Paid</h3>
+      <p class="text-2xl font-bold text-blue-800">Rs. {{ getTotalPaid() }}</p>
+    </div>
+    <div class="bg-red-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Total Due</h3>
+      <p class="text-2xl font-bold text-red-800">Rs. {{ getTotalDue() }}</p>
+    </div>
+  </div>
+
+  <!-- Buyer Summary Table -->
+  <h3 class="font-semibold text-lg mb-2">Buyer-wise Summary</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full table-auto border border-collapse">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-2 border">Buyer</th>
+          <th class="p-2 border">Total</th>
+          <th class="p-2 border">Paid</th>
+          <th class="p-2 border">Due</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of getBuyerSummary()" class="text-center border-t hover:bg-gray-50">
+          <td class="p-2 border font-medium">{{ entry[0] }}</td>
+          <td class="p-2 border">Rs. {{ entry[1].total }}</td>
+          <td class="p-2 border">Rs. {{ entry[1].paid }}</td>
+          <td class="p-2 border text-red-600 font-semibold">Rs. {{ entry[1].due }}</td>
+        </tr>
+        <tr *ngIf="getBuyerSummary().length === 0" class="text-center text-gray-500">
+          <td colspan="4" class="p-4">No data available</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

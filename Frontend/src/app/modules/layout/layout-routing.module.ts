@@ -48,6 +48,11 @@ const routes: Routes = [
         path: 'financials',
         loadChildren: () => import('../financials/financials.module').then(m => m.FinancialsModule),
       },
+       {
+        path: 'sales',
+        loadChildren: () => import('../sales/sales.module').then(m => m.SalesModule),
+      },
+      
       
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

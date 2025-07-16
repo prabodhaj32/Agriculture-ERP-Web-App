@@ -1,0 +1,60 @@
+<!-- Invoice Table -->
+<div class="mt-8 p-6 bg-white rounded shadow max-w-4xl mx-auto">
+  <h2 class="text-xl font-bold mb-4">Invoice List</h2>
+
+  <table class="w-full table-auto border">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="p-2 border">Buyer</th>
+        <th class="p-2 border">Item</th>
+        <th class="p-2 border">Qty</th>
+        <th class="p-2 border">Total</th>
+        <th class="p-2 border">Delivery</th>
+        <th class="p-2 border">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of sales" class="text-center hover:bg-gray-50">
+        <td class="p-2 border">{{ sale.buyer }}</td>
+        <td class="p-2 border">{{ sale.item }}</td>
+        <td class="p-2 border">{{ sale.quantity }}</td>
+        <td class="p-2 border">Rs. {{ sale.total }}</td>
+        <td class="p-2 border">{{ sale.deliveryDate }}</td>
+        <td class="p-2 border">
+          <button (click)="showInvoice(sale)" class="text-blue-600 underline hover:text-blue-800">
+            View
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Invoice Preview Modal -->
+<div
+  *ngIf="selectedInvoice"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 w-[500px] shadow rounded relative">
+    <h3 class="text-lg font-bold mb-4">Invoice Preview</h3>
+
+    <div id="print-area" class="text-sm leading-relaxed space-y-1">
+      <h2 class="text-xl font-bold mb-2 border-b pb-2">Invoice</h2>
+      <p><strong>Buyer:</strong> {{ selectedInvoice.buyer }}</p>
+      <p><strong>Item:</strong> {{ selectedInvoice.item }}</p>
+      <p><strong>Quantity:</strong> {{ selectedInvoice.quantity }}</p>
+      <p><strong>Unit Price:</strong> Rs. {{ selectedInvoice.unitPrice }}</p>
+      <p><strong>Total:</strong> Rs. {{ selectedInvoice.total }}</p>
+      <p><strong>Delivery Date:</strong> {{ selectedInvoice.deliveryDate }}</p>
+    </div>
+
+    <div class="flex justify-between mt-6">
+      <button (click)="savePdf()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Save PDF
+      </button>
+      <button (click)="closePreview()" class="text-red-600 hover:underline">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

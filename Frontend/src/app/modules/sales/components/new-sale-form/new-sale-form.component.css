@@ -1,0 +1,13 @@
+/* src/app/modules/sales/components/new-sale-form/new-sale-form.component.css */
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+}
+
+.btn {
+  cursor: pointer;
+  font-weight: 600;
+}

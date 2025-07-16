@@ -1,0 +1,52 @@
+<div class="max-w-4xl mx-auto mt-6 bg-white p-6 rounded shadow">
+  <h2 class="text-lg font-bold mb-4">Buyer CRM</h2>
+
+  <!-- Notification -->
+  <div *ngIf="notification" class="mb-4 p-3 rounded text-white" [ngClass]="{
+    'bg-green-500': notificationType === 'success',
+    'bg-red-500': notificationType === 'error',
+    'bg-yellow-500': notificationType === 'warning'
+  }">
+    {{ notification }}
+  </div>
+
+  <!-- Add Buyer -->
+  <form (ngSubmit)="addBuyer()" class="flex flex-wrap gap-2 mb-4">
+    <input [(ngModel)]="newBuyer.name" name="name" placeholder="Name" class="border p-2 rounded" required />
+    <input [(ngModel)]="newBuyer.email" name="email" placeholder="Email" class="border p-2 rounded" required />
+    <input [(ngModel)]="newBuyer.phone" name="phone" placeholder="Phone" class="border p-2 rounded" required />
+    <button class="bg-blue-500 text-white px-3 py-1 rounded">Add Buyer</button>
+  </form>
+
+  <!-- Buyer Table -->
+  <table class="w-full border">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2">Name</th>
+        <th class="p-2">Email</th>
+        <th class="p-2">Phone</th>
+        <th class="p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of buyers" class="border-t text-center">
+        <td class="p-2">{{ b.name }}</td>
+        <td class="p-2">{{ b.email }}</td>
+        <td class="p-2">{{ b.phone }}</td>
+        <td class="p-2 space-x-2">
+          <button class="text-blue-600" (click)="edit(b)">Edit</button>
+          <button class="text-red-600" (click)="delete(b.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Edit Buyer -->
+  <div *ngIf="editBuyer" class="mt-6 p-4 border rounded bg-gray-50">
+    <h3 class="font-semibold mb-2">Edit Buyer</h3>
+    <input [(ngModel)]="editBuyer.name" class="border p-2 mb-2 block w-full" />
+    <input [(ngModel)]="editBuyer.email" class="border p-2 mb-2 block w-full" />
+    <input [(ngModel)]="editBuyer.phone" class="border p-2 mb-2 block w-full" />
+    <button (click)="saveEdit()" class="bg-green-500 text-white px-4 py-1 rounded">Save</button>
+  </div>
+</div>

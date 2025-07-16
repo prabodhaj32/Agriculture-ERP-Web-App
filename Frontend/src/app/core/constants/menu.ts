@@ -98,12 +98,19 @@ export class Menu {
     { label: 'Cost Comparison', route: '/financials/cost-comparison' },
     { label: 'Income vs Expense Chart', route: '/financials/income-expense-chart' },
   ],
-},
-        {
-          icon: 'assets/icons/heroicons/outline/business-financial-graph-svgrepo-com.svg',
-          label: 'Sales',
-          route: '/sales',
-        },
+},{
+  icon: 'assets/icons/heroicons/outline/business-financial-graph-svgrepo-com.svg',
+  label: 'Sales',
+  route: '/sales',
+  children: [
+    { label: 'New Sale', route: '/sales/new-sale' },
+    { label: 'Invoices', route: '/sales/invoices' },
+    { label: 'Buyers', route: '/sales/buyers' },
+    { label: 'Sales Tracker', route: '/sales/tracker' },
+  ],
+}
+
+
       ],
     },
     {
