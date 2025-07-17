@@ -1,0 +1,8 @@
+<div class="grid grid-cols-3 gap-4">
+  <input type="date" [(ngModel)]="filters.dateFrom" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="From Date" />
+  <input type="date" [(ngModel)]="filters.dateTo" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="To Date" />
+  <input type="text" [(ngModel)]="filters.field" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="Field" />
+  <input type="text" [(ngModel)]="filters.worker" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="Worker" />
+  <input type="text" [(ngModel)]="filters.cropType" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="Crop Type" />
+  <input type="text" [(ngModel)]="filters.costType" (ngModelChange)="onChange()" class="border p-2 rounded" placeholder="Cost Type" />
+</div>

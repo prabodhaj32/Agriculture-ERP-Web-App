@@ -1,0 +1,23 @@
+<div class="mt-6">
+  <h3 class="text-xl font-semibold mb-2">Harvest Summary</h3>
+  <table class="table-auto w-full border-collapse border border-gray-200">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border px-4 py-2">Date</th>
+        <th class="border px-4 py-2">Field</th>
+        <th class="border px-4 py-2">Crop</th>
+        <th class="border px-4 py-2">Worker</th>
+        <th class="border px-4 py-2">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td class="border px-4 py-2">{{ item.date }}</td>
+        <td class="border px-4 py-2">{{ item.field }}</td>
+        <td class="border px-4 py-2">{{ item.crop }}</td>
+        <td class="border px-4 py-2">{{ item.worker }}</td>
+        <td class="border px-4 py-2">{{ item.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -133,11 +133,11 @@ export class Menu {
       group: 'Reports',
       separator: false,
       items: [
-        {
-          icon: 'assets/icons/heroicons/outline/reports-svgrepo-com.svg',
-          label: 'Reports',
-          route: '/reports',
-        },
+         {
+      icon: 'assets/icons/heroicons/outline/reports-svgrepo-com.svg',
+      label: 'Reports',
+      route: '/reports',
+    },
       ],
     },
   ];

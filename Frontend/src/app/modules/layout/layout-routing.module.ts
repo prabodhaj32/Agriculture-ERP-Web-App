@@ -57,6 +57,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../knowledge-center/knowledge-center.module').then(m => m.KnowledgeCenterModule),
       },
+      {
+        path: 'reports',
+        loadChildren: () => import('../reports/reports.module').then(m => m.ReportsModule),
+      },
+      
       
 
        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
