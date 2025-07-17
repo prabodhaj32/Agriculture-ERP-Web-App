@@ -1,44 +1,43 @@
-<div class="p-6 max-w-6xl mx-auto bg-white rounded shadow-md">
-  <h2 class="text-2xl font-bold text-green-700 mb-6">Reports</h2>
+<div class="p-6 bg-white rounded shadow">
+  <h2 class="text-2xl font-bold text-700 mb-6">Harvest Summary</h2>
 
-  <!-- Filters -->
   <div class="grid grid-cols-3 gap-4 mb-6">
     <input type="date" [(ngModel)]="filters.dateFrom" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="From Date" />
-    <input type="date" [(ngModel)]="filters.dateTo" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="To Date" />
+   
     <input type="text" [(ngModel)]="filters.field" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Field" />
     <input type="text" [(ngModel)]="filters.worker" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Worker" />
     <input type="text" [(ngModel)]="filters.cropType" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Crop Type" />
     <input type="text" [(ngModel)]="filters.costType" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Cost Type" />
   </div>
 
-  <!-- Export Buttons -->
-  <div class="mb-4 flex gap-4">
-    <button (click)="exportToPDF()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Export PDF</button>
-    <button (click)="exportToExcel()" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Export Excel</button>
-    <button (click)="printReport()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Print</button>
-  </div>
-
-  <!-- Table -->
-  <table class="table-auto w-full border border-collapse">
+    <table class="w-full text-sm text-left border mb-6">
     <thead class="bg-gray-100">
       <tr>
-        <th class="border px-4 py-2">Date</th>
-        <th class="border px-4 py-2">Field</th>
-        <th class="border px-4 py-2">Worker</th>
-        <th class="border px-4 py-2">Crop</th>
-        <th class="border px-4 py-2">Cost Type</th>
-        <th class="border px-4 py-2">Quantity</th>
+        <th class="px-4 py-2">Date</th>
+        <th class="px-4 py-2">Field</th>
+        <th class="px-4 py-2">Worker</th>
+        <th class="px-4 py-2">Crop</th>
+        <th class="px-4 py-2">Cost Type</th>
+        <th class="px-4 py-2">Quantity</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of filteredData">
-        <td class="border px-4 py-2">{{ item.date }}</td>
-        <td class="border px-4 py-2">{{ item.field }}</td>
-        <td class="border px-4 py-2">{{ item.worker }}</td>
-        <td class="border px-4 py-2">{{ item.crop }}</td>
-        <td class="border px-4 py-2">{{ item.costType }}</td>
-        <td class="border px-4 py-2">{{ item.quantity }}</td>
+        <td class="px-4 py-2">{{ item.date }}</td>
+        <td class="px-4 py-2">{{ item.field }}</td>
+        <td class="px-4 py-2">{{ item.worker }}</td>
+        <td class="px-4 py-2">{{ item.crop }}</td>
+        <td class="px-4 py-2">{{ item.costType }}</td>
+        <td class="px-4 py-2">{{ item.quantity }}</td>
       </tr>
     </tbody>
   </table>
+
+
+  <app-productivity-cost></app-productivity-cost>
+  <div class="mt-10 flex gap-4 mb-6">
+    <button (click)="exportToPDF()" class="bg-blue-600 text-white px-4 py-2 rounded">Export to PDF</button>
+    <button (click)="exportToExcel()" class="bg-green-600 text-white px-4 py-2 rounded">Export to Excel</button>
+    <button (click)="printReport()" class="bg-gray-600 text-white px-4 py-2 rounded">Print</button>
+  </div>
 </div>

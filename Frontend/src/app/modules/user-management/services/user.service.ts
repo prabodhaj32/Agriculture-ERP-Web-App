@@ -1,4 +1,4 @@
-// src/app/modules/user-management/services/user.service.ts
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
@@ -7,11 +7,11 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  // Store users in a BehaviorSubject to allow reactive updates
+  // Store users 
   private users$ = new BehaviorSubject<User[]>([]);
 
   constructor() {
-    // Optional: initialize with some dummy users or load from storage
+    //  users or load from storage
     this.users$.next([
       {
         id: '1',

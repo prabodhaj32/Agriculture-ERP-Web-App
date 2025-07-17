@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as L from 'leaflet';
+import * as L from 'leaflet';//Showing map tiles (like OpenStreetMap)
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,7 @@ export class FieldMapComponent implements AfterViewInit {
   @ViewChild('map') mapElement!: ElementRef;
 
   private map!: L.Map;
-  lat = 7.8731;
+  lat = 7.8731; // Default latitude (Sri Lanka)
   lng = 80.7718;
   name = 'Field';
 
@@ -40,6 +40,8 @@ export class FieldMapComponent implements AfterViewInit {
       fadeAnimation: true,
     });
 
+    //OpenStreetMap Google Maps but open-source
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       detectRetina: true,
@@ -53,7 +55,7 @@ export class FieldMapComponent implements AfterViewInit {
       .bindPopup(`<b>${this.name}</b>`)
       .openPopup();
 
-    // Smooth camera animation
+   
     this.map.flyTo([this.lat, this.lng], 14, {
       animate: true,
       duration: 1.5,

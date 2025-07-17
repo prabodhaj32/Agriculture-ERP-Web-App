@@ -9,10 +9,10 @@ import { TaskSummaryComponent } from './components/task-summary/task-summary.com
 import { ActivityLogRoutingModule } from './activity-log-routing.module';
 
 @NgModule({
-  // ✅ Remove standalone components from declarations
+  
   declarations: [],
 
-  // ✅ Import standalone components here
+  
   imports: [
     CommonModule,
     FormsModule,

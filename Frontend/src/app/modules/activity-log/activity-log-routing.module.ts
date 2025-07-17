@@ -9,8 +9,7 @@ const routes: Routes = [
   { path: 'daily-task', component: DailyTaskFormComponent },
   { path: 'attendance', component: AttendanceFormComponent },
   { path: 'summary', component: TaskSummaryComponent },
-
-  // Optional default route
+  
   { path: '', redirectTo: 'daily-task', pathMatch: 'full' },
 ];
 

@@ -20,7 +20,7 @@ export class ActivityLogService {
   }
 
   getTasks(): DailyTask[] {
-    return [...this.tasks]; // return a copy
+    return [...this.tasks]; 
   }
 
   clearTasks(): void {

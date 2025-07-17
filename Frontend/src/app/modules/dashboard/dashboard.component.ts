@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Import this
+import { HttpClientModule } from '@angular/common/http'; 
 
 import { DashboardService } from './services/dashboard.service';
 import { WeatherService } from './services/weather.service';

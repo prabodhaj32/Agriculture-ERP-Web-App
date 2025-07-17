@@ -18,7 +18,7 @@ export class ApplicationFormComponent implements OnInit {
   constructor(private applicationService: ApplicationService) {}
 
   ngOnInit(): void {
-    // (Optional) Add sample data once
+   
     if (this.applicationService.getAll().length === 0) {
       this.applicationService.addEntry({
         id: 1,

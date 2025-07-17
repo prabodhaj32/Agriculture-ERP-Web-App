@@ -15,7 +15,7 @@ import { ReportsRoutingModule } from '../reports/report-routing.module';
     FormsModule,
     ReportsRoutingModule,
 
-    // Import standalone components here (do NOT declare)
+
     ReportsComponent,
     FiltersComponent,
     HarvestSummaryComponent,

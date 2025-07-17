@@ -5,7 +5,7 @@ import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { UserFormComponent } from '../user-form/user-form.component';
 
-// Material modules
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

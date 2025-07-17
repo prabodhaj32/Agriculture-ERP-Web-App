@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-harvest',
    standalone: true,
-  imports: [RouterModule], // ✅ for router-outlet
+  imports: [RouterModule], 
   templateUrl: './harvest.component.html',
   styleUrl: './harvest.component.css'
 })

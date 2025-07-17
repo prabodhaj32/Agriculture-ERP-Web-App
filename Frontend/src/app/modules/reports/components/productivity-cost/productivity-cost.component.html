@@ -1,4 +1,31 @@
-<div class="mt-8">
-  <h3 class="text-xl font-semibold mb-2">Productivity & Cost Report</h3>
-  <p class="text-gray-600">[Productivity and cost chart/table placeholder]</p>
+<div class="p-4 bg-white rounded shadow">
+  <h2 class="text-xl font-bold mb-4">Productivity & Cost Report</h2>
+
+  <div class="flex gap-4 mb-4">
+    <select [(ngModel)]="filters.field" (change)="applyFilters()" class="border px-3 py-2 rounded">
+      <option value="">All Fields</option>
+      <option *ngFor="let field of fieldsList" [value]="field">{{ field }}</option>
+    </select>
+
+    
+  </div>
+
+  <div id="print-section">
+    <table class="table-auto w-full border mb-6">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border px-4 py-2 text-left">Field</th>
+          <th class="border px-4 py-2 text-left">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of getSummaryData()">
+          <td class="border px-4 py-2">{{ row.metric }}</td>
+          <td class="border px-4 py-2">{{ row.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
 </div>

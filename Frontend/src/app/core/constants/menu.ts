@@ -103,11 +103,12 @@ export class Menu {
   label: 'Sales',
   route: '/sales',
   children: [
-    { label: 'New Sale', route: '/sales/new-sale' },
-    { label: 'Invoices', route: '/sales/invoices' },
     { label: 'Buyers', route: '/sales/buyers' },
+    { label: 'New Sale', route: '/sales/new-sale' },
+      { label: 'Invoices', route: '/sales/invoices' },
     { label: 'Sales Tracker', route: '/sales/tracker' },
   ],
+ 
 }
 
 

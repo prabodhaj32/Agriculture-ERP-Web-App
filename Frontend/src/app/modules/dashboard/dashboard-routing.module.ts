@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
-      { path: '', component: DashboardPageComponent } // ✅ direct load
+      { path: '', component: DashboardPageComponent } 
     ]
   }
 ];

@@ -6,5 +6,5 @@ export interface HarvestEntry {
   quantity: number;
   qualityGrade: string;
   transportDetails: string;
-  plannedYield?: number; // for comparison
+  plannedYield?: number; 
 }

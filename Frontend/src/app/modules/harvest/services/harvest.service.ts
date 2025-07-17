@@ -5,7 +5,7 @@ import { HarvestEntry } from '../models/harvest.model';
 export class HarvestService {
   private harvests: HarvestEntry[] = [];
 
-  // Mocked planned yields per field (could be fetched from backend)
+
   private plannedYields: { [field: string]: number } = {
     'Field A': 100,
     'Field B': 150,
@@ -28,7 +28,7 @@ export class HarvestService {
     return summary;
   }
 
-  // 🔍 NEW: Compare planned vs. actual yields
+  
   getPlannedVsActual(): {
     field: string;
     plannedYield: number | null;

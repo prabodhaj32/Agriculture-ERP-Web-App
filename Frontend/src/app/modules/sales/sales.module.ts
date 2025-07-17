@@ -11,8 +11,8 @@ import { SalesRoutingModule } from './sales-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    SalesRoutingModule,           // import routing here
-    BuyerCrmComponent,            // import standalone components
+    SalesRoutingModule,           
+    BuyerCrmComponent,            
     NewSaleFormComponent,
     SalesTrackerComponent,
     InvoicePreviewComponent,

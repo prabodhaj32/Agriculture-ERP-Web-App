@@ -12,7 +12,7 @@ import { PlannedVsActualComponent } from './components/planned-vs-actual/planned
     CommonModule,
     HarvestRoutingModule,
 
-    // Standalone Components
+    
     HarvestComponent,
     HarvestFormComponent,
     HarvestSummaryComponent,

@@ -29,7 +29,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // ✅ Load weather
+    //  Load weather
     this.weatherService.getWeather()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -40,7 +40,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         }
       });
 
-    // ✅ Load stats
+    // Load stats
     this.dashboardService.getStats()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -51,7 +51,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         }
       });
 
-    // ✅ Load tasks
+    // Load tasks
     this.dashboardService.getTasks()
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => this.tasks = data);

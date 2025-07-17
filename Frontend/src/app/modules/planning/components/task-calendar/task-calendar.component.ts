@@ -12,7 +12,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 @Component({
   selector: 'app-task-calendar',
   standalone: true,
-   imports: [CommonModule, MatCardModule, MatButtonModule, MatChipsModule,MatIconModule,MatDividerModule], // MatChipsModule here
+   imports: [CommonModule, MatCardModule, MatButtonModule, MatChipsModule,MatIconModule,MatDividerModule], 
    schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   templateUrl: './task-calendar.component.html',
   styleUrls: ['./task-calendar.component.css']

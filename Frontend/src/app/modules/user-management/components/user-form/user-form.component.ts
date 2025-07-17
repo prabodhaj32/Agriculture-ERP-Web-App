@@ -26,7 +26,7 @@ export class UserFormComponent implements OnInit {
 
   @Output() formSubmit = new EventEmitter<void>();
 
-  // ✅ Add this property
+  // Add this property
   assignedField: string = 'Tea';
 
     constructor(private userService: UserService, private location: Location) {}
@@ -37,7 +37,7 @@ ngOnInit() {
   }
 }
   onSubmit() {
-    // ✅ Convert single field to array before saving
+    // Convert single field to array before saving
     this.user.assignedFields = [this.assignedField];
 
     if (this.user.id) {
@@ -48,6 +48,9 @@ ngOnInit() {
         this.resetForm();
       });
     }
+  }
+   goBack(): void {
+    this.location.back();
   }
 
   resetForm() {
@@ -61,7 +64,5 @@ ngOnInit() {
     };
     this.assignedField = 'Tea';
   }
-   goBack(): void {
-    this.location.back();
-  }
+  
 }

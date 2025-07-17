@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { WeatherData } from '../models/weather.model';
-import { environment } from '../environment'; // ✅ Adjusted path
+import { environment } from '../environment'; 
 
 @Injectable({ providedIn: 'root' })
 export class WeatherService {

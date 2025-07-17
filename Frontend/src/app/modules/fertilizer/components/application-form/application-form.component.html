@@ -72,18 +72,18 @@
 
       <div class="mt-4">
         <div class="text-green-600">
-          ✅ <strong>Last Application Date:</strong> {{ getNextApplicationDate() || 'N/A' }}
+        <strong>Last Application Date:</strong> {{ getNextApplicationDate() || 'N/A' }}
         </div>
 
         <div class="text-blue-600 mt-1">
-          📆 <strong>Next Scheduled Date (+14 days):</strong> {{ getNextScheduledDate() || 'N/A' }}
+          <strong>Next Scheduled Date (+14 days):</strong> {{ getNextScheduledDate() || 'N/A' }}
         </div>
 
         <div
           *ngIf="isApplicationOverdue()"
           class="mt-2 text-red-700 font-bold border-l-4 border-red-500 pl-2"
         >
-          ⚠️ Application is overdue for <strong>{{ fieldFilter }}</strong>!
+          Application is overdue for <strong>{{ fieldFilter }}</strong>!
         </div>
       </div>
     </div>

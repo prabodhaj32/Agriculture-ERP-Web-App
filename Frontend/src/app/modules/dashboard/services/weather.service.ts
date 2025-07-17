@@ -20,7 +20,7 @@ export class WeatherService {
           statusText: error.statusText,
           message: error.message,
           url: error.url,
-          errorDetails: error.error // May contain server message
+          errorDetails: error.error 
         });
         return throwError(() => new Error('Failed to fetch weather data'));
       })

@@ -10,7 +10,7 @@ import { WeatherWidgetComponent } from './components/weather-widget/weather-widg
 import { TaskAlertsComponent } from './components/task-alerts/task-alerts.component';
 
 @NgModule({
-  declarations: [], // standalone components should NOT be declared
+  declarations: [], 
   imports: [
     CommonModule,
     DashboardRoutingModule,

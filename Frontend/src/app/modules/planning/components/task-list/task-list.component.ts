@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class TaskListComponent {
   tasks: Task[] = [];
   
-  // Add this:
+
   displayedColumns: string[] = ['taskType', 'assignedTo', 'startDate', 'endDate', 'status', 'actions'];
 
   constructor(private taskService: TaskService) {

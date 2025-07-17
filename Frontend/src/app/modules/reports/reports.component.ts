@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProductivityCostComponent } from './components/productivity-cost/productivity-cost.component';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProductivityCostComponent],
   templateUrl: './reports.component.html',
 })
 export class ReportsComponent {
+  @ViewChild(ProductivityCostComponent)
+  productivityComponent!: ProductivityCostComponent;
+
   filters = {
     dateFrom: '',
     dateTo: '',
     field: '',
     worker: '',
     cropType: '',
-    costType: ''
+    costType: '',
   };
 
   harvestData = [
@@ -30,21 +34,29 @@ export class ReportsComponent {
   filteredData = [...this.harvestData];
 
   onFiltersChange() {
-    this.filteredData = this.harvestData.filter(item => {
-      return (!this.filters.dateFrom || item.date >= this.filters.dateFrom) &&
-             (!this.filters.dateTo || item.date <= this.filters.dateTo) &&
-             (!this.filters.field || item.field.includes(this.filters.field)) &&
-             (!this.filters.worker || item.worker.includes(this.filters.worker)) &&
-             (!this.filters.cropType || item.crop.includes(this.filters.cropType)) &&
-             (!this.filters.costType || item.costType.includes(this.filters.costType));
+    this.filteredData = this.harvestData.filter((item) => {
+      return (
+        (!this.filters.dateFrom || item.date >= this.filters.dateFrom) &&
+        (!this.filters.dateTo || item.date <= this.filters.dateTo) &&
+        (!this.filters.field || item.field.includes(this.filters.field)) &&
+        (!this.filters.worker || item.worker.includes(this.filters.worker)) &&
+        (!this.filters.cropType || item.crop.includes(this.filters.cropType)) &&
+        (!this.filters.costType || item.costType.includes(this.filters.costType))
+      );
     });
   }
 
   exportToPDF() {
     const doc = new jsPDF();
+
+ 
+    doc.setFontSize(16);
+    doc.text('Harvest Summary Report', 14, 20);
+
     autoTable(doc, {
+      startY: 25,
       head: [['Date', 'Field', 'Worker', 'Crop', 'Cost Type', 'Quantity']],
-      body: this.filteredData.map(item => [
+      body: this.filteredData.map((item) => [
         item.date,
         item.field,
         item.worker,
@@ -53,14 +65,29 @@ export class ReportsComponent {
         item.quantity,
       ]),
     });
-    doc.save('report.pdf');
+
+    const productivityData = this.productivityComponent?.getData() || [];
+
+    if (productivityData.length) {
+      doc.addPage();
+      doc.setFontSize(16);
+      doc.text('Productivity & Cost Report', 14, 20);
+
+      autoTable(doc, {
+        startY: 25,
+        head: [['Metric', 'Value']],
+        body: productivityData.map((row: { metric: string; value: string }) => [row.metric, row.value]),
+      });
+    }
+
+    doc.save('combined-report.pdf');
   }
 
   exportToExcel() {
     const worksheet = XLSX.utils.json_to_sheet(this.filteredData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
-    XLSX.writeFile(workbook, 'report.xlsx');
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Harvest Report');
+    XLSX.writeFile(workbook, 'harvest-report.xlsx');
   }
 
   printReport() {

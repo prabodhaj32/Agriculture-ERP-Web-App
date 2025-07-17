@@ -4,6 +4,6 @@ export interface Article {
   category: string;
   description: string;
   tags: string[];
-  attachments: File[];  // store files in component only; send FormData to backend
+  attachments: File[];  
   createdAt?: Date;
 }

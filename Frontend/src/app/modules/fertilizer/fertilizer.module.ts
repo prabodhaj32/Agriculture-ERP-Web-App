@@ -12,8 +12,8 @@ import { ApplicationFormComponent } from './components/application-form/applicat
     CommonModule,
     FormsModule,
     FertilizerRoutingModule,
-    InventoryFormComponent,     // ✅ imported, not declared
-    ApplicationFormComponent    // ✅ imported, not declared
+    InventoryFormComponent,     
+    ApplicationFormComponent      
   ],
 })
 export class FertilizerModule {}
