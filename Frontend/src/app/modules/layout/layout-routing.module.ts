@@ -16,11 +16,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('../user-management/user-management.module').then((m) => m.UserManagementModule)
       },
-      {
-        path: 'user-management',
-        loadChildren: () =>
-          import('../user-management/user-management.module').then((m) => m.UserManagementModule)
-      },
       
         {
         path: 'field-management',
@@ -56,6 +51,11 @@ const routes: Routes = [
         path: 'monitoring',
         loadChildren: () =>
           import('../smart-monitoring/smart-monitoring.module').then(m => m.SmartMonitoringModule)
+      },
+      {
+        path: 'knowledge-center',
+        loadChildren: () =>
+          import('../knowledge-center/knowledge-center.module').then(m => m.KnowledgeCenterModule),
       },
       
 

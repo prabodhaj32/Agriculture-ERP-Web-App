@@ -122,11 +122,11 @@ export class Menu {
   label: 'Monitoring',
   route: '/monitoring',
 },
-        {
-          icon: 'assets/icons/heroicons/outline/book-svgrepo-com.svg',
-          label: 'Knowledge Center',
-          route: '/knowledge-center',
-        },
+       {
+  icon: 'assets/icons/heroicons/outline/book-svgrepo-com.svg',
+  label: 'Knowledge Center',
+  route: '/knowledge-center',
+}
       ],
     },
     {
