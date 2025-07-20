@@ -1,1 +1,25 @@
-<p>field-management works!</p>
+<div class="p-6 bg-hash-50 min-h-screen space-y-8">
+  <div class="flex justify-between items-center">
+     <h3 class="text-foreground font-semibold">Field Management</h3>
+    <button (click)="onAdd()" class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">Add New Field</button>
+  </div>
+
+  <div *ngIf="isAddMode">
+    <app-field-form
+      [field]="selectedField"
+      (save)="onSave($event)"
+      (cancel)="onCancel()"
+    ></app-field-form>
+  </div>
+
+  <app-field-list
+    [fields]="fields"
+    (edit)="onEdit($event)"
+    (viewMap)="onViewMap($event)"
+  ></app-field-list>
+
+  <app-field-map
+    *ngIf="selectedFieldForMap"
+    [focusedField]="selectedFieldForMap"
+  ></app-field-map>
+</div>

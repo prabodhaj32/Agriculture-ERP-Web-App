@@ -1,45 +1,60 @@
 import { Component } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Buyer } from '../../models/buyer.model';
 import { SalesService } from '../../services/sales.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { AddBuyerDialogComponent } from '../add-buyer-dialog/add-buyer-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-buyer-crm',
-   standalone: true,
-    imports: [CommonModule, FormsModule,],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+  ],
   templateUrl: './buyer-crm.component.html',
 })
 export class BuyerCrmComponent {
-  buyers = this.salesService.getBuyers();
-  newBuyer: Partial<Buyer> = {};
-  editBuyer: Buyer | null = null;
+  buyers: Buyer[] = [];
   notification: string | null = null;
   notificationType: 'success' | 'error' | 'warning' = 'success';
 
-  constructor(private salesService: SalesService) {}
+  displayedColumns: string[] = ['name', 'email', 'phone', 'actions'];
 
-  addBuyer() {
-    if (this.newBuyer.name && this.newBuyer.email && this.newBuyer.phone) {
-      this.salesService.addBuyer(this.newBuyer as Buyer);
-      this.newBuyer = {};
-      this.refreshBuyers();
-      this.showNotification('Buyer added successfully!', 'success');
-    }
+  constructor(
+    private salesService: SalesService,
+    private dialog: MatDialog
+  ) {
+    this.refreshBuyers();
+  }
+
+  openAddBuyerDialog() {
+    const dialogRef = this.dialog.open(AddBuyerDialogComponent, {
+      width: '500px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result: Buyer | null) => {
+      if (result) {
+        this.salesService.addBuyer(result);
+        this.refreshBuyers();
+        this.showNotification('Buyer added successfully!', 'success');
+      }
+    });
   }
 
   edit(b: Buyer) {
-    this.editBuyer = { ...b };
-  }
-
-  saveEdit() {
-    if (this.editBuyer) {
-      this.salesService.updateBuyer(this.editBuyer);
-      this.editBuyer = null;
-      this.refreshBuyers();
-      this.showNotification('Buyer updated successfully!', 'success');
-    }
+    // Implement edit logic
   }
 
   delete(id: number) {
@@ -59,6 +74,6 @@ export class BuyerCrmComponent {
     this.notificationType = type;
     setTimeout(() => {
       this.notification = null;
-    }, 3000); // hide after 3 seconds
+    }, 3000);
   }
 }

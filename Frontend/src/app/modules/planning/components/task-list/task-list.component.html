@@ -1,6 +1,13 @@
 <div *ngIf="tasks.length === 0" class="text-center text-gray-500">No tasks yet.</div>
 
+<div class="flex justify-between items-center mb-4">
+  <h3 class="text-foreground font-semibold">Task List</h3>
+  <button (click)="openCreateTaskDialog()" class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+    Create Task
+  </button>
+</div>
 <table mat-table [dataSource]="tasks" *ngIf="tasks.length > 0" class="mat-elevation-z8 w-full">
+  
 
   <!-- Task Type Column -->
   <ng-container matColumnDef="taskType">

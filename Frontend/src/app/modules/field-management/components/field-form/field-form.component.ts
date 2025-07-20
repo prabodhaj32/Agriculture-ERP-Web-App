@@ -3,41 +3,34 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Field } from '../../models/field.model';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatRadioModule } from '@angular/material/radio'; 
-
 @Component({
   selector: 'app-field-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatRadioModule,
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './field-form.component.html',
 })
 export class FieldFormComponent {
-  @Input() field: Field = {
-    id: 0,
-    name: '',
-    size: 0,
-    location: '',
-    soilType: '',
-    cropType: '',
-    status: 'Active',
-  };
-
+  @Input() set field(value: Field | null) {
+    this.localField = value ? { ...value } : this.getEmptyField();
+  }
   @Output() save = new EventEmitter<Field>();
   @Output() cancel = new EventEmitter<void>();
 
+  localField: Field = this.getEmptyField();
+
   onSubmit() {
-    this.save.emit({ ...this.field });
+    this.save.emit(this.localField);
+  }
+
+  private getEmptyField(): Field {
+    return {
+      id: 0,
+      name: '',
+      size: '',
+      location: '',
+      soilType: '',
+      cropType: '',
+      status: '',
+    };
   }
 }

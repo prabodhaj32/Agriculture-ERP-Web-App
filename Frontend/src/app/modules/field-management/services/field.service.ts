@@ -1,46 +1,58 @@
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class FieldService {
   private fields: Field[] = [
     {
       id: 1,
-      name: 'Field A',
-      size: 10,
-      location: 'kandy',
+      name: 'North Field',
+      size: '5',
+      location: 'Kandy',
       soilType: 'Loamy',
-      cropType: 'Tea',
-      status: 'Planted',
-      coordinates: { lat: 7.2906, lng: 80.6337 } // Kandy
+      cropType: 'Corn',
+      status: 'Active'
     },
     {
       id: 2,
-      name: 'Field B',
-      size: 5,
+      name: 'South Field',
+      size: '3',
       location: 'colombo',
       soilType: 'Clay',
-      cropType: 'Coconut',
-      status: 'Active',
-      coordinates: { lat: 6.9271, lng: 79.8612 } // Colombo
+      cropType: 'Wheat',
+      status: 'Inactive'
     }
   ];
 
+  // Return a shallow copy of the fields array
   getFields(): Field[] {
-    return this.fields;
+    return [...this.fields];
   }
 
-  addField(field: Field) {
-    field.id = Date.now();
-    this.fields.push(field);
+  // Add a new field with a unique ID
+  addField(field: Field): void {
+    const newId = this.fields.length > 0 ? Math.max(...this.fields.map(f => f.id)) + 1 : 1;
+    const newField: Field = { ...field, id: newId };
+    this.fields.push(newField);
   }
 
-  updateField(updated: Field) {
-    const index = this.fields.findIndex(f => f.id === updated.id);
-    if (index !== -1) this.fields[index] = updated;
+  // Update an existing field
+  updateField(updatedField: Field): void {
+    const index = this.fields.findIndex(f => f.id === updatedField.id);
+    if (index !== -1) {
+      this.fields[index] = { ...updatedField };
+    }
   }
 
-  deleteField(id: number) {
+  // Delete a field by ID
+  deleteField(id: number): void {
     this.fields = this.fields.filter(f => f.id !== id);
+  }
+
+  // Optional: Get a field by ID
+  getFieldById(id: number): Field | undefined {
+    return this.fields.find(f => f.id === id);
   }
 }

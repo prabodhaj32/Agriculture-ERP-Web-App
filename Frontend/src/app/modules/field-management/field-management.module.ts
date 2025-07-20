@@ -4,29 +4,33 @@ import { FormsModule } from '@angular/forms';
 
 import { FieldManagementRoutingModule } from './field-management-routing.module';
 
-// No need to declare standalone components
+
 import { FieldManagementComponent } from './field-management.component';
 import { FieldFormComponent } from './components/field-form/field-form.component';
 import { FieldListComponent } from './components/field-list/field-list.component';
 
-// Angular Material
+
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FieldMapComponent } from './components/field-map/field-map.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [], // ❌ Do not declare standalone components
+  declarations: [], 
   imports: [
     CommonModule,
     FormsModule,
+    FieldMapComponent,
+     RouterModule,
     FieldManagementRoutingModule,
 
-    // Material Modules
+
     MatTableModule,
     MatButtonModule,
     MatIconModule,
 
-    // ✅ Standalone components must be imported manually
+
     FieldManagementComponent,
     FieldFormComponent,
     FieldListComponent,

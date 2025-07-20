@@ -1,60 +1,69 @@
-
-<div class="mt-8 p-6 bg-white rounded shadow max-w-4xl mx-auto">
-  <h2 class="text-xl font-bold mb-4">Invoice List</h2>
-
-  <table class="w-full table-auto border">
-    <thead class="bg-gray-200">
-      <tr>
-        <th class="p-2 border">Buyer</th>
-        <th class="p-2 border">Item</th>
-        <th class="p-2 border">Qty</th>
-        <th class="p-2 border">Total</th>
-        <th class="p-2 border">Delivery</th>
-        <th class="p-2 border">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let sale of sales" class="text-center hover:bg-gray-50">
-        <td class="p-2 border">{{ sale.buyer }}</td>
-        <td class="p-2 border">{{ sale.item }}</td>
-        <td class="p-2 border">{{ sale.quantity }}</td>
-        <td class="p-2 border">Rs. {{ sale.total }}</td>
-        <td class="p-2 border">{{ sale.deliveryDate }}</td>
-        <td class="p-2 border">
-          <button (click)="showInvoice(sale)" class="text-blue-600 underline hover:text-blue-800">
-            View
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="flex items-center justify-between mb-4 mt-8">
+  <h2 class="text-foreground font-semibold">Sales</h2>
+  <button 
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    (click)="openNewSaleDialog()"
+  >
+     Add New Sale
+  </button>
 </div>
 
-<!-- Invoice Preview Modal -->
-<div
-  *ngIf="selectedInvoice"
-  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
->
-  <div class="bg-white p-6 w-[500px] shadow rounded relative">
-    <h3 class="text-lg font-bold mb-4">Invoice Preview</h3>
+<div class="rounded-md mt-6">
 
-    <div id="print-area" class="text-sm leading-relaxed space-y-1">
-      <h2 class="text-xl font-bold mb-2 border-b pb-2">Invoice</h2>
-      <p><strong>Buyer:</strong> {{ selectedInvoice.buyer }}</p>
-      <p><strong>Item:</strong> {{ selectedInvoice.item }}</p>
-      <p><strong>Quantity:</strong> {{ selectedInvoice.quantity }}</p>
-      <p><strong>Unit Price:</strong> Rs. {{ selectedInvoice.unitPrice }}</p>
-      <p><strong>Total:</strong> Rs. {{ selectedInvoice.total }}</p>
-      <p><strong>Delivery Date:</strong> {{ selectedInvoice.deliveryDate }}</p>
-    </div>
 
-    <div class="flex justify-between mt-6">
-      <button (click)="savePdf()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-        Save PDF
-      </button>
-      <button (click)="closePreview()" class="text-red-600 hover:underline">
-        Close
-      </button>
-    </div>
+
+  
+  <table mat-table [dataSource]="sales" class="min-w-full table-auto border border-gray-200 rounded">
+    <ng-container matColumnDef="buyer">
+      <th mat-header-cell *matHeaderCellDef>Buyer</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.buyer }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef>Item</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.item }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total (Rs.)</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.total }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryDate">
+      <th mat-header-cell *matHeaderCellDef>Delivery Date</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.deliveryDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let sale">
+
+        <button mat-icon-button (click)="showInvoice(sale)" aria-label="Preview sale">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div *ngIf="selectedInvoice" class="mt-6 p-4 border rounded bg-gray-50">
+    <h3 class="text-lg font-semibold mb-2">Invoice Preview</h3>
+    <p><strong>Buyer:</strong> {{ selectedInvoice.buyer }}</p>
+    <p><strong>Item:</strong> {{ selectedInvoice.item }}</p>
+    <p><strong>Quantity:</strong> {{ selectedInvoice.quantity }}</p>
+    <p><strong>Unit Price:</strong> Rs. {{ selectedInvoice.unitPrice }}</p>
+    <p><strong>Total:</strong> Rs. {{ selectedInvoice.total }}</p>
+    <p><strong>Delivery Date:</strong> {{ selectedInvoice.deliveryDate }}</p>
+
+    <button class="bg-red-600 text-white px-3 py-1 rounded mt-3" (click)="closePreview()">Close Preview</button>
+    <button class="bg-blue-600 text-white px-3 py-1 rounded mt-3 ml-2" (click)="savePdf()">Download PDF</button>
   </div>
 </div>

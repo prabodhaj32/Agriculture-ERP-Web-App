@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { ApplicationFormComponent } from './components/application-form/application-form.component';
+import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
 
 @Component({
   selector: 'app-fertilizer',
-  imports: [],
+  standalone: true,
+  imports: [ApplicationFormComponent, InventoryFormComponent],
   templateUrl: './fertilizer.component.html',
-  styleUrl: './fertilizer.component.css'
+  styleUrls: ['./fertilizer.component.css'],
 })
-export class FertilizerComponent {
-
-}
+export class FertilizerComponent {}

@@ -1,5 +1,6 @@
-<div class="max-w-4xl mx-auto p-6 bg-white shadow rounded mt-6">
-  <h2 class="text-xl font-bold mb-4">Sales & Dues Tracker</h2>
+<div class=" rounded-md  mt-6 mb-4 ">
+
+  <h2 class="text-foreground font-semibold mb-8  mt-6">Sales & Dues Tracker</h2>
 
   <!-- Summary Cards -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -17,29 +18,46 @@
     </div>
   </div>
 
-  <!-- Buyer Summary Table -->
-  <h3 class="font-semibold text-lg mb-2">Buyer-wise Summary</h3>
+  <!-- Buyer Summary Material Table -->
+  <h3 class=" text-foreground font-semibold rounded-md  mt-6 mb-4">Buyer-wise Summary</h3>
+
   <div class="overflow-x-auto">
-    <table class="w-full table-auto border border-collapse">
-      <thead class="bg-gray-100">
-        <tr>
-          <th class="p-2 border">Buyer</th>
-          <th class="p-2 border">Total</th>
-          <th class="p-2 border">Paid</th>
-          <th class="p-2 border">Due</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entry of getBuyerSummary()" class="text-center border-t hover:bg-gray-50">
-          <td class="p-2 border font-medium">{{ entry[0] }}</td>
-          <td class="p-2 border">Rs. {{ entry[1].total }}</td>
-          <td class="p-2 border">Rs. {{ entry[1].paid }}</td>
-          <td class="p-2 border text-red-600 font-semibold">Rs. {{ entry[1].due }}</td>
-        </tr>
-        <tr *ngIf="getBuyerSummary().length === 0" class="text-center text-gray-500">
-          <td colspan="4" class="p-4">No data available</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
+
+      <!-- Buyer Column -->
+      <ng-container matColumnDef="buyer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Buyer</th>
+        <td mat-cell *matCellDef="let element">{{ element.buyer }}</td>
+      </ng-container>
+
+      <!-- Total Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+        <td mat-cell *matCellDef="let element">Rs. {{ element.total }}</td>
+      </ng-container>
+
+      <!-- Paid Column -->
+      <ng-container matColumnDef="paid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Paid</th>
+        <td mat-cell *matCellDef="let element">Rs. {{ element.paid }}</td>
+      </ng-container>
+
+      <!-- Due Column -->
+      <ng-container matColumnDef="due">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Due</th>
+        <td mat-cell *matCellDef="let element" class="text-red-600 font-semibold">Rs. {{ element.due }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- No data row -->
+      <tr *ngIf="dataSource.data.length === 0">
+        <td colspan="4" class="p-4 text-center text-gray-500">No sales data available.</td>
+      </tr>
     </table>
   </div>
+
+  
+
 </div>

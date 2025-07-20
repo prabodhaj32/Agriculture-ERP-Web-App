@@ -1,41 +1,62 @@
 import { Injectable } from '@angular/core';
-import { Sale } from '../models/sale.model';
+import { BehaviorSubject } from 'rxjs';
 import { Buyer } from '../models/buyer.model';
+import { Sale } from '../models/sale.model';
 
 @Injectable({ providedIn: 'root' })
 export class SalesService {
-  private sales: Sale[] = [];
-
-  private buyers: Buyer[] = [
-   
+  // Initial buyers data
+  private initialBuyers: Buyer[] = [
+    { id: 1, name: 'Global Tea Co.', email: 'global@tea.com', phone: '0112345678' },
+    { id: 2, name: 'Lanka Beverages', email: 'info@lankabv.com', phone: '0771234567' }
   ];
 
-  private buyerIdCounter = this.buyers.length + 1;
+  // Reactive state for buyers and sales
+  private buyersSubject = new BehaviorSubject<Buyer[]>(this.initialBuyers);
+  private salesSubject = new BehaviorSubject<Sale[]>([]);
+
+  // Public observables
+  buyers$ = this.buyersSubject.asObservable();
+  sales$ = this.salesSubject.asObservable();
+
+  // === Buyer Methods ===
 
   getBuyers(): Buyer[] {
-    // return a copy to prevent external mutation
-    return [...this.buyers];
+    return this.buyersSubject.value;
   }
 
-  addSale(sale: Sale) {
-    this.sales.push({ ...sale, id: Date.now() }); // for sales, Date.now() can be okay
+  addBuyer(buyer: Buyer): void {
+    const newBuyer: Buyer = { ...buyer, id: this.generateId() };
+    const updatedBuyers = [...this.buyersSubject.value, newBuyer];
+    this.buyersSubject.next(updatedBuyers);
   }
+
+  updateBuyer(updatedBuyer: Buyer): void {
+    const updatedBuyers = this.buyersSubject.value.map(buyer =>
+      buyer.id === updatedBuyer.id ? { ...updatedBuyer } : buyer
+    );
+    this.buyersSubject.next(updatedBuyers);
+  }
+
+  deleteBuyer(id: number): void {
+    const filteredBuyers = this.buyersSubject.value.filter(buyer => buyer.id !== id);
+    this.buyersSubject.next(filteredBuyers);
+  }
+
+  // === Sale Methods ===
 
   getSales(): Sale[] {
-    return [...this.sales]; // return a copy for safety
+    return this.salesSubject.value;
   }
 
-  addBuyer(buyer: Buyer) {
-    buyer.id = this.buyerIdCounter++;
-    this.buyers.push(buyer);
+  addSale(sale: Sale): void {
+    const updatedSales = [...this.salesSubject.value, sale];
+    this.salesSubject.next(updatedSales);
   }
 
-  updateBuyer(updated: Buyer) {
-    const index = this.buyers.findIndex(b => b.id === updated.id);
-    if (index !== -1) this.buyers[index] = updated;
-  }
+  // === Utility ===
 
-  deleteBuyer(id: number) {
-    this.buyers = this.buyers.filter(b => b.id !== id);
+  private generateId(): number {
+    return Date.now() + Math.floor(Math.random() * 1000); // slightly more unique
   }
 }

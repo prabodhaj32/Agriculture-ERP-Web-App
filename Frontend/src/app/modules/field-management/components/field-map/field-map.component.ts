@@ -1,70 +1,71 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import * as L from 'leaflet';//Showing map tiles (like OpenStreetMap)
-import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { Field } from '../../models/field.model';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-field-map',
-  standalone: true,
-  imports: [CommonModule,MatButtonModule,
-  MatIconModule],
   templateUrl: './field-map.component.html',
+  styleUrls: ['./field-map.component.css'],
 })
-export class FieldMapComponent implements AfterViewInit {
-  @ViewChild('map') mapElement!: ElementRef;
+export class FieldMapComponent implements OnChanges, AfterViewInit {
+  @Input() focusedField: Field | null = null;
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
 
   private map!: L.Map;
-  lat = 7.8731; // Default latitude (Sri Lanka)
-  lng = 80.7718;
-  name = 'Field';
-
-  constructor(private location: Location, private route: ActivatedRoute) {
-  this.route.queryParams.subscribe(params => {
-    this.lat = +params['lat'] || this.lat;
-    this.lng = +params['lng'] || this.lng;
-    this.name = params['name'] || this.name;
-  });
-}
 
   ngAfterViewInit(): void {
-    this.map = L.map(this.mapElement.nativeElement, {
-      center: [this.lat, this.lng],
-      zoom: 14,
-      scrollWheelZoom: true,
-      zoomControl: true,
-      inertia: true,
-      zoomAnimation: true,
-      fadeAnimation: true,
-    });
+    if (this.focusedField) {
+      this.initMap();
+    }
+  }
 
-    //OpenStreetMap Google Maps but open-source
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['focusedField'] && this.map) {
+      this.updateMap();
+    }
+  }
+
+  initMap(): void {
+    const [lat, lng] = this.getCoordinates(this.focusedField!.location);
+    this.map = L.map(this.mapContainer.nativeElement).setView([lat, lng], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-      detectRetina: true,
-      keepBuffer: 5,
-      updateWhenZooming: false,
-      updateWhenIdle: true,
+      attribution: '© OpenStreetMap contributors',
     }).addTo(this.map);
 
-    L.marker([this.lat, this.lng])
-      .addTo(this.map)
-      .bindPopup(`<b>${this.name}</b>`)
-      .openPopup();
+    this.addMarker();
+  }
 
-   
-    this.map.flyTo([this.lat, this.lng], 14, {
-      animate: true,
-      duration: 1.5,
+  updateMap(): void {
+    this.map.eachLayer((layer: any) => {
+      if (layer instanceof L.Marker || layer instanceof L.TileLayer) {
+        this.map.removeLayer(layer);
+      }
     });
 
-    
+    this.initMap();
   }
-  goBack() {
-  this.location.back();
-}
-  
+
+  addMarker(): void {
+    if (this.focusedField) {
+      const [lat, lng] = this.getCoordinates(this.focusedField.location);
+      L.marker([lat, lng])
+        .addTo(this.map)
+        .bindPopup(this.focusedField.name)
+        .openPopup();
+    }
+  }
+
+  getCoordinates(location: string): [number, number] {
+    const [latStr, lngStr] = location.split(',');
+    return [parseFloat(latStr.trim()), parseFloat(lngStr.trim())];
+  }
 }

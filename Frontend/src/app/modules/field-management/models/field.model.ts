@@ -1,13 +1,10 @@
+// src/app/models/field.model.ts
 export interface Field {
   id: number;
   name: string;
-  size: number;
+  size: string;
   location: string;
   soilType: string;
   cropType: string;
-  status: 'Active' | 'Inactive' | 'Harvested' | 'Planted';
-  coordinates?: {
-    lat: number;
-    lng: number;
-  };
+  status: string;
 }

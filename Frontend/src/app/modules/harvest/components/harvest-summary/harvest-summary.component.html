@@ -1,25 +1,45 @@
-<div class="p-6 max-w-3xl mx-auto bg-white shadow rounded">
-  <div class="flex justify-between items-center mb-4">
-    <h2 class="text-xl font-bold text-green-700">Daily Harvest Summary by Field</h2>
-    <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700" (click)="exportLog()">Export CSV</button>
+<div class="mb-4 mt-4 flex items-center justify-between">
+  <!-- Left: Title -->
+  <h3 class="text-foreground font-semibold">Harvest Summary</h3>
+
+  <!-- Right: Buttons -->
+  <div class="flex space-x-4">
+    <button
+      (click)="exportLog()"
+      class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      Export CSV
+    </button>
+    <button
+      (click)="openHarvestForm()"
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      Add Harvest
+    </button>
   </div>
-  
-  <table class="table-auto w-full border border-gray-200">
-    <thead class="bg-green-100">
-      <tr>
-        <th class="text-left px-4 py-2 border">Field</th>
-        <th class="text-left px-4 py-2 border">Total Quantity (kg)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let field of summary | keyvalue" class="border-t">
-        <td class="px-4 py-2 border">{{ field.key }}</td>
-        <td class="px-4 py-2 border">{{ field.value }}</td>
-      </tr>
-    </tbody>
+</div>
+
+<!-- Full width container -->
+
+  <table mat-table [dataSource]="tableData" class="mat-elevation-z2 w-full">
+
+    <!-- Field Column -->
+    <ng-container matColumnDef="field">
+      <th mat-header-cell *matHeaderCellDef> Field </th>
+      <td mat-cell *matCellDef="let element"> {{ element.field }} </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Total Quantity (kg) </th>
+      <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
 
-  <div *ngIf="isEmptySummary" class="text-gray-500 mt-4">
-  No harvest data available.
-</div>
-</div>
+
+  <div *ngIf="isEmptySummary" class="mt-4 text-gray-500 text-center">
+    No harvest data available.
+  </div>
+

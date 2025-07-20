@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { DailyTaskFormComponent } from './components/daily-task-form/daily-task-form.component';
-import { AttendanceFormComponent } from './components/attendance-form/attendance-form.component';
-import { TaskSummaryComponent } from './components/task-summary/task-summary.component';
+import { ActivityLogComponent } from './activity-log.component';
 
 const routes: Routes = [
-  { path: 'daily-task', component: DailyTaskFormComponent },
-  { path: 'attendance', component: AttendanceFormComponent },
-  { path: 'summary', component: TaskSummaryComponent },
-  
-  { path: '', redirectTo: 'daily-task', pathMatch: 'full' },
+  { path: 'activity-log', component: ActivityLogComponent },
+  { path: '', redirectTo: 'activity-log', pathMatch: 'full' },
 ];
 
 @NgModule({

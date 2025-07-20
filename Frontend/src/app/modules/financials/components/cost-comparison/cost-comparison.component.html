@@ -1,36 +1,47 @@
-<div class="p-6 bg-white shadow rounded-md max-w-3xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6 text-gray-800">Field-wise Cost Comparison</h2>
+<div class="mb-4 mt-4 flex items-center justify-between">
+  <!-- Left: Title -->
+  <h3 class="text-foreground font-semibold">Field-wise Cost Comparison</h3>
 
-  <!-- Action Buttons -->
-  <div class="flex flex-wrap gap-4 mb-6">
-    <button (click)="loadComparisonData()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-       Refresh Data
+  <!-- Right: Buttons -->
+  <div class="flex space-x-4">
+    <button
+      (click)="exportComparisonToExcel()"
+      class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      Export to Excel
     </button>
-    <button (click)="exportComparisonToExcel()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-      ⬇ Export to Excel
+    <button
+      (click)="openExpenseEntryDialog()"
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+       Add Expense
     </button>
   </div>
+</div>
 
-  <!-- Comparison Table -->
-  <div class="overflow-x-auto">
-    <table class="min-w-full text-left text-sm border border-gray-300 shadow-sm">
-      <thead class="bg-gray-100">
-        <tr>
-          <th class="border px-4 py-2 font-semibold text-gray-700"> Field</th>
-          <th class="border px-4 py-2 font-semibold text-gray-700"> Total Expense (Rs.)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of comparisonData | keyvalue" class="hover:bg-gray-50 transition">
-          <td class="border px-4 py-2">{{ item.key }}</td>
-          <td class="border px-4 py-2">Rs. {{ item.value }}</td>
-        </tr>
-      </tbody>
+
+
+
+  <div class="overflow-x-auto w-full">
+    <table mat-table [dataSource]="comparisonKeyValue" class="mat-elevation-z1 w-full">
+
+      <!-- Field Column -->
+      <ng-container matColumnDef="field">
+        <th mat-header-cell *matHeaderCellDef> Field </th>
+        <td mat-cell *matCellDef="let element"> {{ element.key }} </td>
+      </ng-container>
+
+      <!-- Expense Column -->
+      <ng-container matColumnDef="expense">
+        <th mat-header-cell *matHeaderCellDef> Total Expense (Rs.) </th>
+        <td mat-cell *matCellDef="let element"> Rs. {{ element.value }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
   <!-- No Data Message -->
-  <div *ngIf="!comparisonData || (comparisonData | keyvalue).length === 0" class="mt-4 text-red-600">
+  <div *ngIf="!comparisonKeyValue?.length" class="mt-4 text-red-600">
     No comparison data available. Please refresh.
   </div>
-</div>
+

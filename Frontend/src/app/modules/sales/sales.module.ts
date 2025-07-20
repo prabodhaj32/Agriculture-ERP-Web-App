@@ -7,6 +7,7 @@ import { SalesTrackerComponent } from './components/sales-tracker/sales-tracker.
 import { InvoicePreviewComponent } from './components/invoice-preview/invoice-preview.component';
 
 import { SalesRoutingModule } from './sales-routing.module';
+import { AddBuyerDialogComponent } from './components/add-buyer-dialog/add-buyer-dialog.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SalesRoutingModule } from './sales-routing.module';
     NewSaleFormComponent,
     SalesTrackerComponent,
     InvoicePreviewComponent,
+    AddBuyerDialogComponent
   ],
 })
 export class SalesModule {}

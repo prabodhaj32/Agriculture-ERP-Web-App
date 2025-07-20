@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserListComponent } from './user-list.component';
+import { AddBuyerDialogComponent } from './add-buyer-dialog.component';
 
-describe('UserListComponent', () => {
-  let component: UserListComponent;
-  let fixture: ComponentFixture<UserListComponent>;
+describe('AddBuyerDialogComponent', () => {
+  let component: AddBuyerDialogComponent;
+  let fixture: ComponentFixture<AddBuyerDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserListComponent]
+      imports: [AddBuyerDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UserListComponent);
+    fixture = TestBed.createComponent(AddBuyerDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

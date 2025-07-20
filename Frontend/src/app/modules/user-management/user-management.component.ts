@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @Component({
   selector: 'app-user-management',
-  imports: [],
+  standalone: true,
+  imports: [UserListComponent, UserFormComponent], // <-- Required
   templateUrl: './user-management.component.html',
-  styleUrl: './user-management.component.css'
+  styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent {
-
-}
+export class UserManagementComponent {}

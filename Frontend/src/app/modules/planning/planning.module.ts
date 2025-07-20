@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { PlanningRoutingModule } from './planning-routing.module';
 
 
-import { TaskFormComponent } from './components/task-form/task-form.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
-import { TaskCalendarComponent } from './components/task-calendar/task-calendar.component';
+// import { TaskFormComponent } from './components/task-form/task-form.component';
+// import { TaskListComponent } from './components/task-list/task-list.component';
+// import { TaskCalendarComponent } from './components/task-calendar/task-calendar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,16 +15,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule,
+   CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     PlanningRoutingModule,
-    TaskFormComponent,
-    TaskListComponent,
-    TaskCalendarComponent,
-     MatFormFieldModule,
+    MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule
+    MatButtonModule
   ]
 })
 export class PlanningModule {}

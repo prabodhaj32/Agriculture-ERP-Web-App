@@ -1,90 +1,61 @@
-<div class="p-4">
-  <h2 class="text-xl font-bold mb-4">Field Management</h2>
+<table mat-table [dataSource]="fields" class="mat-elevation-z8 w-full">
 
-  <button *ngIf="!selectedField" mat-raised-button color="primary" class="mb-4" (click)="addField()">
-    Add Field
-  </button>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let field"> {{ field.name }} </td>
+  </ng-container>
 
-  <app-field-form
-    *ngIf="selectedField"
-    [field]="selectedField"
-    (save)="saveField($event)"
-    (cancel)="cancelEdit()"
-  ></app-field-form>
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef> Location </th>
+    <td mat-cell *matCellDef="let field"> {{ field.location }} </td>
+  </ng-container>
 
-  <table *ngIf="!selectedField" mat-table [dataSource]="fields" class="mat-elevation-z8 w-full mb-6">
+  <!-- Size Column -->
+  <ng-container matColumnDef="size">
+    <th mat-header-cell *matHeaderCellDef> Size </th>
+    <td mat-cell *matCellDef="let field"> {{ field.size }} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let field">{{ field.name }}</td>
-    </ng-container>
+  <!-- Soil Type Column -->
+  <ng-container matColumnDef="soilType">
+    <th mat-header-cell *matHeaderCellDef> Soil </th>
+    <td mat-cell *matCellDef="let field"> {{ field.soilType }} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef>Size (acre)</th>
-      <td mat-cell *matCellDef="let field">{{ field.size }}</td>
-    </ng-container>
+  <!-- Crop Type Column -->
+  <ng-container matColumnDef="cropType">
+    <th mat-header-cell *matHeaderCellDef> Crop </th>
+    <td mat-cell *matCellDef="let field"> {{ field.cropType }} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef>Location</th>
-      <td mat-cell *matCellDef="let field">{{ field.location }}</td>
-    </ng-container>
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let field"> {{ field.status }} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="soilType">
-      <th mat-header-cell *matHeaderCellDef>Soil</th>
-      <td mat-cell *matCellDef="let field">{{ field.soilType }}</td>
-    </ng-container>
+  <!-- Map Column -->
+  <ng-container matColumnDef="map">
+    <th mat-header-cell *matHeaderCellDef> Map </th>
+    <td mat-cell *matCellDef="let field">
+      <button mat-button color="accent" (click)="onViewMap(field)">Map</button>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="cropType">
-      <th mat-header-cell *matHeaderCellDef>Crop</th>
-      <td mat-cell *matCellDef="let field">{{ field.cropType }}</td>
-    </ng-container>
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let field">
+      <button mat-icon-button color="primary" (click)="onEdit(field)" aria-label="Edit field">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let field">
-        <span class="px-2 py-1 rounded-full text-xs font-semibold"
-          [ngClass]="{
-            'bg-green-100 text-green-800': field.status === 'Active',
-            'bg-yellow-100 text-yellow-800': field.status === 'Planted',
-            'bg-blue-100 text-blue-800': field.status === 'Harvested',
-            'bg-red-100 text-red-800': field.status === 'Inactive'
-          }">
-          {{ field.status }}
-        </span>
-      </td>
-    </ng-container>
+  <!-- Header and Row Definitions -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let field">
-        <button mat-icon-button color="primary" (click)="editField(field)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="deleteField(field.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="view">
-  <th mat-header-cell *matHeaderCellDef>View on Map</th>
-  <td mat-cell *matCellDef="let field">
-    <button
-      mat-button
-      color="accent"
-      [routerLink]="['/field-management/fields/map']"
-      [queryParams]="{
-        lat: field.coordinates?.lat,
-        lng: field.coordinates?.lng,
-        name: field.name
-      }"
-    >
-       Map
-    </button>
-  </td>
-</ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+</table>

@@ -1,19 +1,9 @@
-<div class="p-4">
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-bold" aria-live="polite">Field Location - {{ name }}</h2>
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="goBack()"
-      aria-label="Go back to previous page"
-      class="flex items-center gap-1"
-    >
-      <mat-icon aria-hidden="true">arrow_back</mat-icon>
-      Back
-    </button>
-  </div>
-
-  <div class="border rounded shadow overflow-hidden" style="height: 500px;">
-    <div #map id="map" class="h-full w-full"></div>
-  </div>
+<div class="bg-hash p-4 mt-6 ">
+  <h2 class="text-lg font-bold mb-4">Field Map View</h2>
+  <div
+    #mapContainer
+    id="map"
+    class="w-full h-96 rounded border"
+    style="min-height: 400px"
+  ></div>
 </div>

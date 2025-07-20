@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  Inject,
+  Optional
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.model';
@@ -6,11 +14,12 @@ import { UserService } from '../../services/user.service';
 import { Location } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-   imports: [CommonModule, FormsModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatIconModule],
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
@@ -26,31 +35,52 @@ export class UserFormComponent implements OnInit {
 
   @Output() formSubmit = new EventEmitter<void>();
 
-  // Add this property
+  // ✅ This must exist to avoid assignedField errors
   assignedField: string = 'Tea';
 
-    constructor(private userService: UserService, private location: Location) {}
-  
-ngOnInit() {
-  if (this.user?.assignedFields?.length) {
-    this.assignedField = this.user.assignedFields[0];
-  }
-}
-  onSubmit() {
-    // Convert single field to array before saving
-    this.user.assignedFields = [this.assignedField];
+  constructor(
+    private userService: UserService,
+    private location: Location,
+    @Optional() public dialogRef: MatDialogRef<UserFormComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: { user: User }
+  ) {}
 
-    if (this.user.id) {
-      this.userService.updateUser(this.user).subscribe(() => this.formSubmit.emit());
-    } else {
-   this.userService.addUser(this.user).subscribe(() => {
-        this.formSubmit.emit();
-        this.resetForm();
-      });
+  ngOnInit() {
+    // If using dialog and user data is passed
+    if (this.data?.user) {
+      this.user = { ...this.data.user };
+    }
+
+    if (this.user?.assignedFields?.length) {
+      this.assignedField = this.user.assignedFields[0];
     }
   }
-   goBack(): void {
-    this.location.back();
+
+  onSubmit() {
+    this.user.assignedFields = [this.assignedField];
+
+    const action$ = this.user.id
+      ? this.userService.updateUser(this.user)
+      : this.userService.addUser(this.user);
+
+    action$.subscribe(() => {
+      this.formSubmit.emit();
+
+      // If in dialog, close after submit
+      if (this.dialogRef) {
+        this.dialogRef.close();
+      } else {
+        this.resetForm();
+      }
+    });
+  }
+
+  // ✅ Make sure this method exists
+  onCancel() {
+    this.resetForm(); // Resets the form fields
+    if (this.dialogRef) {
+      this.dialogRef.close(); // Closes dialog if it's a popup
+    }
   }
 
   resetForm() {
@@ -64,5 +94,4 @@ ngOnInit() {
     };
     this.assignedField = 'Tea';
   }
-  
 }

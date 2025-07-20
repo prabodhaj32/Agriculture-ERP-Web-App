@@ -1,73 +1,83 @@
-<form (ngSubmit)="submitRevenue()" class="bg-white p-6 rounded shadow max-w-xl mx-auto space-y-4">
-  <h2 class="text-2xl font-bold text-gray-800 mb-4"> Revenue Entry Form</h2>
+<form (ngSubmit)="submitRevenue()" class="bg-white p-6 rounded-xl shadow-md w-full max-w-xl mx-auto space-y-5">
+  <h2 class="text-2xl font-bold text-gray-800">Revenue Entry Form</h2>
 
-  <input
-    [(ngModel)]="revenue.type"
-    name="type"
-    placeholder="Revenue Type"
-    required
-    class="input w-full"
-  />
-
-  <input
-    [(ngModel)]="revenue.date"
-    name="date"
-    type="date"
-    required
-    class="input w-full"
-  />
-
-  <input
-    [(ngModel)]="revenue.field"
-    name="field"
-    placeholder="Field"
-    required
-    class="input w-full"
-  />
-
-  <div class="grid grid-cols-2 gap-4">
+  <div class="space-y-4">
     <input
-      [(ngModel)]="quantity"
-      name="quantity"
-      type="number"
-      (input)="updateTotal()"
-      placeholder="Quantity"
+      [(ngModel)]="revenue.type"
+      name="type"
+      placeholder="Revenue Type"
       required
-      class="input w-full"
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
+
     <input
-      [(ngModel)]="price"
-      name="price"
-      type="number"
-      (input)="updateTotal()"
-      placeholder="Price per Unit"
+      [(ngModel)]="revenue.date"
+      name="date"
+      type="date"
       required
-      class="input w-full"
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
+
+    <input
+      [(ngModel)]="revenue.field"
+      name="field"
+      placeholder="Field"
+      required
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+
+    <div class="grid grid-cols-2 gap-4">
+      <input
+        [(ngModel)]="quantity"
+        name="quantity"
+        type="number"
+        (input)="updateTotal()"
+        placeholder="Quantity"
+        required
+        class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        [(ngModel)]="price"
+        name="price"
+        type="number"
+        (input)="updateTotal()"
+        placeholder="Price per Unit"
+        required
+        class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+    </div>
+
+    <input
+      [(ngModel)]="revenue.total"
+      name="total"
+      placeholder="Total Revenue"
+      readonly
+      class="w-full border bg-gray-100 text-gray-700 rounded px-4 py-2"
+    />
+
+    <textarea
+      [(ngModel)]="revenue.description"
+      name="description"
+      placeholder="Description"
+      rows="3"
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    ></textarea>
   </div>
 
-  <input
-    [(ngModel)]="revenue.total"
-    name="total"
-    placeholder="Total Revenue"
-    readonly
-    class="input w-full bg-gray-100 text-gray-700"
-  />
-
-  <textarea
-    [(ngModel)]="revenue.description"
-    name="description"
-    placeholder="Description"
-    rows="3"
-    class="input w-full"
-  ></textarea>
-  <div>
+  <div class="flex justify-between gap-4 pt-4">
+   
     <button
+      type="button"
+      (click)="cancel()"
+      class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition"
+    >
+      Cancel
+    </button>
+     <button
       type="submit"
-      class="w-full bg-green-600 text-white py-2 rounded hover:bg-blue-700 transition"
+      class="bg-green-600 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition"
     >
       Submit Revenue
     </button>
-
   </div>
 </form>

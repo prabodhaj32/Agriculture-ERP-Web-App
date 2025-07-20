@@ -7,6 +7,7 @@ import { UserManagementRoutingModule } from './user-management-routing.module';
 
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   
@@ -16,7 +17,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     HttpClientModule,
     UserListComponent,
     UserFormComponent,
-    UserManagementRoutingModule
+    UserManagementRoutingModule,
+     MatDialogModule
   ],
 
   exports: [UserListComponent] 

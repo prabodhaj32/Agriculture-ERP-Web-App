@@ -1,52 +1,78 @@
-<div class="max-w-4xl mx-auto mt-6 bg-white p-6 rounded shadow">
-  <h2 class="text-lg font-bold mb-4">Buyer CRM</h2>
+<!-- Header with Button and Title -->
+<div class="flex items-center justify-between mb-4">
+  <!-- Left: Heading -->
+  <h2 class="text-foreground font-semibold">New Buyer</h2>
 
-  <!-- Notification -->
-  <div *ngIf="notification" class="mb-4 p-3 rounded text-white" [ngClass]="{
-    'bg-green-500': notificationType === 'success',
-    'bg-red-500': notificationType === 'error',
-    'bg-yellow-500': notificationType === 'warning'
-  }">
-    {{ notification }}
-  </div>
-
-  <!-- Add Buyer -->
-  <form (ngSubmit)="addBuyer()" class="flex flex-wrap gap-2 mb-4">
-    <input [(ngModel)]="newBuyer.name" name="name" placeholder="Name" class="border p-2 rounded" required />
-    <input [(ngModel)]="newBuyer.email" name="email" placeholder="Email" class="border p-2 rounded" required />
-    <input [(ngModel)]="newBuyer.phone" name="phone" placeholder="Phone" class="border p-2 rounded" required />
-    <button class="bg-blue-500 text-white px-3 py-1 rounded">Add Buyer</button>
-  </form>
-
-  <!-- Buyer Table -->
-  <table class="w-full border">
-    <thead class="bg-gray-100">
-      <tr>
-        <th class="p-2">Name</th>
-        <th class="p-2">Email</th>
-        <th class="p-2">Phone</th>
-        <th class="p-2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let b of buyers" class="border-t text-center">
-        <td class="p-2">{{ b.name }}</td>
-        <td class="p-2">{{ b.email }}</td>
-        <td class="p-2">{{ b.phone }}</td>
-        <td class="p-2 space-x-2">
-          <button class="text-blue-600" (click)="edit(b)">Edit</button>
-          <button class="text-red-600" (click)="delete(b.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Edit Buyer -->
-  <div *ngIf="editBuyer" class="mt-6 p-4 border rounded bg-gray-50">
-    <h3 class="font-semibold mb-2">Edit Buyer</h3>
-    <input [(ngModel)]="editBuyer.name" class="border p-2 mb-2 block w-full" />
-    <input [(ngModel)]="editBuyer.email" class="border p-2 mb-2 block w-full" />
-    <input [(ngModel)]="editBuyer.phone" class="border p-2 mb-2 block w-full" />
-    <button (click)="saveEdit()" class="bg-green-500 text-white px-4 py-1 rounded">Save</button>
-  </div>
+  <!-- Right: Add Buyer Button -->
+  <button
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    (click)="openAddBuyerDialog()">
+    Add Buyer
+  </button>
 </div>
+
+
+
+<!-- Notification -->
+<div *ngIf="notification" class="mb-4 p-3 rounded text-white"
+     [ngClass]="{
+       'bg-green-500': notificationType === 'success',
+       'bg-red-500': notificationType === 'error',
+       'bg-yellow-500': notificationType === 'warning'
+     }">
+  {{ notification }}
+</div>
+
+<!-- Buyers Table (example display) -->
+<!-- Material Table Wrapper -->
+<div class="mat-elevation-z2 overflow-x-auto">
+  <table mat-table [dataSource]="buyers" class="min-w-full">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let buyer">{{ buyer.name }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let buyer">{{ buyer.email }}</td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let buyer">{{ buyer.phone }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef>Actions</th>
+  <td mat-cell *matCellDef="let buyer">
+
+    <!-- More actions button triggers menu -->
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <!-- Menu definition -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="edit(buyer)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="delete(buyer.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

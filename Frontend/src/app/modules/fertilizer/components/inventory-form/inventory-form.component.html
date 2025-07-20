@@ -1,27 +1,36 @@
-<div class="p-6 bg-white rounded shadow-md max-w-3xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6 text-gray-800"> Inventory Management Form</h2>
+<!-- Title + Button Row -->
+<div class="flex items-center justify-between mb-6 mt-8">
+  <h3 class="text-foreground font-semibold">Inventory Management Form</h3>
+  <button
+    (click)="addItem()"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+  >
+    Add Item
+  </button>
+</div>
 
-
-  <form (ngSubmit)="addItem()" class="grid gap-4 md:grid-cols-2">
+<!-- Form Card -->
+<div class="p-6 bg-white rounded-md shadow-md mx-auto w-full ">
+  <form class="grid gap-4 md:grid-cols-2 w-full">
     <input
-      class="input border rounded px-4 py-2"
-      placeholder=" Item Name"
+      class="border rounded px-4 py-2 w-full"
+      placeholder="Item Name"
       [(ngModel)]="item.name"
       name="name"
       required
     />
-<select
-  class="input border rounded px-4 py-2 text-gray-700"
-  [(ngModel)]="item.type"
-  name="type"
-  required
->
-  <option value=""> Select Type</option>
-  <option value="Fertilizer"> Fertilizer</option>
-  <option value="Pesticide"> Pesticide</option>
-</select>
+    <select
+      class="border rounded px-4 py-2 w-full"
+      [(ngModel)]="item.type"
+      name="type"
+      required
+    >
+      <option value="">Select Type</option>
+      <option value="Fertilizer">Fertilizer</option>
+      <option value="Pesticide">Pesticide</option>
+    </select>
     <input
-      class="input border rounded px-4 py-2"
+      class="border rounded px-4 py-2 w-full"
       placeholder="Brand"
       [(ngModel)]="item.brand"
       name="brand"
@@ -29,7 +38,7 @@
     />
     <input
       type="number"
-      class="input border rounded px-4 py-2"
+      class="border rounded px-4 py-2 w-full"
       placeholder="Quantity"
       [(ngModel)]="item.quantity"
       name="quantity"
@@ -37,21 +46,15 @@
     />
     <input
       type="number"
-      class="input border rounded px-4 py-2"
+      class="border rounded px-4 py-2 w-full md:col-span-2"
       placeholder="Unit Cost"
       [(ngModel)]="item.unitCost"
       name="unitCost"
       required
     />
-
-    <button
-      class="btn bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-700 md:col-span-2"
-    >
-       Add Item
-    </button>
   </form>
 
-  <!-- Low Stock Alert Section -->
+  <!-- Low Stock Alert -->
   <div
     *ngIf="lowStockItems.length > 0"
     class="bg-red-100 text-red-800 p-4 rounded mt-8 border border-red-300"

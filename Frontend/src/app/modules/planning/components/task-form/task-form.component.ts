@@ -1,39 +1,48 @@
-import { Component } from '@angular/core';
-import { Task } from '../../models/task.model';
-import { TaskService } from '../../services/task.service';
+import { Component, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
 })
 export class TaskFormComponent {
-  constructor(private taskService: TaskService) {}
+  field = '';
+  taskType = '';
+  assignedTo = '';
+  startDate = '';
+  endDate = '';
+  notes = '';
 
-  save(
-    field: string,
-    taskType: string,
-    assignedTo: string,
-    startDate: string,
-    endDate: string,
-    notes: string
-  ) {
+  constructor(@Optional() private dialogRef?: MatDialogRef<TaskFormComponent>) {}
+
+  save() {
     const newTask: Task = {
       id: this.generateId(),
-      field,
-      taskType,
-      assignedTo,
-      startDate,
-      endDate,
-      notes,
+      field: this.field,
+      taskType: this.taskType,
+      assignedTo: this.assignedTo,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      notes: this.notes,
       completed: false,
     };
 
-    this.taskService.addTask(newTask);
-    alert('Task saved!');
+    if (this.dialogRef) {
+      this.dialogRef.close(newTask); // used in popup
+    } else {
+      alert('Task saved (direct form)');
+      // Handle direct-save logic here (optional)
+    }
+  }
+
+  cancel() {
+    this.dialogRef?.close(); // close dialog only if available
   }
 
   private generateId(): string {

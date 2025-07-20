@@ -1,58 +1,68 @@
-<form (ngSubmit)="onSubmit()" class="p-4 bg-white rounded shadow-md" style="max-width: 600px;">
-  <div class="grid grid-cols-2 gap-4">
-
-    <mat-form-field appearance="fill">
-      <mat-label>Field Name</mat-label>
-      <input matInput [(ngModel)]="field.name" name="name" required />
-      <mat-error *ngIf="!field.name">Field Name is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Size (Acre)</mat-label>
-      <input matInput type="number" [(ngModel)]="field.size" name="size" required min="0" />
-      <mat-error *ngIf="field.size < 0">Size must be positive</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Location</mat-label>
-      <input matInput [(ngModel)]="field.location" name="location" />
-    </mat-form-field>
-
-    <!-- Soil Type Radio Buttons -->
-    <div class="col-span-2">
-      <label class="block font-medium mb-1">Soil Type</label>
-      <mat-radio-group [(ngModel)]="field.soilType" name="soilType" class="flex gap-4">
-        <mat-radio-button value="Clay">Clay</mat-radio-button>
-        <mat-radio-button value="Sandy">Sandy</mat-radio-button>
-        <mat-radio-button value="Loamy">Loamy</mat-radio-button>
-      </mat-radio-group>
-    </div>
-
-    <!-- Crop Type Radio Buttons -->
-    <div class="col-span-2">
-      <label class="block font-medium mb-1">Crop Type</label>
-      <mat-radio-group [(ngModel)]="field.cropType" name="cropType" class="flex gap-4">
-        <mat-radio-button value="Tea">Tea</mat-radio-button>
-        <mat-radio-button value="Coconut">Coconut</mat-radio-button>
-
-      </mat-radio-group>
-    </div>
-
-    <!-- Status Select -->
-    <mat-form-field appearance="fill">
-      <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="field.status" name="status">
-        <mat-option value="Active">Active</mat-option>
-        <mat-option value="Inactive">Inactive</mat-option>
-        <mat-option value="Planted">Planted</mat-option>
-        <mat-option value="Harvested">Harvested</mat-option>
-      </mat-select>
-    </mat-form-field>
-
+<form (ngSubmit)="onSubmit()" class="bg-white p-6 rounded-md shadow-md space-y-6 w-full">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <input
+      [(ngModel)]="localField.name"
+      name="name"
+      placeholder="Field Name"
+      required
+      class="input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Field Name"
+    />
+    <input
+      [(ngModel)]="localField.size"
+      name="size"
+      placeholder="Size"
+      required
+      class="input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Size"
+    />
+    <input
+      [(ngModel)]="localField.location"
+      name="location"
+      placeholder="Location"
+      required
+      class="input w-full col-span-1 md:col-span-2 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Location (latitude, longitude)"
+    />
+    <input
+      [(ngModel)]="localField.soilType"
+      name="soilType"
+      placeholder="Soil Type"
+      class="input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Soil Type"
+    />
+    <input
+      [(ngModel)]="localField.cropType"
+      name="cropType"
+      placeholder="Crop Type"
+      class="input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Crop Type"
+    />
+    <select
+      [(ngModel)]="localField.status"
+      name="status"
+      class="input w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      aria-label="Status"
+      required
+    >
+      <option value="" disabled>Select Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
   </div>
-
-  <div class="mt-4 flex gap-2">
-    <button mat-raised-button color="primary" type="submit">Save</button>
-    <button mat-button type="button" (click)="cancel.emit()">Cancel</button>
+  <div class="flex justify-end space-x-4">
+    <button
+      type="button"
+      (click)="cancel.emit()"
+      class="btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    >
+      Save
+    </button>
   </div>
 </form>

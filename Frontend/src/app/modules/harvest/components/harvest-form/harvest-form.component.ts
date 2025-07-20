@@ -3,6 +3,7 @@ import { HarvestService } from '../../services/harvest.service';
 import { HarvestEntry } from '../../models/harvest.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-harvest-form',

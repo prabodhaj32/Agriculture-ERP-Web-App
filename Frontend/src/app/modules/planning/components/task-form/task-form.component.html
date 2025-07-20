@@ -1,9 +1,91 @@
-<form (submit)="save(fieldInput.value, taskTypeInput.value, assignedToInput.value, startDateInput.value, endDateInput.value, notesInput.value)" class="p-4 space-y-4">
-  <input #fieldInput placeholder="Field" required />
-  <input #taskTypeInput placeholder="Task Type" required />
-  <input #assignedToInput placeholder="Assigned To" required />
-  <input type="date" #startDateInput required />
-  <input type="date" #endDateInput required />
-  <textarea #notesInput placeholder="Notes"></textarea>
-  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save Task</button>
+<form (ngSubmit)="save()" class="p-6 space-y-6 bg-white rounded  w-full">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add Task</h2>
+  <div>
+    <label for="field" class="block mb-1 font-semibold">Field</label>
+    <input
+      id="field"
+      [(ngModel)]="field"
+      name="field"
+      placeholder="Enter field name"
+      required
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <div>
+    <label for="taskType" class="block mb-1 font-semibold">Task Type</label>
+    <input
+      id="taskType"
+      [(ngModel)]="taskType"
+      name="taskType"
+      placeholder="Enter task type"
+      required
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <div>
+    <label for="assignedTo" class="block mb-1 font-semibold">Assigned To</label>
+    <input
+      id="assignedTo"
+      [(ngModel)]="assignedTo"
+      name="assignedTo"
+      placeholder="Person responsible"
+      required
+      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label for="startDate" class="block mb-1 font-semibold">Start Date</label>
+      <input
+        id="startDate"
+        [(ngModel)]="startDate"
+        name="startDate"
+        type="date"
+        required
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+    <div>
+      <label for="endDate" class="block mb-1 font-semibold">End Date</label>
+      <input
+        id="endDate"
+        [(ngModel)]="endDate"
+        name="endDate"
+        type="date"
+        required
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="notes" class="block mb-1 font-semibold">Notes</label>
+    <textarea
+      id="notes"
+      [(ngModel)]="notes"
+      name="notes"
+      placeholder="Additional details (optional)"
+      rows="4"
+      class="w-full border border-gray-300 rounded px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
+    ></textarea>
+  </div>
+
+  <div class="flex justify-end gap-4">
+    <button
+      type="button"
+      (click)="cancel()"
+      class="bg-gray-400 text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="bg-green-600  text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    >
+      Save Task
+    </button>
+  </div>
 </form>
