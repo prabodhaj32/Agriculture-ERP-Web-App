@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build -- --configuration production"
+  publish = "dist/angular-tailwind"
+  base = "/"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
