@@ -1,39 +1,38 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { RouterModule } from '@angular/router';
 import { FieldManagementRoutingModule } from './field-management-routing.module';
-
 
 import { FieldManagementComponent } from './field-management.component';
 import { FieldFormComponent } from './components/field-form/field-form.component';
 import { FieldListComponent } from './components/field-list/field-list.component';
-
+import { FieldMapComponent } from './components/field-map/field-map.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FieldMapComponent } from './components/field-map/field-map.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [], 
+  // ❗️ Do NOT put standalone components in declarations
   imports: [
     CommonModule,
-    FormsModule,
-    FieldMapComponent,
-     RouterModule,
+    FormsModule,              // Required for ngModel
+    ReactiveFormsModule,      // Required for formGroup
+    RouterModule,
     FieldManagementRoutingModule,
 
-
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-
-
+    // Standalone Components (you must import them)
     FieldManagementComponent,
     FieldFormComponent,
     FieldListComponent,
-  ],
+    FieldMapComponent,
+
+    // Angular Material modules
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule
+  ]
 })
 export class FieldManagementModule {}

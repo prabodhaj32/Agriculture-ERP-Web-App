@@ -70,4 +70,5 @@ export class HarvestSummaryComponent implements OnInit, OnDestroy {
   get isEmptySummary(): boolean {
     return this.tableData.data.length === 0;
   }
+  
 }

@@ -1,58 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Field } from '../models/field.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class FieldService {
   private fields: Field[] = [
     {
       id: 1,
-      name: 'North Field',
-      size: '5',
-      location: 'Kandy',
+      name: 'Field 1',
+      size: 10,
+      location: 'Nuwara Eliya',
       soilType: 'Loamy',
-      cropType: 'Corn',
-      status: 'Active'
+      cropType: 'Tea',
+      status: 'Planted',
+      lat: 6.9705,
+      lng: 80.7820,
     },
-    {
-      id: 2,
-      name: 'South Field',
-      size: '3',
-      location: 'colombo',
-      soilType: 'Clay',
-      cropType: 'Wheat',
-      status: 'Inactive'
-    }
   ];
 
-  // Return a shallow copy of the fields array
   getFields(): Field[] {
-    return [...this.fields];
+    return this.fields;
   }
 
-  // Add a new field with a unique ID
-  addField(field: Field): void {
-    const newId = this.fields.length > 0 ? Math.max(...this.fields.map(f => f.id)) + 1 : 1;
-    const newField: Field = { ...field, id: newId };
-    this.fields.push(newField);
+  getFieldById(id: number): Field | undefined {
+    return this.fields.find(f => f.id === id);
   }
 
-  // Update an existing field
-  updateField(updatedField: Field): void {
-    const index = this.fields.findIndex(f => f.id === updatedField.id);
-    if (index !== -1) {
-      this.fields[index] = { ...updatedField };
+  addField(field: Field) {
+    field.id = this.fields.length ? Math.max(...this.fields.map(f => f.id)) + 1 : 1;
+    this.fields.push(field);
+  }
+
+  updateField(field: Field) {
+    const index = this.fields.findIndex(f => f.id === field.id);
+    if (index > -1) {
+      this.fields[index] = field;
     }
   }
 
-  // Delete a field by ID
-  deleteField(id: number): void {
+  deleteField(id: number) {
     this.fields = this.fields.filter(f => f.id !== id);
-  }
-
-  // Optional: Get a field by ID
-  getFieldById(id: number): Field | undefined {
-    return this.fields.find(f => f.id === id);
   }
 }

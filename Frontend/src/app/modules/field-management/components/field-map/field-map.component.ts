@@ -9,9 +9,15 @@ import {
 } from '@angular/core';
 import { Field } from '../../models/field.model';
 import * as L from 'leaflet';
+import { CommonModule } from '@angular/common';
+import { FormsModule, } from '@angular/forms';
+
 
 @Component({
   selector: 'app-field-map',
+   standalone: true,
+  imports: [
+    CommonModule,FormsModule],
   templateUrl: './field-map.component.html',
   styleUrls: ['./field-map.component.css'],
 })

@@ -1,4 +1,3 @@
-// src/app/modules/field-management/field-management-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FieldManagementComponent } from './field-management.component';

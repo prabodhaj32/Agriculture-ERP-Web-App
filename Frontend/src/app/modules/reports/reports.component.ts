@@ -5,11 +5,13 @@ import * as XLSX from 'xlsx';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductivityCostComponent } from './components/productivity-cost/productivity-cost.component';
+import { MatTableModule } from '@angular/material/table';
+import { HarvestSummaryComponent } from './components/harvest-summary/harvest-summary.component';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductivityCostComponent],
+  imports: [CommonModule, FormsModule, ProductivityCostComponent,MatTableModule,HarvestSummaryComponent],
   templateUrl: './reports.component.html',
 })
 export class ReportsComponent {
@@ -30,6 +32,7 @@ export class ReportsComponent {
     { date: '2025-07-16', field: 'B', worker: 'Sara', crop: 'Rubber', costType: 'Transport', quantity: 80 },
     { date: '2025-07-17', field: 'C', worker: 'Ali', crop: 'Tea', costType: 'Fertilizer', quantity: 120 },
   ];
+  displayedColumns: string[] = ['date', 'field', 'worker', 'crop', 'costType', 'quantity'];
 
   filteredData = [...this.harvestData];
 

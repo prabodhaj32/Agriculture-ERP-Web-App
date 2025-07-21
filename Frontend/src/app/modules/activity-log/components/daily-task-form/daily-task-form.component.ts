@@ -1,4 +1,4 @@
-import { Component, Optional } from '@angular/core';
+import { Component, Optional, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivityLogService } from '../../services/activity-log.service';
 import { DailyTask } from '../../Model/daily-task.model';
@@ -13,6 +13,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./daily-task-form.component.css'],
 })
 export class DailyTaskFormComponent {
+  @Output() formClose = new EventEmitter<void>(); // ✅ added
+
   task: DailyTask = {
     field: '',
     taskType: '',
@@ -37,20 +39,31 @@ export class DailyTaskFormComponent {
       reader.onload = () => {
         if (reader.result) {
           base64Photos.push(reader.result.toString());
-          this.task.photos = base64Photos; // update photos while reading
+          this.task.photos = base64Photos;
         }
       };
       reader.readAsDataURL(file);
     });
   }
 
+  onCancel() {
+    if (this.dialogRef) {
+      this.dialogRef.close(); // close dialog if opened via MatDialog
+    } else {
+      this.formClose.emit(); // close inline form
+    }
+  }
+
   submitTask() {
     this.activityService.addTask({ ...this.task });
     alert('Task submitted successfully!');
     if (this.dialogRef) {
-      this.dialogRef.close();  // close dialog only if inside a dialog
+      this.dialogRef.close(); // close dialog only if inside a dialog
+    } else {
+      this.formClose.emit(); // close inline form
     }
-    // reset task after submit
+
+    // reset form
     this.task = {
       field: '',
       taskType: '',

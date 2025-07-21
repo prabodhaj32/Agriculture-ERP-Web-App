@@ -1,36 +1,55 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output,Input } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Field } from '../../models/field.model';
 
 @Component({
   selector: 'app-field-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './field-form.component.html',
+  styleUrls: ['./field-form.component.css'],
 })
-export class FieldFormComponent {
-  @Input() set field(value: Field | null) {
-    this.localField = value ? { ...value } : this.getEmptyField();
-  }
-  @Output() save = new EventEmitter<Field>();
-  @Output() cancel = new EventEmitter<void>();
+export class FieldFormComponent implements OnInit {
+  @Input() field?: Field;
+   @Input() fieldId?: number;
+  @Output() formSubmit = new EventEmitter<Field>();
+  @Output() formClose = new EventEmitter<void>();
 
-  localField: Field = this.getEmptyField();
+  fieldForm!: FormGroup;
+  isEditMode = false;
+
+  statuses = ['Planted', 'Harvested', 'Idle', 'Maintenance'];
+  soilTypes = ['Loamy', 'Sandy', 'Clay', 'Silty'];
+  cropTypes = ['Tea', 'Vegetables', 'Fruits', 'Herbs'];
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+  this.fieldForm = this.fb.group({
+    id: [null], // include id for updates
+    name: ['', Validators.required],
+    size: [null, [Validators.required, Validators.min(0.1)]],
+    location: ['', Validators.required],
+    soilType: ['', Validators.required],
+    cropType: ['', Validators.required],
+    status: ['', Validators.required],
+    lat: [null],
+    lng: [null],
+  });
+
+  if (this.field) {
+    this.isEditMode = true;
+    this.fieldForm.patchValue(this.field);  // 💡 Patch form with existing field data
+  }
+}
 
   onSubmit() {
-    this.save.emit(this.localField);
+    if (this.fieldForm.invalid) return;
+    this.formSubmit.emit(this.fieldForm.value as Field);
   }
 
-  private getEmptyField(): Field {
-    return {
-      id: 0,
-      name: '',
-      size: '',
-      location: '',
-      soilType: '',
-      cropType: '',
-      status: '',
-    };
+  onCancel() {
+    this.formClose.emit();
   }
 }

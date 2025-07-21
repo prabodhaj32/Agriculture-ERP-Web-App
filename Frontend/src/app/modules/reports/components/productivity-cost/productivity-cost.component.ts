@@ -4,15 +4,27 @@ import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-productivity-cost',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MatTableModule,
+    MatCardModule,
+    MatSelectModule,
+    MatFormFieldModule],
   templateUrl: './productivity-cost.component.html',
 })
 export class ProductivityCostComponent {
+  
+  
+
+
   fieldsList: string[] = ['Field A', 'Field B', 'Field C'];
+  
 
   filters = {
     field: '',
@@ -35,7 +47,15 @@ export class ProductivityCostComponent {
     });
   }
 
-  
+
+
+
+
+  clearFilters() {
+    this.filters = { field: '', minCost: 0 };
+    this.applyFilters();
+  }
+
   getSummaryData() {
     return this.filteredData.map(item => ({
       metric: item.field,
@@ -97,7 +117,6 @@ export class ProductivityCostComponent {
     }
   }
 
-  //  data to parent component or for export
   getData(): { metric: string; value: string }[] {
     return this.getSummaryData();
   }

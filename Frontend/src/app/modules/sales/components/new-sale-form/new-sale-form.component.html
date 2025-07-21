@@ -1,5 +1,7 @@
 <form (ngSubmit)="submitSale()" class="space-y-4  bg-white p-6 rounded shadow">
-  <h2 class="text-lg font-bold mb-4">New Sale</h2>
+
+  <h3 class="text-foreground font-semibold mb-4">New Sale</h3>
+
 
   <div>
     <label class="block font-medium mb-1">Select Buyer</label>
@@ -79,7 +81,7 @@
   <div class="text-right space-x-2">
   <button 
     type="button" 
-    class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
     (click)="onCancel()"
   >
     Cancel
@@ -87,7 +89,7 @@
 
   <button 
     type="submit" 
-    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
   >
     Submit Sale
   </button>

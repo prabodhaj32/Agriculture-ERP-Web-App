@@ -1,43 +1,11 @@
-<div class="p-6 bg-white rounded shadow">
-  <h2 class="text-2xl font-bold text-700 mb-6">Harvest Summary</h2>
 
-  <div class="grid grid-cols-3 gap-4 mb-6">
-    <input type="date" [(ngModel)]="filters.dateFrom" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="From Date" />
-   
-    <input type="text" [(ngModel)]="filters.field" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Field" />
-    <input type="text" [(ngModel)]="filters.worker" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Worker" />
-    <input type="text" [(ngModel)]="filters.cropType" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Crop Type" />
-    <input type="text" [(ngModel)]="filters.costType" (ngModelChange)="onFiltersChange()" class="border p-2 rounded" placeholder="Cost Type" />
-  </div>
+  <app-harvest-summary></app-harvest-summary>
 
-    <table class="w-full text-sm text-left border mb-6">
-    <thead class="bg-gray-100">
-      <tr>
-        <th class="px-4 py-2">Date</th>
-        <th class="px-4 py-2">Field</th>
-        <th class="px-4 py-2">Worker</th>
-        <th class="px-4 py-2">Crop</th>
-        <th class="px-4 py-2">Cost Type</th>
-        <th class="px-4 py-2">Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of filteredData">
-        <td class="px-4 py-2">{{ item.date }}</td>
-        <td class="px-4 py-2">{{ item.field }}</td>
-        <td class="px-4 py-2">{{ item.worker }}</td>
-        <td class="px-4 py-2">{{ item.crop }}</td>
-        <td class="px-4 py-2">{{ item.costType }}</td>
-        <td class="px-4 py-2">{{ item.quantity }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-
+<div>
   <app-productivity-cost></app-productivity-cost>
   <div class="mt-10 flex gap-4 mb-6">
-    <button (click)="exportToPDF()" class="bg-blue-600 text-white px-4 py-2 rounded">Export to PDF</button>
-    <button (click)="exportToExcel()" class="bg-green-600 text-white px-4 py-2 rounded">Export to Excel</button>
-    <button (click)="printReport()" class="bg-gray-600 text-white px-4 py-2 rounded">Print</button>
+    <button (click)="exportToPDF()" class="bg-blue-600 text-white flex-none rounded-md px-4 py-2.5 text-xs font-semibold">Export to PDF</button>
+    <button (click)="exportToExcel()" class="bg-green-600 text-white flex-none rounded-md px-4 py-2.5 text-xs font-semibold">Export to Excel</button>
+    <button (click)="printReport()" class="bg-gray-600 text-white flex-none rounded-md px-4 py-2.5 text-xs font-semibold">Print</button>
   </div>
 </div>
