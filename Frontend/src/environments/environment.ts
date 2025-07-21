@@ -1,5 +1,4 @@
-// export const environment = {
-//   url:process.env['NG_APP_BASE_URL']
+
 // }
 
 // This file can be replaced during build by using the `fileReplacements` array.
