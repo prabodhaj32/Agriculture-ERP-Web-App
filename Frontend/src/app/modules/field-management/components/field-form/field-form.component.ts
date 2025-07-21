@@ -40,7 +40,7 @@ export class FieldFormComponent implements OnInit {
 
   if (this.field) {
     this.isEditMode = true;
-    this.fieldForm.patchValue(this.field);  // 💡 Patch form with existing field data
+    this.fieldForm.patchValue(this.field);  // Patch form with existing field data
   }
 }
 

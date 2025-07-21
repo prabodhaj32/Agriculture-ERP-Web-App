@@ -32,20 +32,20 @@ export class Menu {
           //   { label: 'User List', route: '/user-management/user-list' },
           // ],
         },
-       {
-  icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
-  label: 'Field Management',
-  route: '/field-management',
-},
+        {
+          icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
+          label: 'Field Management',
+          route: '/field-management',
+        },
         {
           icon: 'assets/icons/heroicons/outline/planning-poker-svgrepo-com.svg',
           label: 'Planning',
           route: '/planning',
           // children: [
-          //   { label: 'Task Form', route: '/planning/form' }, 
-          //   { label: 'Task List', route: '/planning/list' }, 
+          //   { label: 'Task Form', route: '/planning/form' },
+          //   { label: 'Task List', route: '/planning/list' },
           //   { label: 'Task Calendar', route: '/planning/calendar' },
-            
+
           // ],
         },
         {
@@ -125,6 +125,11 @@ export class Menu {
           icon: 'assets/icons/heroicons/outline/reports-svgrepo-com.svg',
           label: 'Reports',
           route: '/reports',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/settings-svgrepo-com.svg',
+          label: 'Settings',
+          route: '/settings',
         },
       ],
     },

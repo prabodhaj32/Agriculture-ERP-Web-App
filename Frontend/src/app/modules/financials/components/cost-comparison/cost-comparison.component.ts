@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./cost-comparison.component.css']
 })
 export class CostComparisonComponent implements OnInit, OnDestroy {
-  comparisonData: Record<string, number> = {}; // ✅ only declared once
+  comparisonData: Record<string, number> = {}; // only declared once
   displayedColumns: string[] = ['field', 'expense'];
   private subscription!: Subscription;
 

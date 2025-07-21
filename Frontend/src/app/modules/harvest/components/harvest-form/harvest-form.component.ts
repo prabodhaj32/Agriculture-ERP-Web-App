@@ -10,7 +10,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './harvest-form.component.html',
-  styleUrls: ['./harvest-form.component.css'] // ✅ fixed plural
+  styleUrls: ['./harvest-form.component.css'] 
 })
 export class HarvestFormComponent {
   entry: HarvestEntry = {

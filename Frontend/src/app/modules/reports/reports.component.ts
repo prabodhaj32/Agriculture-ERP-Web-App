@@ -11,7 +11,7 @@ import { HarvestSummaryComponent } from './components/harvest-summary/harvest-su
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductivityCostComponent,MatTableModule,HarvestSummaryComponent],
+  imports: [CommonModule, FormsModule, ProductivityCostComponent, MatTableModule, HarvestSummaryComponent],
   templateUrl: './reports.component.html',
 })
 export class ReportsComponent {
@@ -52,7 +52,6 @@ export class ReportsComponent {
   exportToPDF() {
     const doc = new jsPDF();
 
- 
     doc.setFontSize(16);
     doc.text('Harvest Summary Report', 14, 20);
 

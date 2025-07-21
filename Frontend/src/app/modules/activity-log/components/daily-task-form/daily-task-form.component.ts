@@ -13,7 +13,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./daily-task-form.component.css'],
 })
 export class DailyTaskFormComponent {
-  @Output() formClose = new EventEmitter<void>(); // ✅ added
+  @Output() formClose = new EventEmitter<void>(); //  added
 
   task: DailyTask = {
     field: '',

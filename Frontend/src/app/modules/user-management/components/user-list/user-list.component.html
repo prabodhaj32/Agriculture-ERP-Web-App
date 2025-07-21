@@ -1,11 +1,9 @@
-<!-- Header with title and add button -->
-<div class="flex justify-between items-center mb-6 mt-6">
+<div class="mb-6 mt-6 flex items-center justify-between">
   <h2 class="text-foreground font-semibold">Users</h2>
-  <button 
-    type="button" 
+  <button
+    type="button"
     class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
-    (click)="openAddUserPopup()"
-  >
+    (click)="openAddUserPopup()">
     Add User
   </button>
 </div>
@@ -13,34 +11,33 @@
 <!-- User Table -->
 <div class="rounded-md">
   <table mat-table [dataSource]="users" class="mat-elevation-z8 w-full rounded-md">
-
     <!-- Full Name -->
     <ng-container matColumnDef="fullName">
-      <th mat-header-cell *matHeaderCellDef> Full Name </th>
-      <td mat-cell *matCellDef="let user"> {{ user.fullName }} </td>
+      <th mat-header-cell *matHeaderCellDef>Full Name</th>
+      <td mat-cell *matCellDef="let user">{{ user.fullName }}</td>
     </ng-container>
 
     <!-- Email -->
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
     </ng-container>
 
     <!-- Phone -->
     <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Phone </th>
-      <td mat-cell *matCellDef="let user"> {{ user.phone }} </td>
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
     </ng-container>
 
     <!-- Role -->
     <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Role </th>
-      <td mat-cell *matCellDef="let user"> {{ user.role | titlecase }} </td>
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let user">{{ user.role | titlecase }}</td>
     </ng-container>
 
     <!-- Password -->
     <ng-container matColumnDef="password">
-      <th mat-header-cell *matHeaderCellDef> Password </th>
+      <th mat-header-cell *matHeaderCellDef>Password</th>
       <td mat-cell *matCellDef="let user">
         {{ '*'.repeat(user.password?.length || 0) }}
       </td>
@@ -48,22 +45,22 @@
 
     <!-- Assigned Fields -->
     <ng-container matColumnDef="assignedFields">
-      <th mat-header-cell *matHeaderCellDef> Assigned Fields </th>
+      <th mat-header-cell *matHeaderCellDef>Assigned Fields</th>
       <td mat-cell *matCellDef="let user">
         <ng-container *ngIf="user.assignedFields?.length > 0; else noFields">
           {{ user.assignedFields.join(', ') }}
         </ng-container>
         <ng-template #noFields>
-          <span class="text-gray-400 italic">None</span>
+          <span class="italic text-gray-400">None</span>
         </ng-template>
       </td>
     </ng-container>
 
     <!-- Status -->
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let user">
-        <span [ngClass]="user.isActive ? 'text-green-600 font-medium' : 'text-red-600 font-medium'">
+        <span [ngClass]="user.isActive ? 'font-medium text-green-600' : 'font-medium text-red-600'">
           {{ user.isActive ? 'Active' : 'Disabled' }}
         </span>
       </td>
@@ -71,7 +68,7 @@
 
     <!-- Actions -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let user">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More actions">
           <mat-icon>more_vert</mat-icon>
@@ -92,12 +89,12 @@
 
     <!-- Table Header & Rows -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
   <!-- Edit Form -->
   <mat-card class="mt-6" *ngIf="selectedUser">
-    <h3 class="text-md font-semibold mb-2">Edit User</h3>
+    <h3 class="text-md mb-2 font-semibold">Edit User</h3>
     <app-user-form [user]="selectedUser" (formSubmit)="onUserUpdated()"></app-user-form>
   </mat-card>
 </div>

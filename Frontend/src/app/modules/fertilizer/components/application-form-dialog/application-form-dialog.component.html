@@ -1,52 +1,45 @@
-<div class=" bg-white border border-gray-200 rounded-lg p-8">
+<div class="rounded-lg border border-gray-200 bg-white p-8">
+  <h3 class="text-foreground mb-4 font-semibold">Fertilizer / Pesticide Application</h3>
 
-  <h3 class="text-foreground font-semibold mb-4">Fertilizer / Pesticide Application</h3>
-
-
-  
-  <form (ngSubmit)="submit()" #applicationForm="ngForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+  <form (ngSubmit)="submit()" #applicationForm="ngForm" class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <!-- Field -->
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Field</label>
+      <label class="mb-1 block text-sm font-medium text-gray-700">Field</label>
       <input
         type="text"
         name="field"
         [(ngModel)]="entry.field"
         required
         placeholder="Field"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-      />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
     </div>
 
     <!-- Date -->
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+      <label class="mb-1 block text-sm font-medium text-gray-700">Date</label>
       <input
         type="date"
         name="date"
         [(ngModel)]="entry.date"
         required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-      />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
     </div>
 
     <!-- Item -->
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Item</label>
+      <label class="mb-1 block text-sm font-medium text-gray-700">Item</label>
       <input
         type="text"
         name="item"
         [(ngModel)]="entry.item"
         required
         placeholder="Item (e.g., Urea)"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-      />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
     </div>
 
     <!-- Quantity Applied -->
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Quantity (kg)</label>
+      <label class="mb-1 block text-sm font-medium text-gray-700">Quantity (kg)</label>
       <input
         type="number"
         name="quantityApplied"
@@ -54,38 +47,34 @@
         required
         min="0"
         placeholder="Quantity (kg)"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-      />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
     </div>
 
     <!-- Applied By -->
     <div class="md:col-span-2">
-      <label class="block text-sm font-medium text-gray-700 mb-1">Applied By</label>
+      <label class="mb-1 block text-sm font-medium text-gray-700">Applied By</label>
       <input
         type="text"
         name="appliedBy"
         [(ngModel)]="entry.appliedBy"
         required
         placeholder="Applied By"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-      />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
     </div>
 
     <!-- Buttons -->
-    <div class="md:col-span-2 flex justify-end space-x-2">
-  <button
-    type="button"
-    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
-    (click)="close()"
-  >
-    Cancel
-  </button>
-  <button
-    type="submit"
-    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
-  >
-    Submit
-  </button>
-</div>
+    <div class="flex justify-end space-x-2 md:col-span-2">
+      <button
+        type="button"
+        class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+        (click)="close()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+        Submit
+      </button>
+    </div>
   </form>
 </div>

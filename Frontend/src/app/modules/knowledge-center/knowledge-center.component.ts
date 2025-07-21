@@ -4,14 +4,12 @@ import { Article } from './knowledge-center.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-knowledge-center',
-   standalone: true,
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './knowledge-center.component.html',
-  styleUrls: ['./knowledge-center.component.css']
+  styleUrls: ['./knowledge-center.component.css'],
 })
 export class KnowledgeCenterComponent implements OnInit {
   articles: Article[] = [];
@@ -22,7 +20,7 @@ export class KnowledgeCenterComponent implements OnInit {
     category: '',
     description: '',
     tags: [],
-    attachments: []
+    attachments: [],
   };
 
   tagInput: string = '';
@@ -33,7 +31,7 @@ export class KnowledgeCenterComponent implements OnInit {
   constructor(private knowledgeService: KnowledgeCenterService) {}
 
   ngOnInit() {
-    this.knowledgeService.getArticles().subscribe(data => {
+    this.knowledgeService.getArticles().subscribe((data) => {
       this.articles = data;
       this.filteredArticles = data;
     });
@@ -48,12 +46,12 @@ export class KnowledgeCenterComponent implements OnInit {
   }
 
   removeTag(tag: string) {
-    this.newArticle.tags = this.newArticle.tags.filter(t => t !== tag);
+    this.newArticle.tags = this.newArticle.tags.filter((t) => t !== tag);
   }
 
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
-    for(let i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       this.newArticle.attachments.push(files[i]);
     }
   }
@@ -69,7 +67,7 @@ export class KnowledgeCenterComponent implements OnInit {
       category: '',
       description: '',
       tags: [],
-      attachments: []
+      attachments: [],
     };
     this.filteredArticles = this.articles;
   }

@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 @Component({
   selector: 'app-application-form',
   standalone: true,
-  imports: [CommonModule, FormsModule,  MatTableModule ],
+  imports: [CommonModule, FormsModule, MatTableModule],
   templateUrl: './application-form.component.html',
 })
 export class ApplicationFormComponent implements OnInit {
@@ -18,10 +18,7 @@ export class ApplicationFormComponent implements OnInit {
   applications: ApplicationEntry[] = [];
   fieldFilter: string = '';
 
-  constructor(
-    private applicationService: ApplicationService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private applicationService: ApplicationService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     if (this.applicationService.getAll().length === 0) {
@@ -50,10 +47,10 @@ export class ApplicationFormComponent implements OnInit {
   openApplicationDialog() {
     const dialogRef = this.dialog.open(ApplicationFormDialogComponent, {
       width: '500px',
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         const newEntry: ApplicationEntry = {
           ...result,
@@ -65,9 +62,6 @@ export class ApplicationFormComponent implements OnInit {
       }
     });
   }
-
-
-  
 
   refresh() {
     this.applications = this.applicationService.getAll();
@@ -82,7 +76,7 @@ export class ApplicationFormComponent implements OnInit {
   }
 
   getFieldList(): string[] {
-    const fields = this.applicationService.getAll().map(e => e.field.trim());
+    const fields = this.applicationService.getAll().map((e) => e.field.trim());
     return [...new Set(fields)];
   }
 

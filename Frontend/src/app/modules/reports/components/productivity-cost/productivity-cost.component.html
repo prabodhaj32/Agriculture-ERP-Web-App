@@ -1,42 +1,32 @@
-
- <h3 class="text-foreground font-semibold mb-4 mt-6">Productivity & Cost Summary</h3>
-<div class="p-6  rounded shadow space-y-6 mt-4">
- 
-
+<h3 class="text-foreground mb-4 mt-6 font-semibold">Productivity & Cost Summary</h3>
+<div class="mt-4 space-y-6 rounded p-6 shadow">
   <!-- Filter Section -->
-  <form (ngSubmit)="applyFilters()" class="flex flex-wrap gap-4 items-end">
+  <form (ngSubmit)="applyFilters()" class="flex flex-wrap items-end gap-4">
     <div class="flex flex-col">
-      <label class="text-sm font-medium mb-1">Filter by Field</label>
+      <label class="mb-1 text-sm font-medium">Filter by Field</label>
       <input
         type="text"
         [(ngModel)]="filters.field"
         name="field"
         placeholder="Enter field name"
-        class="border rounded px-3 py-2"
-      />
+        class="rounded border px-3 py-2" />
     </div>
 
     <div class="flex flex-col">
-      <label class="text-sm font-medium mb-1">Minimum Cost</label>
-      <input
-        type="number"
-        [(ngModel)]="filters.minCost"
-        name="minCost"
-        class="border rounded px-3 py-2"
-      />
+      <label class="mb-1 text-sm font-medium">Minimum Cost</label>
+      <input type="number" [(ngModel)]="filters.minCost" name="minCost" class="rounded border px-3 py-2" />
     </div>
 
-    <button type="submit" class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+    <button
+      type="submit"
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
       Apply
     </button>
-
   </form>
-
-  
 
   <!-- Data Table -->
   <div id="print-section">
-    <table class="w-full border border-collapse mt-4">
+    <table class="mt-4 w-full border-collapse border">
       <thead>
         <tr class="bg-gray-100">
           <th class="border px-4 py-2">Field</th>

@@ -76,9 +76,9 @@ export class FieldListComponent implements OnInit {
 
   onFormSubmit(field: Field) {
   if (field.id) {
-    this.fieldService.updateField(field);  // 🛠 updates existing
+    this.fieldService.updateField(field);  // updates existing
   } else {
-    this.fieldService.addField(field);     // 🆕 add new
+    this.fieldService.addField(field);     //  add new
   }
 
   this.loadFields();

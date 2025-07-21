@@ -12,19 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-productivity-cost',
   standalone: true,
-  imports: [CommonModule, FormsModule,MatTableModule,
-    MatCardModule,
-    MatSelectModule,
-    MatFormFieldModule],
+  imports: [CommonModule, FormsModule, MatTableModule, MatCardModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './productivity-cost.component.html',
 })
 export class ProductivityCostComponent {
-  
-  
-
-
   fieldsList: string[] = ['Field A', 'Field B', 'Field C'];
-  
 
   filters = {
     field: '',
@@ -47,17 +39,13 @@ export class ProductivityCostComponent {
     });
   }
 
-
-
-
-
   clearFilters() {
     this.filters = { field: '', minCost: 0 };
     this.applyFilters();
   }
 
   getSummaryData() {
-    return this.filteredData.map(item => ({
+    return this.filteredData.map((item) => ({
       metric: item.field,
       value: `Cost: Rs ${item.cost}, Productivity: ${item.productivity} kg`,
     }));
@@ -73,7 +61,7 @@ export class ProductivityCostComponent {
     autoTable(doc, {
       startY: 20,
       head: [['Field', 'Details']],
-      body: summaryData.map(d => [d.metric, d.value]),
+      body: summaryData.map((d) => [d.metric, d.value]),
     });
 
     doc.save('productivity-cost-report.pdf');
