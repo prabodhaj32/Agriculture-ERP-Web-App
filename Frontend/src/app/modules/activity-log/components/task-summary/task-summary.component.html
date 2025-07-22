@@ -5,11 +5,11 @@
   <!-- Right: Buttons -->
   <div class="flex space-x-4">
     <button (click)="exportReport()"
-      class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
       Export CSV
     </button>
     <button (click)="openAddTaskForm()"
-      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
       Add Task
     </button>
   </div>
@@ -20,18 +20,20 @@
 <div class="p-6 bg-white shadow rounded mt-6">
   <div class="mb-4 flex items-center justify-between">
     <!-- Left side: Label and Date Input -->
-    <div class="flex items-center gap-2">
-      <label class="mr-2">Filter by Date:</label>
-      <input type="date" [(ngModel)]="filterDate" (change)="filterTasks()" />
+    <div class="flex items-center gap-2 "  >
+      <label class="mr-2"  >Filter by Date:</label>
+      <input type="date" style="cursor: pointer;" [(ngModel)]="filterDate" (change)="filterTasks()" />
     </div>
 
-  <button matIconButton [matMenuTriggerFor]="menu" aria-label="Options menu">
+  
+
+<button matIconButton [matMenuTriggerFor]="menu" aria-label="Options menu" style="cursor: pointer;">
   <mat-icon>more_vert</mat-icon>
 </button>
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="clearAll()">
-    <mat-icon style="color: rgb(243, 15, 7);">delete</mat-icon>
+    <mat-icon style="color: rgb(243, 15, 7) cursor-pointer;">delete</mat-icon>
     Clear
   </button>
 </mat-menu>

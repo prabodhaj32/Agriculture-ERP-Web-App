@@ -4,17 +4,17 @@ import { Field } from '../models/field.model';
 @Injectable({ providedIn: 'root' })
 export class FieldService {
   private fields: Field[] = [
-    {
-      id: 1,
-      name: 'Field 1',
-      size: 10,
-      location: 'Nuwara Eliya',
-      soilType: 'Loamy',
-      cropType: 'Tea',
-      status: 'Planted',
-      lat: 6.9705,
-      lng: 80.7820,
-    },
+   {
+  id: 1,
+  name: 'Field 1',
+  size: 10,
+  location: 'Nuwara Eliya',
+  soilType: 'Loamy',
+  cropType: 'Tea',
+  status: 'Planted',
+  lat: 6.9705,
+  lng: 80.7820,
+}
   ];
 
   getFields(): Field[] {

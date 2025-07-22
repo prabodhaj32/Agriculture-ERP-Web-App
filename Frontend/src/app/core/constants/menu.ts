@@ -11,27 +11,19 @@ export class Menu {
           label: 'Dashboard',
           route: '/dashboard',
         },
-        {
-          icon: 'assets/icons/heroicons/outline/lock-closed-outline-svgrepo-com.svg',
-          label: 'Auth',
-          route: '/auth',
-          children: [
-            { label: 'Sign up', route: '/auth/sign-up' },
-            { label: 'Sign in', route: '/auth/sign-in' },
-            { label: 'Forgot Password', route: '/auth/forgot-password' },
-            { label: 'New Password', route: '/auth/new-password' },
-            { label: 'Two Steps', route: '/auth/two-steps' },
-          ],
-        },
-        {
-          icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg',
-          label: 'User Management',
-          route: '/user-management',
-          // children: [
-          //   { label: 'User Form', route: '/user-management/user-form' },
-          //   { label: 'User List', route: '/user-management/user-list' },
-          // ],
-        },
+        // {
+        //   icon: 'assets/icons/heroicons/outline/lock-closed-outline-svgrepo-com.svg',
+        //   label: 'Auth',
+        //   route: '/auth',
+        //   children: [
+        //     { label: 'Sign up', route: '/auth/sign-up' },
+        //     { label: 'Sign in', route: '/auth/sign-in' },
+        //     { label: 'Forgot Password', route: '/auth/forgot-password' },
+        //     { label: 'New Password', route: '/auth/new-password' },
+        //     { label: 'Two Steps', route: '/auth/two-steps' },
+        //   ],
+        // },
+        
         {
           icon: 'assets/icons/heroicons/outline/world-1-svgrepo-com.svg',
           label: 'Field Management',
@@ -127,10 +119,20 @@ export class Menu {
           route: '/reports',
         },
         {
+          icon: 'assets/icons/heroicons/outline/user-plus-01-svgrepo-com.svg',
+          label: 'User Management',
+          route: '/user-management',
+          // children: [
+          //   { label: 'User Form', route: '/user-management/user-form' },
+          //   { label: 'User List', route: '/user-management/user-list' },
+          // ],
+        },
+        {
           icon: 'assets/icons/heroicons/outline/settings-svgrepo-com.svg',
           label: 'Settings',
           route: '/settings',
         },
+
       ],
     },
   ];

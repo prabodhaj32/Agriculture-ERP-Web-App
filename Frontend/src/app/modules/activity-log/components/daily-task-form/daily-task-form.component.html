@@ -42,7 +42,7 @@
     <!--  Add Date Picker Here -->
     <input
       type="date"
-      class="input"
+      class="input cursor-pointer"
       [(ngModel)]="task.date"
       name="date"
       required
@@ -59,14 +59,14 @@
       type="file"
       (change)="onFileChange($event)"
       multiple
-      class="input"
+      class="input cursor-pointer"
     />
 
 <div class="flex justify-end gap-4 mt-4">
   <!-- Submit Button -->
   <button
     type="submit"
-    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
   >
     Submit
   </button>
@@ -75,7 +75,7 @@
   <button
     type="button"
     (click)="onCancel()"
-    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
   >
     Cancel
   </button>

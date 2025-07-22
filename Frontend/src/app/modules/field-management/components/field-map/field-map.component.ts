@@ -1,77 +1,79 @@
 import {
   Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
   AfterViewInit,
-  ViewChild,
   ElementRef,
+  ViewChild,
+  Input,
 } from '@angular/core';
-import { Field } from '../../models/field.model';
+import { ActivatedRoute } from '@angular/router';
 import * as L from 'leaflet';
-import { CommonModule } from '@angular/common';
-import { FormsModule, } from '@angular/forms';
-
+import { Location } from '@angular/common';
+import { Field } from '../../models/field.model';
 
 @Component({
   selector: 'app-field-map',
-   standalone: true,
-  imports: [
-    CommonModule,FormsModule],
+  standalone: true,
+  imports: [],
   templateUrl: './field-map.component.html',
   styleUrls: ['./field-map.component.css'],
 })
-export class FieldMapComponent implements OnChanges, AfterViewInit {
-  @Input() focusedField: Field | null = null;
-  @ViewChild('mapContainer') mapContainer!: ElementRef;
+export class FieldMapComponent implements AfterViewInit {
+  @Input() field!: Field;
+  @ViewChild('map', { static: false }) mapElement!: ElementRef;
 
   private map!: L.Map;
+  lat = 7.8731; // Default Sri Lanka lat
+  lng = 80.7718; // Default Sri Lanka lng
+  name = 'Field';
+
+  constructor(private location: Location, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe((params) => {
+      this.lat = +params['lat'] || this.lat;
+      this.lng = +params['lng'] || this.lng;
+      this.name = params['name'] || this.name;
+    });
+  }
 
   ngAfterViewInit(): void {
-    if (this.focusedField) {
-      this.initMap();
-    }
+    setTimeout(() => this.initializeMap(), 0); // allow DOM to stabilize
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['focusedField'] && this.map) {
-      this.updateMap();
-    }
-  }
+  private initializeMap(): void {
+    const mapContainer = this.mapElement.nativeElement;
 
-  initMap(): void {
-    const [lat, lng] = this.getCoordinates(this.focusedField!.location);
-    this.map = L.map(this.mapContainer.nativeElement).setView([lat, lng], 13);
+    // Initialize map
+    this.map = L.map(mapContainer, {
+      center: [this.lat, this.lng],
+      zoom: 13,
+      zoomControl: true,
+      scrollWheelZoom: true,
+    });
 
+    // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
     }).addTo(this.map);
 
-    this.addMarker();
-  }
+    // Add marker
+    L.marker([this.lat, this.lng])
+      .addTo(this.map)
+      .bindPopup(`<strong>${this.name}</strong>`)
+      .openPopup();
 
-  updateMap(): void {
-    this.map.eachLayer((layer: any) => {
-      if (layer instanceof L.Marker || layer instanceof L.TileLayer) {
-        this.map.removeLayer(layer);
-      }
+    // Smooth fly to
+    this.map.flyTo([this.lat, this.lng], 13, {
+      animate: true,
+      duration: 1.5,
     });
 
-    this.initMap();
+    // Ensure map fully renders with animation
+    setTimeout(() => {
+      this.map.invalidateSize();
+      mapContainer.classList.add('map-loaded');
+    }, 600);
   }
 
-  addMarker(): void {
-    if (this.focusedField) {
-      const [lat, lng] = this.getCoordinates(this.focusedField.location);
-      L.marker([lat, lng])
-        .addTo(this.map)
-        .bindPopup(this.focusedField.name)
-        .openPopup();
-    }
-  }
-
-  getCoordinates(location: string): [number, number] {
-    const [latStr, lngStr] = location.split(',');
-    return [parseFloat(latStr.trim()), parseFloat(lngStr.trim())];
+  goBack(): void {
+    this.location.back();
   }
 }

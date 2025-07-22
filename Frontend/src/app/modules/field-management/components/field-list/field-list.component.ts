@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FieldFormComponent } from '../field-form/field-form.component';
+import { FieldMapComponent } from '../field-map/field-map.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,11 +23,12 @@ import { MatTableDataSource } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     FieldFormComponent,
+    FieldMapComponent,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   templateUrl: './field-list.component.html',
 })
@@ -40,11 +42,13 @@ export class FieldListComponent implements OnInit {
     'soilType',
     'cropType',
     'status',
+    'map',        
     'actions',
   ];
 
   showFieldForm = false;
   editingField?: Field;
+  focusedField: Field | null = null; 
 
   constructor(private fieldService: FieldService) {}
 
@@ -65,30 +69,38 @@ export class FieldListComponent implements OnInit {
   onEditField(id: number) {
     const field = this.fields.find(f => f.id === id);
     if (field) {
-      this.editingField = { ...field }; // clone to avoid direct mutation
+      this.editingField = { ...field };
       this.showFieldForm = true;
     }
   }
 
-  closeFieldForm() {
+  onFormSubmit(field: Field) {
+    if (field.id) {
+      this.fieldService.updateField(field);
+    } else {
+      this.fieldService.addField(field);
+    }
+    this.loadFields();
     this.showFieldForm = false;
   }
-
-  onFormSubmit(field: Field) {
-  if (field.id) {
-    this.fieldService.updateField(field);  // updates existing
-  } else {
-    this.fieldService.addField(field);     //  add new
-  }
-
-  this.loadFields();
-  this.showFieldForm = false;
-}
 
   onDeleteField(id: number) {
     if (confirm('Are you sure you want to delete this field?')) {
       this.fieldService.deleteField(id);
       this.loadFields();
     }
+  }
+
+  closeFieldForm() {
+    this.showFieldForm = false;
+    this.editingField = undefined;
+  }
+
+    onMapView(field: Field) {
+    this.focusedField = field; 
+  }
+
+  closeMapPopup() {
+    this.focusedField = null;
   }
 }

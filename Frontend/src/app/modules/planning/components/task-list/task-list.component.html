@@ -2,9 +2,14 @@
 
 <div class="flex justify-between items-center mb-4">
   <h3 class="text-foreground font-semibold">Task List</h3>
-  <button (click)="openCreateTaskDialog()" class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
-    Create Task
-  </button>
+  
+  <button
+  (click)="openCreateTaskDialog()"
+  class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+>
+  Create Task
+</button>
+
 </div>
 <table mat-table [dataSource]="tasks" *ngIf="tasks.length > 0" class="mat-elevation-z8 w-full">
   

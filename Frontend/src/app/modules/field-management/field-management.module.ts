@@ -13,26 +13,28 @@ import { FieldMapComponent } from './components/field-map/field-map.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  // ❗️ Do NOT put standalone components in declarations
+  
   imports: [
     CommonModule,
-    FormsModule,              // Required for ngModel
-    ReactiveFormsModule,      // Required for formGroup
+    FormsModule,              
+    ReactiveFormsModule,     
     RouterModule,
     FieldManagementRoutingModule,
 
-    // Standalone Components (you must import them)
+   
     FieldManagementComponent,
     FieldFormComponent,
     FieldListComponent,
     FieldMapComponent,
 
-    // Angular Material modules
+   
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ]
 })
 export class FieldManagementModule {}

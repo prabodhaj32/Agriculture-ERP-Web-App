@@ -56,7 +56,8 @@
       <select
         id="soilType"
         formControlName="soilType"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition cursor-pointer
+"
       >
         <option value="" disabled>Select Soil Type</option>
         <option *ngFor="let soil of soilTypes" [value]="soil">{{ soil }}</option>
@@ -72,7 +73,8 @@
       <select
         id="cropType"
         formControlName="cropType"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition cursor-pointer
+"
       >
         <option value="" disabled>Select Crop Type</option>
         <option *ngFor="let crop of cropTypes" [value]="crop">{{ crop }}</option>
@@ -88,7 +90,8 @@
       <select
         id="status"
         formControlName="status"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition cursor-pointer
+"
       >
         <option value="" disabled>Select Status</option>
         <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
@@ -103,14 +106,14 @@
       <button
         type="button"
         (click)="onCancel()"
-        class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+        class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
       >
         Cancel
       </button>
       <button
         type="submit"
         [disabled]="fieldForm.invalid"
-        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
       >
         {{ isEditMode ? 'Update' : 'Add' }} Field
       </button>

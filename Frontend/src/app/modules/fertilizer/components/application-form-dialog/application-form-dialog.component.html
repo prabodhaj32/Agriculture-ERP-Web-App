@@ -22,7 +22,7 @@
         name="date"
         [(ngModel)]="entry.date"
         required
-        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer" />
     </div>
 
     <!-- Item -->
@@ -66,13 +66,13 @@
     <div class="flex justify-end space-x-2 md:col-span-2">
       <button
         type="button"
-        class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+        class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
         (click)="close()">
         Cancel
       </button>
       <button
         type="submit"
-        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold">
+        class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
         Submit
       </button>
     </div>

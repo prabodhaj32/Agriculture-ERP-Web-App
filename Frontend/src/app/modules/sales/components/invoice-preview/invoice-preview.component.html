@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between mb-4 mt-8">
   <h2 class="text-foreground font-semibold">Sales</h2>
   <button 
-    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
     (click)="openNewSaleDialog()"
   >
      Add New Sale
@@ -63,7 +63,7 @@
     <p><strong>Total:</strong> Rs. {{ selectedInvoice.total }}</p>
     <p><strong>Delivery Date:</strong> {{ selectedInvoice.deliveryDate }}</p>
 
-    <button class="bg-red-600 text-white px-3 py-1 rounded mt-3" (click)="closePreview()">Close Preview</button>
-    <button class="bg-blue-600 text-white px-3 py-1 rounded mt-3 ml-2" (click)="savePdf()">Download PDF</button>
+    <button class="bg-red-600 text-white px-3 py-1 rounded mt-3 cursor-pointer" (click)="closePreview()">Close Preview</button>
+    <button class="bg-blue-600 text-white px-3 py-1 rounded mt-3 ml-2 cursor-pointer" (click)="savePdf()">Download PDF</button>
   </div>
 </div>

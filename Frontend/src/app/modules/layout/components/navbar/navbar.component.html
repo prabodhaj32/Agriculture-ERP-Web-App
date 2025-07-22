@@ -6,7 +6,8 @@
         <button
           (click)="toggleMobileMenu()"
           type="button"
-          class="bg-muted text-muted-foreground focus:ring-primary hover:bg-muted-foreground hover:text-muted inline-flex items-center justify-center rounded-md p-2 focus:outline-hidden focus:ring-2 focus:ring-inset"
+          class="bg-muted text-muted-foreground focus:ring-primary hover:bg-muted-foreground hover:text-muted inline-flex items-center justify-center rounded-md p-2 focus:outline-hidden focus:ring-2 focus:ring-inset cursor-pointer
+"
           aria-expanded="false">
           <span class="sr-only">Open menu</span>
           <!-- Heroicon name: outline/menu -->
@@ -23,12 +24,12 @@
       </div>
 
       <!-- Desktop Menu -->
-      <div class="hidden space-x-10 sm:order-3 md:flex">
+      <div class="hidden space-x-10 sm:order-3 md:flex cursor-pointer">
         <app-navbar-menu></app-navbar-menu>
       </div>
 
       <!-- Profile menu -->
-      <div class="items-center justify-end sm:order-4 md:flex md:flex-1 lg:w-0">
+      <div class="items-center justify-end sm:order-4 md:flex md:flex-1 lg:w-0 cursor-pointer">
         <app-profile-menu></app-profile-menu>
       </div>
     </div>
