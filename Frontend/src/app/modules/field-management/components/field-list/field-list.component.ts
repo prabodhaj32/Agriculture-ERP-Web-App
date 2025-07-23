@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FieldFormComponent } from '../field-form/field-form.component';
-import { FieldMapComponent } from '../field-map/field-map.component';
+// import { FieldMapComponent } from '../field-map/field-map.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableDataSource } from '@angular/material/table';
+import { MapComponent } from '../../map/map.component';
 
 @Component({
   selector: 'app-field-list',
@@ -23,12 +24,13 @@ import { MatTableDataSource } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     FieldFormComponent,
-    FieldMapComponent,
+    // FieldMapComponent,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
     MatMenuModule,
+    MapComponent
   ],
   templateUrl: './field-list.component.html',
 })
@@ -48,7 +50,8 @@ export class FieldListComponent implements OnInit {
 
   showFieldForm = false;
   editingField?: Field;
-  focusedField: Field | null = null; 
+  // focusedField: Field | null = null; 
+  focusedField?: Field;
 
   constructor(private fieldService: FieldService) {}
 
@@ -100,7 +103,12 @@ export class FieldListComponent implements OnInit {
     this.focusedField = field; 
   }
 
-  closeMapPopup() {
-    this.focusedField = null;
-  }
+  viewMap(field: Field) {
+  this.focusedField = field;
+}
+
+closeMapPopup() {
+  this.focusedField = undefined;
+}
+
 }

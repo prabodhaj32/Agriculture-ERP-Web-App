@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FieldMapComponent } from './field-map.component';
+// import { FieldMapComponent } from './field-map.component';
 
-describe('FieldMapComponent', () => {
-  let component: FieldMapComponent;
-  let fixture: ComponentFixture<FieldMapComponent>;
+// describe('FieldMapComponent', () => {
+//   let component: FieldMapComponent;
+//   let fixture: ComponentFixture<FieldMapComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FieldMapComponent]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       imports: [FieldMapComponent]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(FieldMapComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(FieldMapComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

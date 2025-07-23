@@ -8,12 +8,13 @@ import { FieldManagementRoutingModule } from './field-management-routing.module'
 import { FieldManagementComponent } from './field-management.component';
 import { FieldFormComponent } from './components/field-form/field-form.component';
 import { FieldListComponent } from './components/field-list/field-list.component';
-import { FieldMapComponent } from './components/field-map/field-map.component';
+// import { FieldMapComponent } from './components/field-map/field-map.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   
@@ -28,13 +29,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     FieldManagementComponent,
     FieldFormComponent,
     FieldListComponent,
-    FieldMapComponent,
+    // FieldMapComponent,
 
    
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MapComponent
   ]
 })
 export class FieldManagementModule {}
