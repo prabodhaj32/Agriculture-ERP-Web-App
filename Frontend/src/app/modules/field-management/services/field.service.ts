@@ -5,9 +5,7 @@ import { environment } from '../../../../environments/environment';
 declare global {
   interface Window {
     gapiLoaded: boolean;
-    eeLoaded: boolean;
     gapi: any;
-    ee: any;
   }
 }
 
@@ -29,6 +27,8 @@ export class FieldService {
 
   private clientId = environment.googleClientId;
   private apiKey = environment.googleApiKey;
+
+  constructor() {}
 
   // -------------------- Field Data Methods --------------------
 
@@ -56,12 +56,11 @@ export class FieldService {
     this.fields = this.fields.filter(f => f.id !== id);
   }
 
-  // -------------------- Load External Scripts --------------------
+  // -------------------- Load Google API --------------------
 
   private loadScript(src: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (document.querySelector(`script[src="${src}"]`)) {
-        // Script already loaded
         resolve();
         return;
       }
@@ -75,42 +74,34 @@ export class FieldService {
     });
   }
 
-  private async loadExternalScripts(): Promise<void> {
-    await this.loadScript('https://apis.google.com/js/api.js');
-    await this.loadScript('https://earthengine.googleapis.com/earthengine/load.js');
-
-    // Wait for globals to be defined
-    await this.waitForGlobals();
-  }
-
-  private waitForGlobals(): Promise<void> {
+  private waitForGapi(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const maxWait = 10000; // 10 seconds max wait
+      const maxWait = 10000;
       const intervalTime = 100;
       let waited = 0;
 
       const check = () => {
-        if (window.gapi && window.ee) {
+        if (window.gapi) {
           resolve();
         } else {
           waited += intervalTime;
           if (waited >= maxWait) {
-            reject(new Error('Timeout waiting for Google API or Earth Engine globals.'));
+            reject(new Error('Timeout waiting for gapi.'));
           } else {
             setTimeout(check, intervalTime);
           }
         }
       };
-
       check();
     });
   }
 
-  // -------------------- Google Earth Engine Initialization --------------------
+  // -------------------- Init Google OAuth --------------------
 
   async init(): Promise<void> {
     try {
-      await this.loadExternalScripts();
+      await this.loadScript('https://apis.google.com/js/api.js');
+      await this.waitForGapi();
 
       await new Promise<void>((resolve, reject) => {
         window.gapi.load('client:auth2', async () => {
@@ -124,44 +115,20 @@ export class FieldService {
               ],
             });
 
-            // Sign in user
             const authInstance = window.gapi.auth2.getAuthInstance();
-            const user = await authInstance.signIn();
+            await authInstance.signIn();
 
-            const token = window.gapi.auth.getToken().access_token;
-
-            // Authenticate Earth Engine
-            window.ee.data.authenticateViaOauth(
-              token,
-              () => {
-                // Initialize EE
-                window.ee.initialize(
-                  null,
-                  null,
-                  () => {
-                    console.log('Earth Engine initialized.');
-                    resolve();
-                  },
-                  (err: any) => {
-                    console.error('Earth Engine init error:', err);
-                    reject(err);
-                  }
-                );
-              },
-              (authErr: any) => {
-                console.error('EE authentication error:', authErr);
-                reject(authErr);
-              }
-            );
-          } catch (error) {
-            console.error('Google API initialization failed:', error);
-            reject(error);
+            console.log('User signed in with Google.');
+            resolve();
+          } catch (err) {
+            console.error('Google API init error:', err);
+            reject(err);
           }
         });
       });
-    } catch (error) {
-      console.error('Failed to initialize FieldService:', error);
-      throw error;
+    } catch (err) {
+      console.error('Failed to initialize Google API:', err);
+      throw err;
     }
   }
 }
