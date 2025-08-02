@@ -1,0 +1,135 @@
+<!-- Header -->
+<div class="flex justify-between mb-4 mt-4">
+  <h1 class="text-foreground font-semibold">Field List</h1>
+  <button
+    (click)="onAddField()"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Add Field
+  </button>
+</div>
+
+<!-- Table -->
+<div class="rounded shadow border border-gray-200 overflow-x-auto">
+  <table mat-table [dataSource]="dataSource" class="min-w-full">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Name</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.name }}</td>
+    </ng-container>
+
+    <!-- Size Column -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Size</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.size }}</td>
+    </ng-container>
+
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Location</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.location }}</td>
+    </ng-container>
+
+    <!-- Soil Type Column -->
+    <ng-container matColumnDef="soilType">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Soil Type</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.soilType }}</td>
+    </ng-container>
+
+    <!-- Crop Type Column -->
+    <ng-container matColumnDef="cropType">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Crop Type</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.cropType }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Status</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">{{ field.status }}</td>
+    </ng-container>
+
+    <!-- Map View Column -->
+    <ng-container matColumnDef="map">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Map</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">
+        <button
+          (click)="viewMap(field)"
+          class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+        >
+          View Map
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="text-left px-4 py-2">Actions</th>
+      <td mat-cell *matCellDef="let field" class="px-4 py-2">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onEditField(field.id)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="onDeleteField(field.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <!-- Render table rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- No data message -->
+    <tr *ngIf="dataSource.data.length === 0">
+      <td colspan="8" class="text-center p-4 text-gray-500">No fields found.</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Field Form Modal -->
+<div
+  *ngIf="showFieldForm"
+  class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 z-50 border border-gray-300"
+>
+  <button
+    class="absolute top-2 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold"
+    (click)="closeFieldForm()"
+    aria-label="Close popup"
+  >
+    &times;
+  </button>
+
+  <app-field-form
+    [field]="editingField"
+    (formClose)="closeFieldForm()"
+    (formSubmit)="onFormSubmit($event)"
+  ></app-field-form>
+</div>
+
+<!-- Field Map Modal -->
+<div *ngIf="focusedField" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class=" p-4 rounded shadow-lg w-full relative" style="max-height: 90vh; overflow-y: auto;">
+    <button
+      class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-2xl"
+      (click)="closeMapPopup()"
+      aria-label="Close map"
+    >
+      &times;
+    </button>
+    <h2 class="text-lg font-semibold mb-2">Field: {{ focusedField.name }}</h2>
+
+    <app-map
+      [lat]="focusedField.lat!"
+      [lng]="focusedField.lng!"
+      [areaGeoJson]="focusedField.areaGeoJson"
+      [readOnly]="true"
+    ></app-map>
+  </div>
+</div>

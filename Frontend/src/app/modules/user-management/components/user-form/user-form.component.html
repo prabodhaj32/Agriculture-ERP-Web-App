@@ -1,0 +1,129 @@
+<div class="bg-white p-6 sm:p-8 rounded-md w-full ">
+  <h3 class="text-foreground font-semibold mb-4">Create user form</h3>
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-6" novalidate>
+
+    <!-- Full Name -->
+    <div>
+      <label for="fullName" class="block mb-1 font-semibold text-gray-700">Full Name</label>
+      <input 
+        id="fullName" 
+        type="text" 
+        name="fullName" 
+        [(ngModel)]="user.fullName" 
+        required 
+        placeholder="Enter full name"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+      />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="block mb-1 font-semibold text-gray-700">Email</label>
+      <input 
+        id="email" 
+        type="email" 
+        name="email" 
+        [(ngModel)]="user.email" 
+        required 
+        placeholder="Enter email address"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for="phone" class="block mb-1 font-semibold text-gray-700">Phone</label>
+      <input 
+        id="phone" 
+        type="text" 
+        name="phone" 
+        [(ngModel)]="user.phone" 
+        required 
+        placeholder="Enter phone number"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+      />
+    </div>
+
+    <!-- Role -->
+    <div>
+      <label for="role" class="block mb-1 font-semibold text-gray-700">Role</label>
+      <select 
+        id="role" 
+        name="role" 
+        [(ngModel)]="user.role" 
+        required
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 cursor-pointer"
+      >
+        <option value="Admin">Admin</option>
+        <option value="FieldOfficer">Field Officer</option>
+        <option value="Manager">Manager</option>
+      </select>
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label for="password" class="block mb-1 font-semibold text-gray-700">Password</label>
+      <input 
+        id="password" 
+        type="password" 
+        name="password" 
+        [(ngModel)]="user.password" 
+        required 
+        placeholder="Enter password"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+      />
+    </div>
+
+    <!-- Assigned Field -->
+    <div>
+      <label class="block mb-1 font-semibold text-gray-700">Assigned Field</label>
+      <div class="flex flex-wrap gap-6">
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="assignedField" 
+            [(ngModel)]="assignedField" 
+            [ngModelOptions]="{ standalone: true }"
+            value="Tea"
+            class="form-radio text-green-600 cursor-pointer"
+          />
+          <span class="ml-2">Tea</span>
+        </label>
+
+        <label class="inline-flex items-center">
+          <input 
+            type="radio" 
+            name="assignedField" 
+            [(ngModel)]="assignedField" 
+            [ngModelOptions]="{ standalone: true }"
+            value="Coconut"
+            class="form-radio text-green-600 cursor-pointer"
+          />
+          <span class="ml-2">Coconut</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Submit & Cancel -->
+    <div class="flex justify-end mt-6 gap-4">
+  <button 
+    type="submit" 
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+    [disabled]="userForm.invalid"
+  >
+    {{ user.id ? 'Update' : 'Create' }} User
+  </button>
+
+  <button 
+    type="button" 
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+    (click)="onCancel()"
+  >
+    Cancel
+  </button>
+</div>
+
+
+  </form>
+</div>

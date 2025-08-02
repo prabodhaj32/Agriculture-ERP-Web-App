@@ -1,0 +1,54 @@
+
+<div class="flex justify-between items-center mb-4 mt-4 w-full">
+  <h3 class="text-foreground font-semibold">Attendance Form</h3>
+  <button
+    type="button"
+    (click)="submitAttendance()"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Submit Attendance
+  </button>
+</div>
+
+
+<div class="p-6 bg-white shadow rounded w-full max-w-full mx-auto mt-6">
+  <form #attendanceForm="ngForm" class="space-y-4 w-full">
+
+    <input
+      type="text"
+      placeholder="Worker Name"
+      [(ngModel)]="attendance.workerName"
+      name="workerName"
+      class="input w-full"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Field"
+      [(ngModel)]="attendance.field"
+      name="field"
+      class="input w-full"
+      required
+    />
+
+    <input
+      type="time"
+      placeholder="In Time"
+      [(ngModel)]="attendance.inTime"
+      name="inTime"
+      class="input w-full"
+      required
+    />
+
+    <input
+      type="time"
+      placeholder="Out Time"
+      [(ngModel)]="attendance.outTime"
+      name="outTime"
+      class="input w-full"
+      required
+    />
+
+  </form>
+</div>

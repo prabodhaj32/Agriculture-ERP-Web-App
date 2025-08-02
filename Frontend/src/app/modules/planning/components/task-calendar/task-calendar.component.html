@@ -1,0 +1,65 @@
+<div *ngIf="tasks.length === 0" class="text-center text-gray-600 mt-12 py-8">
+  <p class="text-lg font-medium">No tasks available</p>
+  <p class="text-sm text-gray-400">Create a new task to get started</p>
+</div>
+
+<div *ngIf="tasks.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-4">
+  <mat-card
+    *ngFor="let task of tasks"
+    class="rounded-xl bg-white border border-gray-100 shadow hover:shadow-md transition-all duration-300"
+  >
+    <mat-card-content class="p-6">
+      <!-- Task Header -->
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">{{ task.taskType }}</h3>
+          <p class="text-sm text-gray-500 mt-1">Field: {{ task.field }}</p>
+        </div>
+        <mat-chip
+          [color]="task.completed ? 'accent' : 'warn'"
+          selected
+          class="text-xs font-medium px-2 py-1"
+        >
+          {{ task.completed ? 'Completed' : 'Pending' }}
+        </mat-chip>
+      </div>
+
+      <!-- Task Details -->
+      <div class="space-y-2 text-sm text-gray-700">
+        <div class="flex items-center gap-2">
+          <mat-icon class="text-base text-gray-500">person</mat-icon>
+          <span class="font-medium">Assigned:</span> {{ task.assignedTo }}
+        </div>
+        <div class="flex items-center gap-2">
+          <mat-icon class="text-base text-gray-500">event</mat-icon>
+          <span class="font-medium">Start:</span> {{ task.startDate | date: 'mediumDate' }}
+        </div>
+        <div class="flex items-center gap-2">
+          <mat-icon class="text-base text-gray-500">event</mat-icon>
+          <span class="font-medium">End:</span> {{ task.endDate | date: 'mediumDate' }}
+        </div>
+        <p class="italic text-gray-500 bg-gray-50 mt-2 p-2 rounded-md border border-gray-100">
+          {{ task.notes || 'No additional notes.' }}
+        </p>
+      </div>
+    </mat-card-content>
+
+    <!-- Actions -->
+    <mat-divider></mat-divider>
+    <mat-card-actions class="px-6 py-4 flex justify-end gap-2 bg-gray-50 rounded-b-xl cursor-pointer">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="markComplete(task)"
+        [disabled]="task.completed"
+      >
+        <mat-icon>done</mat-icon>
+        {{ task.completed ? 'Completed' : 'Mark Complete' }}
+      </button>
+      <button mat-flat-button color="warn" (click)="deleteTask(task)">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

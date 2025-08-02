@@ -1,0 +1,63 @@
+<div class=" rounded-md  mt-6 mb-4 ">
+
+  <h2 class="text-foreground font-semibold mb-8  mt-6">Sales & Dues Tracker</h2>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-green-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Total Sales</h3>
+      <p class="text-2xl font-bold text-green-800">Rs. {{ getTotalSales() }}</p>
+    </div>
+    <div class="bg-blue-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Amount Paid</h3>
+      <p class="text-2xl font-bold text-blue-800">Rs. {{ getTotalPaid() }}</p>
+    </div>
+    <div class="bg-red-100 p-4 rounded shadow">
+      <h3 class="text-lg font-semibold">Total Due</h3>
+      <p class="text-2xl font-bold text-red-800">Rs. {{ getTotalDue() }}</p>
+    </div>
+  </div>
+
+  <!-- Buyer Summary Material Table -->
+  <h3 class=" text-foreground font-semibold rounded-md  mt-6 mb-4">Buyer-wise Summary</h3>
+
+  <div class="overflow-x-auto">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
+
+      <!-- Buyer Column -->
+      <ng-container matColumnDef="buyer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Buyer</th>
+        <td mat-cell *matCellDef="let element">{{ element.buyer }}</td>
+      </ng-container>
+
+      <!-- Total Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+        <td mat-cell *matCellDef="let element">Rs. {{ element.total }}</td>
+      </ng-container>
+
+      <!-- Paid Column -->
+      <ng-container matColumnDef="paid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Paid</th>
+        <td mat-cell *matCellDef="let element">Rs. {{ element.paid }}</td>
+      </ng-container>
+
+      <!-- Due Column -->
+      <ng-container matColumnDef="due">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Due</th>
+        <td mat-cell *matCellDef="let element" class="text-red-600 font-semibold">Rs. {{ element.due }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- No data row -->
+      <tr *ngIf="dataSource.data.length === 0">
+        <td colspan="4" class="p-4 text-center text-gray-500">No sales data available.</td>
+      </tr>
+    </table>
+  </div>
+
+  
+
+</div>

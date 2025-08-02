@@ -1,0 +1,48 @@
+<div class="mb-6 mt-8 flex items-center justify-between">
+  <h3 class="text-foreground font-semibold">Inventory Management Form</h3>
+  <button
+    (click)="addItem()"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
+    Add Item
+  </button>
+</div>
+
+<!-- Form Card -->
+<div class="mx-auto w-full rounded-md bg-white p-6 shadow-md">
+  <form class="grid w-full gap-4 md:grid-cols-2">
+    <input
+      class="w-full rounded border px-4 py-2"
+      placeholder="Item Name"
+      [(ngModel)]="item.name"
+      name="name"
+      required />
+    <select class="w-full rounded border px-4 py-2 cursor-pointer" [(ngModel)]="item.type" name="type" required>
+      <option value="">Select Type</option>
+      <option value="Fertilizer">Fertilizer</option>
+      <option value="Pesticide">Pesticide</option>
+    </select>
+    <input class="w-full rounded border px-4 py-2" placeholder="Brand" [(ngModel)]="item.brand" name="brand" required />
+    <input
+      type="number"
+      class="w-full rounded border px-4 py-2"
+      placeholder="Quantity"
+      [(ngModel)]="item.quantity"
+      name="quantity"
+      required />
+    <input
+      type="number"
+      class="w-full rounded border px-4 py-2 md:col-span-2"
+      placeholder="Unit Cost"
+      [(ngModel)]="item.unitCost"
+      name="unitCost"
+      required />
+  </form>
+
+  <!-- Low Stock Alert -->
+  <div *ngIf="lowStockItems.length > 0" class="mt-8 rounded border border-red-300 bg-red-100 p-4 text-red-800">
+    <h3 class="mb-2 text-lg font-bold">Low Stock Alert</h3>
+    <ul class="ml-6 list-disc text-sm">
+      <li *ngFor="let item of lowStockItems">{{ item.name }} — Only {{ item.quantity }} left!</li>
+    </ul>
+  </div>
+</div>

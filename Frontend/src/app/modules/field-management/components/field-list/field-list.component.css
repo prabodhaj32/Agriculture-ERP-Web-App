@@ -1,0 +1,21 @@
+.white-table-container .mat-elevation-z8 {
+  background-color: white !important;
+  border: 1px solid #ddd; /* light gray border for visibility */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.white-table-container .mat-header-row,
+.white-table-container .mat-row {
+  border-bottom: 1px solid #ddd; /* light gray row border */
+}
+
+.white-table-container .mat-header-cell,
+.white-table-container .mat-cell {
+  padding: 16px;
+}
+
+/* Remove bottom border from last row */
+.white-table-container .mat-row:last-child {
+  border-bottom: none;
+}

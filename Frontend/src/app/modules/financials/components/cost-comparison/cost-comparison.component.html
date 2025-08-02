@@ -1,0 +1,47 @@
+<div class="mb-4 mt-4 flex items-center justify-between">
+  <!-- Left: Title -->
+  <h3 class="text-foreground font-semibold">Field-wise Cost Comparison</h3>
+
+  <!-- Right: Buttons -->
+  <div class="flex space-x-4">
+    <button
+      (click)="exportComparisonToExcel()"
+      class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
+      Export to Excel
+    </button>
+    <button
+      (click)="openExpenseEntryDialog()"
+      class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer">
+       Add Expense
+    </button>
+  </div>
+</div>
+
+
+
+
+  <div class="overflow-x-auto w-full">
+    <table mat-table [dataSource]="comparisonKeyValue" class="mat-elevation-z1 w-full">
+
+      <!-- Field Column -->
+      <ng-container matColumnDef="field">
+        <th mat-header-cell *matHeaderCellDef> Field </th>
+        <td mat-cell *matCellDef="let element"> {{ element.key }} </td>
+      </ng-container>
+
+      <!-- Expense Column -->
+      <ng-container matColumnDef="expense">
+        <th mat-header-cell *matHeaderCellDef> Total Expense (Rs.) </th>
+        <td mat-cell *matCellDef="let element"> Rs. {{ element.value }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- No Data Message -->
+  <div *ngIf="!comparisonKeyValue?.length" class="mt-4 text-red-600">
+    No comparison data available. Please refresh.
+  </div>
+

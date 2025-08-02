@@ -1,0 +1,23 @@
+Fix leaflet core icons
+.leaflet-container .leaflet-marker-icon {
+  background-image: url('/assets/leaflet/images/marker-icon.png') !important;
+}
+
+.leaflet-container .leaflet-control-layers {
+  background-image: url('/assets/leaflet/images/layers.png') !important;
+}
+
+/* Fix leaflet draw icons */
+.leaflet-draw-toolbar a {
+  background-image: url('/assets/leaflet/images/spritesheet.png') !important;
+}
+.leaflet-container .leaflet-draw-toolbar a,
+.leaflet-container .leaflet-draw-toolbar a:hover {
+  background-image: url('/assets/leaflet-draw/spritesheet.png');
+}
+.leaflet-container .leaflet-draw-toolbar .leaflet-draw-toolbar-top {
+  background-image: url('/assets/leaflet-draw/spritesheet.png');
+}
+.leaflet-container .leaflet-draw-toolbar .leaflet-draw-toolbar-bottom {
+  background-image: url('/assets/leaflet-draw/spritesheet.png');
+}

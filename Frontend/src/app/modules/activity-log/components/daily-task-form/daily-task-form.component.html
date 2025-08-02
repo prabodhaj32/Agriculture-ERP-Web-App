@@ -1,0 +1,86 @@
+<div class="p-6 bg-white shadow rounded  mt-6">
+  <h3 class="text-foreground font-semibold mb-4">Daily Task Log</h3>
+
+
+  <form (submit)="submitTask()" class="space-y-4">
+    <input
+      type="text"
+      placeholder="Field"
+      [(ngModel)]="task.field"
+      name="field"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Task Type"
+      [(ngModel)]="task.taskType"
+      name="taskType"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Worker Name"
+      [(ngModel)]="task.workerName"
+      name="workerName"
+      class="input"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="Task Duration (in hours)"
+      [(ngModel)]="task.duration"
+      name="duration"
+      class="input"
+      required
+    />
+
+    <!--  Add Date Picker Here -->
+    <input
+      type="date"
+      class="input cursor-pointer"
+      [(ngModel)]="task.date"
+      name="date"
+      required
+    />
+
+    <textarea
+      placeholder="Remarks"
+      [(ngModel)]="task.remarks"
+      name="remarks"
+      class="input"
+    ></textarea>
+
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      multiple
+      class="input cursor-pointer"
+    />
+
+<div class="flex justify-end gap-4 mt-4">
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Submit
+  </button>
+
+  <!-- Cancel Button -->
+  <button
+    type="button"
+    (click)="onCancel()"
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Cancel
+  </button>
+</div>
+
+
+  </form>
+</div>

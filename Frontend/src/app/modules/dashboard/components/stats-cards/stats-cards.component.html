@@ -1,0 +1,18 @@
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in">
+  <div class="bg-gradient-to-r from-green-100 to-green-300 p-4 rounded-lg shadow-lg text-center transform transition-transform hover:scale-105">
+    <p class="text-sm text-gray-700 font-medium">Total Fields</p>
+    <p class="text-2xl font-bold text-green-800">{{ stats?.totalFields }}</p>
+  </div>
+  <div class="bg-gradient-to-r from-blue-100 to-blue-300 p-4 rounded-lg shadow-lg text-center transform transition-transform hover:scale-105">
+    <p class="text-sm text-gray-700 font-medium">Active Workers</p>
+    <p class="text-2xl font-bold text-blue-800">{{ stats?.activeWorkers }}</p>
+  </div>
+  <div class="bg-gradient-to-r from-yellow-100 to-green-300 p-4 rounded-lg shadow-lg text-center transform transition-transform hover:scale-105">
+    <p class="text-sm text-gray-700 font-medium">Today's Harvest</p>
+    <p class="text-2xl font-bold text-yellow-800">{{ stats?.todaysHarvestKg }} kg</p>
+  </div>
+  <div class="bg-gradient-to-r from-purple-100 to-purple-300 p-4 rounded-lg shadow-lg text-center transform transition-transform hover:scale-105">
+    <p class="text-sm text-gray-700 font-medium">Fertilizer Used</p>
+    <p class="text-2xl font-bold text-purple-800">{{ stats?.fertilizerUsedKg }} kg</p>
+  </div>
+</div>

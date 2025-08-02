@@ -1,0 +1,143 @@
+<h3 class="text-foreground mb-6 mt-4 font-semibold">Knowledge Center</h3>
+
+<div class="rounded-xl bg-white px-4 py-10 shadow">
+  <form (submit)="submitArticle()" class="space-y-6 rounded-xl border border-green-200 p-6">
+    <div>
+      <label for="title" class="mb-1 block text-sm font-semibold text-gray-700">
+        Article Title <span class="text-red-500">*</span>
+      </label>
+      <input
+        id="title"
+        name="title"
+        [(ngModel)]="newArticle.title"
+        type="text"
+        required
+        placeholder="e.g., Best practices for pruning tea bushes"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-green-500" />
+    </div>
+
+    <div>
+      <label for="category" class="mb-1 block text-sm font-semibold text-gray-700">
+        Category <span class="text-red-500 cursor-pointer">*</span>
+      </label>
+      <select
+        id="category"
+        name="category"
+        [(ngModel)]="newArticle.category"
+        required
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-green-500 cursor-pointer">
+        <option value="" disabled>Select a category</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="description" class="mb-1 block text-sm font-semibold text-gray-700"> Description </label>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="newArticle.description"
+        rows="4"
+        placeholder="Write a tip or detail..."
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-green-500"></textarea>
+    </div>
+
+    <div>
+      <label class="mb-1 block text-sm font-semibold text-gray-700">Tags</label>
+      <div class="flex gap-2">
+        <input
+          type="text"
+          name="tagInput"
+          [(ngModel)]="tagInput"
+          (keydown.enter)="addTag(); $event.preventDefault()"
+          placeholder="e.g.fertilizer"
+          class="flex-grow rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-green-500" />
+        <button
+          type="button"
+          (click)="addTag()"
+          class="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700 cursor-pointer">
+          Add
+        </button>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-2">
+        <span
+          *ngFor="let tag of newArticle.tags"
+          class="flex items-center gap-1 rounded-full bg-green-200 px-3 py-1 text-sm text-green-800 cursor-pointer">
+          {{ tag }}
+          <button
+            type="button"
+            (click)="removeTag(tag)"
+            class="ml-1 text-green-800 hover:text-red-500 cursor-pointer"
+            aria-label="Remove tag">
+            &times;
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <label for="attachments" class="mb-1 block text-sm font-semibold text-gray-700 cursor-pointer">Attachments</label>
+      <input
+        id="attachments"
+        type="file"
+        (change)="onFileSelected($event)"
+        multiple
+        class="block w-full text-sm text-gray-600 file:mr-4 file:rounded-lg file:border-0 file:bg-green-600 file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-green-700 cursor-pointer" />
+      <ul *ngIf="newArticle.attachments.length > 0" class="mt-2 list-inside list-disc space-y-1 text-sm text-gray-700 cursor-pointer">
+        <li *ngFor="let file of newArticle.attachments">{{ file.name }}</li>
+      </ul>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full rounded-lg bg-green-700 py-2 font-semibold text-white transition hover:bg-green-800 cursor-pointer">
+      Upload Article
+    </button>
+  </form>
+
+  <!-- Search Bar -->
+  <div class="mt-12 mb-6">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="search()"
+      placeholder=" Search articles by title, tags or category..."
+      class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="filteredArticles.length === 0" class="mt-10 text-center italic text-gray-500">No articles found.</div>
+
+  <!-- Article Results -->
+  <div
+    *ngFor="let article of filteredArticles"
+    class="group mb-6 rounded-xl border border-green-100 bg-white p-5 shadow-sm transition duration-200 hover:shadow-md">
+    <div class="flex items-start justify-between">
+      <h3 class="text-xl font-semibold text-green-800 group-hover:underline">{{ article.title }}</h3>
+      <span class="text-xs text-gray-400">{{ article.createdAt | date : 'short' }}</span>
+    </div>
+
+    <div class="mt-1 mb-2 text-sm italic text-green-600">📂 {{ article.category }}</div>
+
+    <p class="mb-3 whitespace-pre-line leading-relaxed text-gray-700">
+      {{ article.description }}
+    </p>
+
+    <div *ngIf="article.tags.length > 0" class="mb-3">
+      <div class="flex flex-wrap gap-2">
+        <span
+          *ngFor="let tag of article.tags"
+          class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium tracking-wide text-emerald-700">
+          #{{ tag }}
+        </span>
+      </div>
+    </div>
+
+    <div *ngIf="article.attachments.length > 0" class="mb-2">
+      <div class="mb-1 text-sm font-medium text-gray-800">📎 Attachments:</div>
+      <ul class="ml-2 list-inside list-disc text-sm text-gray-600">
+        <li *ngFor="let file of article.attachments">{{ file.name }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

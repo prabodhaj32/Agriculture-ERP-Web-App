@@ -1,0 +1,84 @@
+<form (ngSubmit)="submitRevenue()" class="bg-white p-6 rounded-xl shadow-md w-full max-w-xl mx-auto space-y-5">
+  <h2 class="text-foreground font-semibold mb-4">Revenue Entry Form</h2>
+
+  <div class="space-y-4">
+    <input
+      [(ngModel)]="revenue.type"
+      name="type"
+      placeholder="Revenue Type"
+      required
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+
+    <input
+      [(ngModel)]="revenue.date"
+      name="date"
+      type="date"
+      required
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
+    />
+
+    <input
+      [(ngModel)]="revenue.field"
+      name="field"
+      placeholder="Field"
+      required
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+
+    <div class="grid grid-cols-2 gap-4">
+      <input
+        [(ngModel)]="quantity"
+        name="quantity"
+        type="number"
+        (input)="updateTotal()"
+        placeholder="Quantity"
+        required
+        class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        [(ngModel)]="price"
+        name="price"
+        type="number"
+        (input)="updateTotal()"
+        placeholder="Price per Unit"
+        required
+        class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+    </div>
+
+    <input
+      [(ngModel)]="revenue.total"
+      name="total"
+      placeholder="Total Revenue"
+      readonly
+      class="w-full border bg-gray-100 text-gray-700 rounded px-4 py-2"
+    />
+
+    <textarea
+      [(ngModel)]="revenue.description"
+      name="description"
+      placeholder="Description"
+      rows="3"
+      class="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    ></textarea>
+  </div>
+
+  <div class="flex justify-end gap-4 pt-4">
+  <button
+    type="button"
+    (click)="cancel()"
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Cancel
+  </button>
+  
+  <button
+    type="submit"
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer
+"
+  >
+    Submit Revenue
+  </button>
+</div>
+</form>

@@ -1,0 +1,1 @@
+var e={production:!0,apiUrl:"https://api.example.com/api",tokenExpiryMinutes:60,refreshTokenExpiryDays:7,googleApiKey:"AIzaSyBn3rok-vLyxohTlJT44RncvbN0XRMDiQQ",googleClientId:"332216686858-1b1ouldkfr4d9krkq1ee8ahl3tbv8hl3.apps.googleusercontent.com"};export{e as a};

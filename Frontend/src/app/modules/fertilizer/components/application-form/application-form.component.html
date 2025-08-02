@@ -1,0 +1,75 @@
+<div class="mb-6 mt-4 flex items-center justify-between">
+  <h3 class="text-foreground font-semibold">Field Application History</h3>
+  <button
+    (click)="openApplicationDialog()"
+    class="bg-primary text-primary-foreground hover:bg-primary-dark rounded-md px-4 py-2.5 text-xs font-semibold transition cursor-pointer">
+    Add Application
+  </button>
+</div>
+<div class="mx-auto w-full rounded-md bg-white p-6 shadow-md">
+  <!-- Filter Select -->
+  <select
+    class="input mb-2 w-full rounded border px-4 py-2 cursor-pointer"
+    [(ngModel)]="fieldFilter"
+    name="fieldFilter"
+    (ngModelChange)="refresh()">
+    <option value="">Select Field to Filter</option>
+    <option *ngFor="let field of getFieldList()" [value]="field">{{ field }}</option>
+  </select>
+
+  <!-- Table container for horizontal scroll on small screens -->
+  <div *ngIf="fieldFilter" class="overflow-x-auto cursor-pointer">
+    <table
+      *ngIf="getHistoryByField().length > 0; else noHistory"
+      mat-table
+      [dataSource]="getHistoryByField()"
+      class="mat-elevation-z1 w-full">
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let record">{{ record.date }}</td>
+      </ng-container>
+
+      <!-- Item Column -->
+      <ng-container matColumnDef="item">
+        <th mat-header-cell *matHeaderCellDef>Item</th>
+        <td mat-cell *matCellDef="let record">{{ record.item }}</td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantityApplied">
+        <th mat-header-cell *matHeaderCellDef>Quantity (kg)</th>
+        <td mat-cell *matCellDef="let record">{{ record.quantityApplied }}</td>
+      </ng-container>
+
+      <!-- Applied By Column -->
+      <ng-container matColumnDef="appliedBy">
+        <th mat-header-cell *matHeaderCellDef>Applied By</th>
+        <td mat-cell *matCellDef="let record">{{ record.appliedBy }}</td>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <ng-template #noHistory>
+      <p class="mt-4 text-red-600">No history records available for this field.</p>
+    </ng-template>
+  </div>
+
+  <!-- No history fallback -->
+  <ng-template #noHistory>
+    <p class="mt-2 text-sm text-gray-500">No entries found for this field.</p>
+  </ng-template>
+</div>
+
+<!-- Application Dates & Overdue Info -->
+<div *ngIf="fieldFilter" class="mt-6 space-y-2">
+  <div class="font-semibold text-green-600">
+    Last Application Date: <span class="font-normal">{{ getNextApplicationDate() || 'N/A' }}</span>
+  </div>
+  <div class="font-semibold text-blue-600">
+    Next Scheduled Date (+14 days): <span class="font-normal">{{ getNextScheduledDate() || 'N/A' }}</span>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<form (ngSubmit)="submitSale()" class="space-y-4  bg-white p-6 rounded shadow">
+
+  <h3 class="text-foreground font-semibold mb-4">New Sale</h3>
+
+
+  <div>
+    <label class="block font-medium mb-1 cursor-pointer">Select Buyer</label>
+    <select [(ngModel)]="sale.buyer" name="buyer" class="input w-full p-2 border rounded cursor-pointer" required>
+      <option value="" disabled selected>Select a buyer</option>
+      <option *ngFor="let b of buyers" [value]="b.name">{{ b.name }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Select Item</label>
+    <select [(ngModel)]="sale.item" name="item" class="input w-full p-2 border rounded cursor-pointer" required>
+      <option value="" disabled selected>Select an item</option>
+      <option *ngFor="let i of items" [value]="i">{{ i }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Quantity</label>
+    <input
+      [(ngModel)]="sale.quantity"
+      name="quantity"
+      type="number"
+      (input)="calculateTotal()"
+      class="input w-full p-2 border rounded"
+      required
+      min="1"
+    />
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Unit Price</label>
+    <input
+      [(ngModel)]="sale.unitPrice"
+      name="unitPrice"
+      type="number"
+      (input)="calculateTotal()"
+      class="input w-full p-2 border rounded"
+      required
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Total</label>
+    <input
+      [(ngModel)]="sale.total"
+      name="total"
+      class="input w-full p-2 border rounded bg-gray-100"
+      readonly
+    />
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Amount Paid</label>
+    <input
+      [(ngModel)]="sale.amountPaid"
+      name="amountPaid"
+      type="number"
+      class="input w-full p-2 border rounded"
+      required
+      min="0"
+    />
+  </div>
+
+  <div>
+    <label class="block font-medium mb-1">Delivery Date</label>
+    <input
+      [(ngModel)]="sale.deliveryDate"
+      name="deliveryDate"
+      type="date"
+      class="input w-full p-2 border rounded cursor-pointer"
+      required
+    />
+  </div>
+
+  <div class="text-right space-x-2">
+  <button 
+    type="button" 
+    class="bg-muted text-muted-foreground hover:text-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+    (click)="onCancel()"
+  >
+    Cancel
+  </button>
+
+  <button 
+    type="submit" 
+    class="bg-primary text-primary-foreground flex-none rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
+  >
+    Submit Sale
+  </button>
+</div>
+</form>

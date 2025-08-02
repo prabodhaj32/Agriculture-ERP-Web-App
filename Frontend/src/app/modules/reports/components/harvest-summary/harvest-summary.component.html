@@ -1,0 +1,72 @@
+<h3 class="text-foreground mb-4 font-semibold">Harvest Summary</h3>
+
+<div class="rounded p-6 shadow">
+  <div class="mb-6 grid grid-cols-3 gap-4">
+    <input
+      type="date"
+      [(ngModel)]="filters.dateFrom"
+      (ngModelChange)="onFiltersChange() "
+      class="rounded border p-2 cursor-pointer"
+      placeholder="From Date" />
+
+    <input
+      type="text"
+      [(ngModel)]="filters.field"
+      (ngModelChange)="onFiltersChange()"
+      class="rounded border p-2"
+      placeholder="Field" />
+    <input
+      type="text"
+      [(ngModel)]="filters.worker"
+      (ngModelChange)="onFiltersChange()"
+      class="rounded border p-2"
+      placeholder="Worker" />
+    <input
+      type="text"
+      [(ngModel)]="filters.cropType"
+      (ngModelChange)="onFiltersChange()"
+      class="rounded border p-2"
+      placeholder="Crop Type" />
+    <input
+      type="text"
+      [(ngModel)]="filters.costType"
+      (ngModelChange)="onFiltersChange()"
+      class="rounded border p-2"
+      placeholder="Cost Type" />
+  </div>
+
+  <table mat-table [dataSource]="filteredData" class="mat-elevation-z8 w-full">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let item">{{ item.date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="field">
+      <th mat-header-cell *matHeaderCellDef>Field</th>
+      <td mat-cell *matCellDef="let item">{{ item.field }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="worker">
+      <th mat-header-cell *matHeaderCellDef>Worker</th>
+      <td mat-cell *matCellDef="let item">{{ item.worker }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="crop">
+      <th mat-header-cell *matHeaderCellDef>Crop</th>
+      <td mat-cell *matCellDef="let item">{{ item.crop }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="costType">
+      <th mat-header-cell *matHeaderCellDef>Cost Type</th>
+      <td mat-cell *matCellDef="let item">{{ item.costType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
