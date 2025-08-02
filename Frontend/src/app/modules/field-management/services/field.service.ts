@@ -56,66 +56,112 @@ export class FieldService {
     this.fields = this.fields.filter(f => f.id !== id);
   }
 
-  // -------------------- Google Earth Engine Init --------------------
+  // -------------------- Load External Scripts --------------------
 
-  async init(): Promise<void> {
-    await this.waitForScripts();
-
+  private loadScript(src: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      window.gapi.load('client:auth2', async () => {
-        try {
-          await window.gapi.client.init({
-            apiKey: this.apiKey,
-            clientId: this.clientId,
-            scope: 'https://www.googleapis.com/auth/earthengine.readonly',
-            discoveryDocs: [
-              'https://earthengine.googleapis.com/$discovery/rest?version=v1',
-            ],
-          });
-
-          await window.gapi.auth2.getAuthInstance().signIn();
-
-          const token = window.gapi.auth.getToken().access_token;
-
-          window.ee.data.authenticateViaOauth(
-            token,
-            () => {
-              window.ee.initialize(
-                null,
-                null,
-                () => {
-                  console.log('Earth Engine initialized.');
-                  resolve();
-                },
-                (err: any) => {
-                  console.error('Earth Engine init error:', err);
-                  reject(err);
-                }
-              );
-            },
-            (authError: any) => {
-              console.error('EE authentication error:', authError);
-              reject(authError);
-            }
-          );
-        } catch (error) {
-          console.error('Google API initialization failed:', error);
-          reject(error);
-        }
-      });
+      if (document.querySelector(`script[src="${src}"]`)) {
+        // Script already loaded
+        resolve();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load script ${src}`));
+      document.head.appendChild(script);
     });
   }
 
-  private waitForScripts(): Promise<void> {
-    return new Promise((resolve) => {
+  private async loadExternalScripts(): Promise<void> {
+    await this.loadScript('https://apis.google.com/js/api.js');
+    await this.loadScript('https://earthengine.googleapis.com/earthengine/load.js');
+
+    // Wait for globals to be defined
+    await this.waitForGlobals();
+  }
+
+  private waitForGlobals(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const maxWait = 10000; // 10 seconds max wait
+      const intervalTime = 100;
+      let waited = 0;
+
       const check = () => {
-        if (window.gapiLoaded && window.eeLoaded) {
+        if (window.gapi && window.ee) {
           resolve();
         } else {
-          setTimeout(check, 100);
+          waited += intervalTime;
+          if (waited >= maxWait) {
+            reject(new Error('Timeout waiting for Google API or Earth Engine globals.'));
+          } else {
+            setTimeout(check, intervalTime);
+          }
         }
       };
+
       check();
     });
+  }
+
+  // -------------------- Google Earth Engine Initialization --------------------
+
+  async init(): Promise<void> {
+    try {
+      await this.loadExternalScripts();
+
+      await new Promise<void>((resolve, reject) => {
+        window.gapi.load('client:auth2', async () => {
+          try {
+            await window.gapi.client.init({
+              apiKey: this.apiKey,
+              clientId: this.clientId,
+              scope: 'https://www.googleapis.com/auth/earthengine.readonly',
+              discoveryDocs: [
+                'https://earthengine.googleapis.com/$discovery/rest?version=v1',
+              ],
+            });
+
+            // Sign in user
+            const authInstance = window.gapi.auth2.getAuthInstance();
+            const user = await authInstance.signIn();
+
+            const token = window.gapi.auth.getToken().access_token;
+
+            // Authenticate Earth Engine
+            window.ee.data.authenticateViaOauth(
+              token,
+              () => {
+                // Initialize EE
+                window.ee.initialize(
+                  null,
+                  null,
+                  () => {
+                    console.log('Earth Engine initialized.');
+                    resolve();
+                  },
+                  (err: any) => {
+                    console.error('Earth Engine init error:', err);
+                    reject(err);
+                  }
+                );
+              },
+              (authErr: any) => {
+                console.error('EE authentication error:', authErr);
+                reject(authErr);
+              }
+            );
+          } catch (error) {
+            console.error('Google API initialization failed:', error);
+            reject(error);
+          }
+        });
+      });
+    } catch (error) {
+      console.error('Failed to initialize FieldService:', error);
+      throw error;
+    }
   }
 }
