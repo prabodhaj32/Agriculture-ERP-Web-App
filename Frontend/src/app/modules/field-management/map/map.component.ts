@@ -10,12 +10,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import * as L from 'leaflet'
+import * as L from 'leaflet';
 import 'leaflet-draw';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
- iconRetinaUrl: 'assets/leaflet/images/marker-icon-2x.png',
+  iconRetinaUrl: 'assets/leaflet/images/marker-icon-2x.png',
   iconUrl: 'assets/leaflet/images/marker-icon.png',
   shadowUrl: 'assets/leaflet/images/marker-shadow.png',
 });
@@ -23,7 +23,7 @@ L.Icon.Default.mergeOptions({
 @Component({
   selector: 'app-map',
   standalone: true,
-  encapsulation: ViewEncapsulation.None, 
+  encapsulation: ViewEncapsulation.None,
   template: `<div #mapContainer id="map" class="leaflet-map-container"></div>`,
   styleUrls: ['./map.component.css'],
 })
@@ -139,20 +139,15 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
     this.map.addControl(drawControl);
 
-    
-    if ((L as any).Draw && (L as any).Draw.Event) {
-      this.map.on((L as any).Draw.Event.CREATED, (event: any) => {
-        const layer = event.layer;
-        if (layer) {
-          this.drawnItems.clearLayers();
-          this.drawnItems.addLayer(layer);
-          const geoJson = layer.toGeoJSON();
-          this.areaDrawn.emit(geoJson);
-        }
-      });
-    } else {
-      console.error('L.Draw or L.Draw.Event is undefined. Ensure leaflet-draw is imported.');
-    }
+    this.map.on(L.Draw.Event.CREATED, (event: any) => {
+      const layer = event.layer;
+      if (layer) {
+        this.drawnItems.clearLayers();
+        this.drawnItems.addLayer(layer);
+        const geoJson = layer.toGeoJSON();
+        this.areaDrawn.emit(geoJson);
+      }
+    });
   }
 
   private onMapClick(e: L.LeafletMouseEvent): void {

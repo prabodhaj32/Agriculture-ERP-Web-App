@@ -40,23 +40,21 @@
                 "output": "assets/leaflet/images"
               }
             ],
-           "styles": [
-
-  "src/styles/leaflet-custom.css",
-  "src/styles.css"
-],
+            "styles": ["src/styles/leaflet-custom.css", "src/styles.css", "node_modules/leaflet/dist/leaflet.css",
+  "node_modules/leaflet-draw/dist/leaflet.draw.css"],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/leaflet-draw/dist/leaflet.draw.js"
+              "node_modules/leaflet-draw/dist/leaflet.draw.js",
+               "node_modules/leaflet/dist/leaflet.js"
             ],
             "allowedCommonJsDependencies": [
-    "apexcharts",
-    "leaflet",
-    "leaflet-draw",
-    "file-saver",
-    "canvg",
-    "html2canvas"
-  ],
+              "apexcharts",
+              "leaflet",
+              "leaflet-draw",
+              "file-saver",
+              "canvg",
+              "html2canvas"
+            ],
             "browser": "src/main.ts"
           },
           "configurations": {
@@ -130,14 +128,12 @@
                 "output": "assets/leaflet/images"
               }
             ],
-            "styles": [
- 
-  "src/styles/leaflet-custom.css",
-  "src/styles.css"
-],
+           "styles": ["src/styles/leaflet-custom.css", "src/styles.css", "node_modules/leaflet/dist/leaflet.css",
+  "node_modules/leaflet-draw/dist/leaflet.draw.css"],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/leaflet-draw/dist/leaflet.draw.js"
+              "node_modules/leaflet-draw/dist/leaflet.draw.js",
+               "node_modules/leaflet/dist/leaflet.js"
             ]
           }
         }
