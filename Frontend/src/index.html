@@ -6,34 +6,38 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  
- <!-- Google API Client -->
-<script 
-  src="https://apis.google.com/js/api.js"
-  onload="window.gapiLoaded = true;"
-  defer
-></script>
+    <!-- Roboto Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
-<!-- Google Earth Engine API -->
-<!-- <script 
-  src="https://earthengine.googleapis.com/earthengine/load.js"
-  onload="window.eeLoaded = true;"
-  crossorigin="anonymous"
-  defer
-></script> -->
+    <!-- Google API Client -->
+    <script
+      src="https://apis.google.com/js/api.js"
+      onload="window.gapiLoaded = true;"
+      defer
+    ></script>
 
-<!-- Leaflet CSS -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-  crossorigin=""
-/>
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      crossorigin=""
+    />
 
-    
-</head>
+    <!-- ✅ Leaflet JS (missing in your original code) -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      crossorigin=""
+      defer
+    ></script>
+  </head>
 
   <body class="bg-background font-poppins selection:bg-primary selection:text-primary-foreground mat-typography">
     <app-root>
@@ -42,17 +46,27 @@
           <button
             type="button"
             class="bg-primary text-primary-foreground inline-flex cursor-not-allowed items-center rounded-md px-4 py-2 text-sm font-semibold leading-6 shadow-sm transition duration-150 ease-in-out"
-            disabled="">
+            disabled=""
+          >
             <svg
               class="-ml-1 mr-3 h-5 w-5 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
               <path
                 class="opacity-75"
                 fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
             </svg>
             Loading...
           </button>
