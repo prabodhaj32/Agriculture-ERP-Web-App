@@ -41,7 +41,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private map!: L.Map;
   private geoJsonLayer?: L.GeoJSON;
   private drawnItems = new L.FeatureGroup();
-  private drawControl?: L.Control.Draw;
   private mapClickHandler?: (e: L.LeafletMouseEvent) => void;
 
   ngAfterViewInit(): void {
@@ -111,26 +110,20 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   private enableDrawing(): void {
     if (!this.map) {
-      console.error('Map is not initialized.');
+      console.error('Map not initialized');
       return;
     }
 
     if (!this.map.hasLayer(this.drawnItems)) {
-      this.drawnItems.addTo(this.map);
+      this.map.addLayer(this.drawnItems);
     }
 
-    if (this.drawControl) {
-      this.map.removeControl(this.drawControl);
-    }
-
-    this.drawControl = new L.Control.Draw({
+    const drawControl = new L.Control.Draw({
       draw: {
         polygon: {
-          allowIntersection: false,
-          showArea: true,
-          shapeOptions: {
-            color: '#3383ff',
-          },
+          allowIntersection: true,
+          showArea: false,
+          shapeOptions: { color: '#3383ff' },
         },
         rectangle: false,
         polyline: false,
@@ -144,10 +137,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       },
     });
 
-    this.map.addControl(this.drawControl);
-
-    // Prevent duplicate event handlers
-    this.map.off(L.Draw.Event.CREATED);
+    this.map.addControl(drawControl);
 
     this.map.on(L.Draw.Event.CREATED, (event: any) => {
       const layer = event.layer;
@@ -170,15 +160,9 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       if (this.mapClickHandler) {
         this.map.off('click', this.mapClickHandler);
       }
-
       this.map.off();
       this.map.remove();
     }
-
-    if (this.drawControl) {
-      this.map.removeControl(this.drawControl);
-    }
-
     this.drawnItems.clearLayers();
   }
 }
