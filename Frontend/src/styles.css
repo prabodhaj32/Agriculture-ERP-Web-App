@@ -298,6 +298,18 @@ select {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+@font-face {
+  font-family: 'Poppins';
+  src: url('/assets/fonts/poppins/poppins-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+/* Add additional font weights/styles as needed */
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 /* leaflet toolbar icon fix */
 /* .leaflet-container .leaflet-control a,
 .leaflet-container .leaflet-control a:hover {

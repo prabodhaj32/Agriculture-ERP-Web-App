@@ -40,15 +40,15 @@
                 "output": "assets/leaflet/images"
               }
             ],
-           "styles": [
-  "node_modules/leaflet/dist/leaflet.css",
-  "node_modules/leaflet-draw/dist/leaflet.draw.css",
-  "src/styles.css"
-],
+            "styles": [
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-draw/dist/leaflet.draw.css",
+              "src/styles.css"
+            ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/leaflet-draw/dist/leaflet.draw.js",
-               "node_modules/leaflet/dist/leaflet.js"
+              "node_modules/leaflet/dist/leaflet.js"
             ],
             "allowedCommonJsDependencies": [
               "apexcharts",
@@ -131,15 +131,15 @@
                 "output": "assets/leaflet/images"
               }
             ],
-           "styles": [
-  "node_modules/leaflet/dist/leaflet.css",
-  "node_modules/leaflet-draw/dist/leaflet.draw.css",
-  "src/styles.css"
-],
+            "styles": [
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet-draw/dist/leaflet.draw.css",
+              "src/styles.css"
+            ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/leaflet-draw/dist/leaflet.draw.js",
-               "node_modules/leaflet/dist/leaflet.js"
+              "node_modules/leaflet/dist/leaflet.js"
             ]
           }
         }
